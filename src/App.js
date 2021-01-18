@@ -1,24 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Login from "./components/auth/Login";
+import Registro from "./components/auth/Registro";
+import AlertaState from "./context/alerta/alertaState";
+import AuthState from "./context/auth/authState";
+import tokenAuth from "./config/token";
+import RutaPrivada from "./privado/RutaPrivada";
+// Si se encuentra logueado al recargar la pagina
+const token = localStorage.getItem("token");
+if (token) {
+  tokenAuth(token);
+}
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthState>
+      <AlertaState>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Login} />
+            <RutaPrivada exact path="/registro" component={Registro} />
+          </Switch>
+        </Router>
+      </AlertaState>
+    </AuthState>
   );
 }
 
