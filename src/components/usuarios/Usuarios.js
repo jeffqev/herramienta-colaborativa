@@ -1,11 +1,14 @@
 import React, { useContext, useEffect } from "react";
-import "./registro.css";
-import RegistroForm from "./RegistroForm";
+
 import AuthContext from "../../context/auth/authContext";
+
+import UsuarioForm from "./UsuarioForm";
 import Header from "../layout/Header";
 import Nav from "../layout/Nav";
+import UsuarioTable from "./UsuarioTable";
+import Titulo from "../layout/Titulo";
 
-function Registro() {
+function Usuario() {
   const authContext = useContext(AuthContext);
   const { usuario, usuarioAutenticado } = authContext;
 
@@ -19,15 +22,20 @@ function Registro() {
   return (
     <>
       <Header />
-      <Nav />
+      <Nav activa={"usuarios"} />
+
       <div className="container-fluid">
         <div className="row">
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-2">
             <div className="row">
-              <h2>Gestion de Usuarios</h2>
-              <hr />
-              <div className="col-md-5">
-                <RegistroForm />
+              <Titulo titulo={"Gestion de usuarios"} />
+
+              <div className="col-md-8 me-4 mb-4">
+                <UsuarioTable />
+              </div>
+
+              <div className="col-md-3  ">
+                <UsuarioForm />
               </div>
             </div>
           </main>
@@ -37,4 +45,4 @@ function Registro() {
   );
 }
 
-export default Registro;
+export default Usuario;

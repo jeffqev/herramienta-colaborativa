@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function Nav() {
+function Nav({ activa }) {
   return (
     <div className="container-fluid">
       <div className="row">
@@ -9,83 +10,43 @@ function Nav() {
           className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
         >
           <div className="position-sticky pt-3">
+            <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Administración</span>
+            </h6>
             <ul className="nav flex-column">
               <li className="nav-item">
-                <a
-                  className="nav-link active"
-                  aria-current="page"
-                  href="/registro"
+                <Link
+                  className={`nav-link ${
+                    activa === "usuarios" ? "active" : null
+                  }`}
+                  to={"/usuarios"}
                 >
-                  <span data-feather="home"></span>
-                  Dashboard
-                </a>
+                  {/* <span data-feather="users"></span> */}
+                  <i className="bi bi-people feather"></i>
+                  Usuarios
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/registro">
-                  <span data-feather="file"></span>
-                  Orders
-                </a>
+                <Link
+                  className={`nav-link ${
+                    activa === "carreras" ? "active" : null
+                  }`}
+                  to={"/carreras"}
+                >
+                  <i className="bi bi-book feather"></i>
+                  Carreras
+                </Link>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/registro">
-                  <span data-feather="shopping-cart"></span>
-                  Products
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/registro">
-                  <span data-feather="users"></span>
-                  Customers
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/registro">
-                  <span data-feather="bar-chart-2"></span>
-                  Reports
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/registro">
-                  <span data-feather="layers"></span>
-                  Integrations
-                </a>
-              </li>
-            </ul>
-
-            <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Saved reports</span>
-              <a
-                className="link-secondary"
-                href="/registro"
-                aria-label="Add a new report"
-              >
-                <span data-feather="plus-circle"></span>
-              </a>
-            </h6>
-            <ul className="nav flex-column mb-2">
-              <li className="nav-item">
-                <a className="nav-link" href="/registro">
-                  <span data-feather="file-text"></span>
-                  Current month
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/registro">
-                  <span data-feather="file-text"></span>
-                  Last quarter
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/registro">
-                  <span data-feather="file-text"></span>
-                  Social engagement
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/registro">
-                  <span data-feather="file-text"></span>
-                  Year-end sale
-                </a>
+                <Link
+                  className={`nav-link ${
+                    activa === "periodos" ? "active" : null
+                  }`}
+                  to={"/periodos"}
+                >
+                  <i className="bi bi-calendar-date feather"></i>
+                  Periodos
+                </Link>
               </li>
             </ul>
           </div>

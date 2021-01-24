@@ -7,17 +7,18 @@ import "./login.css";
 import AuthContext from "../../context/auth/authContext";
 
 export default function Login(props) {
-  // Datos globales con useContext
+  // Datos globales con useContext para las alertas
   const alertaContext = useContext(AlertaContext);
   const { alerta, mostrarAlerta } = alertaContext;
 
-  // Datos globales con useContext
+  // Datos globales con useContext para la informacion de autenticación
   const authaContext = useContext(AuthContext);
   const { iniciarSesion, autenticado, mensaje } = authaContext;
 
   useEffect(() => {
+    // Si autenticado es verdadero cambiar de pagina
     if (autenticado) {
-      props.history.push("/registro");
+      props.history.push("/usuarios");
     }
 
     // En caso se detecte un nuevo mensaje lo mostrara
@@ -29,7 +30,7 @@ export default function Login(props) {
 
   // Inicializar el State del formulario
   const [usuario, setUsuario] = useState({
-    correo: "admin@admin.com",
+    correo: "jeff.qev4@gmail.com",
     contrasena: "admin",
   });
 
