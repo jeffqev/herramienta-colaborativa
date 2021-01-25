@@ -9,3 +9,6 @@ export const ELIMINAR_USUARIOS = "/api/usuarios";
 
 // Carreras
 export const PATH_CARRERA = "/api/carrera";
+
+// Periodos
+export const PATH_PERIODO = "/api/periodo";

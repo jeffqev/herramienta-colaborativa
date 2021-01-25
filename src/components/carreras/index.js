@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
 
 import AuthContext from "../../context/auth/authContext";
+import AntHeader from "../layout/AntHeader";
 
 import Header from "../layout/Header";
 import Nav from "../layout/Nav";
-import Titulo from "../layout/Titulo";
 import CarreraForm from "./CarreraForm";
 import VerCarreras from "./VerCarreras";
 
@@ -28,13 +28,16 @@ function Usuario() {
         <div className="row">
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-2">
             <div className="row">
-              <Titulo titulo={"Gestion de carreras"} />
+              <AntHeader
+                titulo={"Periodos"}
+                subtitulo={"Gestionar y activar periodos academicos"}
+              />
 
-              <div className="col-md-9">
+              <div className="col-md-9 mt-4">
                 <VerCarreras />
               </div>
 
-              <div className="col-md-3">
+              <div className="col-md-3 mt-4">
                 <CarreraForm />
               </div>
             </div>

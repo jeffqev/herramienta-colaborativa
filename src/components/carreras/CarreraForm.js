@@ -2,14 +2,17 @@ import React, { useState, useContext, useEffect } from "react";
 
 import CarreraContext from "../../context/carrera/carreraContext";
 import { mostrarMsg } from "../../utils";
-function CarreraForm() {
-  const [carreras, setCarreras] = useState({ carrera: "" });
 
+function CarreraForm() {
+  // State del formulario
+  const [carreras, setCarreras] = useState({ carrera: "" });
   const { carrera } = carreras;
 
+  // Variables globales de carreras
   const carreraContext = useContext(CarreraContext);
   const { msg, crearCarrera, vaciarmsg } = carreraContext;
 
+  // Si existe un mensaje mostrarlo
   useEffect(() => {
     if (msg) {
       mostrarMsg(msg.texto, msg.tipo);
@@ -18,6 +21,7 @@ function CarreraForm() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [msg]);
 
+  // Rellenar el formulario
   const handleChange = (e) => {
     setCarreras({
       ...carreras,
@@ -25,6 +29,7 @@ function CarreraForm() {
     });
   };
 
+  // Enviar la peticion y validar campos
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -38,7 +43,7 @@ function CarreraForm() {
 
   return (
     <div className="card mt-2">
-      <div class="card-header">
+      <div className="card-header">
         <small>Agregar Nueva Carrera</small>
       </div>
       <div className="card-body">

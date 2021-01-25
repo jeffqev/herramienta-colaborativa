@@ -13,6 +13,7 @@ import AlertaState from "./context/alerta/alertaState";
 import AuthState from "./context/auth/authState";
 import UsuarioState from "./context/usuarios/usuarioState";
 import CarreraState from "./context/carrera/carreraState";
+import PeriodoState from "./context/periodo/periodoState";
 
 import tokenAuth from "./config/token";
 import RutaPrivada from "./privado/RutaPrivada";
@@ -28,25 +29,27 @@ function App() {
       <AlertaState>
         <UsuarioState>
           <CarreraState>
-            <ToastContainer
-              position="bottom-center"
-              autoClose={2000}
-              hideProgressBar={false}
-              newestOnTop={false}
-              closeOnClick
-              rtl={false}
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-            />
-            <Router>
-              <Switch>
-                <Route exact path="/" component={Login} />
-                <RutaPrivada exact path="/usuarios" component={Usuarios} />
-                <RutaPrivada exact path="/carreras" component={Carreras} />
-                <RutaPrivada exact path="/periodos" component={Periodos} />
-              </Switch>
-            </Router>
+            <PeriodoState>
+              <ToastContainer
+                position="bottom-center"
+                autoClose={2000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+              />
+              <Router>
+                <Switch>
+                  <Route exact path="/" component={Login} />
+                  <RutaPrivada exact path="/usuarios" component={Usuarios} />
+                  <RutaPrivada exact path="/carreras" component={Carreras} />
+                  <RutaPrivada exact path="/periodos" component={Periodos} />
+                </Switch>
+              </Router>
+            </PeriodoState>
           </CarreraState>
         </UsuarioState>
       </AlertaState>

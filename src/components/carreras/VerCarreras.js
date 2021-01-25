@@ -14,7 +14,6 @@ function VerCarreras() {
 
   useEffect(() => {
     buscarCarreras();
-    console.log(carreras);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nuevocambio]);
 

@@ -28,7 +28,7 @@ function Usuario() {
         <div className="row">
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-2">
             <div className="row">
-              <Titulo titulo={"Gestion de usuarios"} />
+              <Titulo titulo={"Gestión de usuarios"} />
 
               <div className="col-md-8 me-4 mb-4">
                 <UsuarioTable />

@@ -67,7 +67,7 @@ export default function Login(props) {
               alt=""
             />
           </div>
-          <div className="card-body">
+          <div className="card-body card-body-login">
             <form onSubmit={handleSubmit}>
               <label htmlFor="correo" className="form-label">
                 Correo electronico

@@ -67,7 +67,7 @@ function UsuarioForm() {
   return (
     <>
       <div className="card mt-2">
-        <div class="card-header text-center">
+        <div className="card-header text-center">
           <small>Agregar nuevo usuario</small>
         </div>
         <div className="card-body">

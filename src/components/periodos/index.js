@@ -4,7 +4,9 @@ import AuthContext from "../../context/auth/authContext";
 
 import Header from "../layout/Header";
 import Nav from "../layout/Nav";
-import Titulo from "../layout/Titulo";
+import PeriodoForm from "./PeriodoForm";
+import VerPeriodos from "./VerPeriodos";
+import AntHeader from "../layout/AntHeader";
 
 function Usuario() {
   const authContext = useContext(AuthContext);
@@ -26,14 +28,17 @@ function Usuario() {
         <div className="row">
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-2">
             <div className="row">
-              <Titulo titulo={"Gestion de periodos"} />
+              <AntHeader
+                titulo={"Periodos"}
+                subtitulo={"Gestionar y activar periodos academicos"}
+              />
 
-              <div className="col-md-9">
-                <p>hola</p>
+              <div className="col-md-4">
+                <PeriodoForm />
               </div>
 
-              <div className="col-md-3">
-                <p>hola</p>
+              <div className="col-md-8">
+                <VerPeriodos />
               </div>
             </div>
           </main>
