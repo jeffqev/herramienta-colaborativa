@@ -1,12 +1,10 @@
 import React, { useContext, useEffect } from "react";
 
 import AuthContext from "../../context/auth/authContext";
-import AntHeader from "../layout/AntHeader";
 
 import Header from "../layout/Header";
 import Nav from "../layout/Nav";
-import CarreraForm from "./CarreraForm";
-import VerCarreras from "./VerCarreras";
+import AntHeader from "../layout/AntHeader";
 
 function Usuario() {
   const authContext = useContext(AuthContext);
@@ -22,22 +20,23 @@ function Usuario() {
   return (
     <>
       <Header />
-      <Nav activa={"carreras"} />
+      <Nav activa={"asignaturas"} />
+
       <div className="container-fluid">
         <div className="row">
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-2">
             <div className="row">
               <AntHeader
-                titulo={"Carreras"}
-                subtitulo={"Gestión de carreras"}
+                titulo={"Periodos"}
+                subtitulo={"Gestionar y activar periodos academicos"}
               />
 
-              <div className="col-md-9 mt-4">
-                <VerCarreras />
+              <div className="col-md-4">
+                <p>Form</p>
               </div>
 
-              <div className="col-md-3 mt-4">
-                <CarreraForm />
+              <div className="col-md-8">
+                <p>Tabla</p>
               </div>
             </div>
           </main>

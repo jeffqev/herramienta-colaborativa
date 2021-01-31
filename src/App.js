@@ -8,6 +8,7 @@ import Login from "./components/auth/Login";
 import Usuarios from "./components/usuarios/Usuarios";
 import Carreras from "./components/carreras";
 import Periodos from "./components/periodos";
+import Asignaturas from "./components/asignaturas";
 
 import AlertaState from "./context/alerta/alertaState";
 import AuthState from "./context/auth/authState";
@@ -47,6 +48,11 @@ function App() {
                   <RutaPrivada exact path="/usuarios" component={Usuarios} />
                   <RutaPrivada exact path="/carreras" component={Carreras} />
                   <RutaPrivada exact path="/periodos" component={Periodos} />
+                  <RutaPrivada
+                    exact
+                    path="/asignaturas"
+                    component={Asignaturas}
+                  />
                 </Switch>
               </Router>
             </PeriodoState>

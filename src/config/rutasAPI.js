@@ -12,3 +12,7 @@ export const PATH_CARRERA = "/api/carrera";
 
 // Periodos
 export const PATH_PERIODO = "/api/periodo";
+
+// Asignaturas
+export const PATH_ASIGNATURA = "/api/asignatura";
+export const PATH_ASIGNATURA_DOCENTES = "/api/asignatura/docentes";

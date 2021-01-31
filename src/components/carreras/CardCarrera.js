@@ -26,27 +26,31 @@ function CardCarrera({ carrera, eliminarCarrera }) {
   return (
     <>
       <div className="col-md-4 col-sm-6 item mb-4">
-        <div className="card">
+        <div className="card card-carrera">
           <div className="card-body d-grid gap-2 ">
             <h4 className="card-title text-left">
-              <button className="btn btn-link cardcarreraeditar">
-                <i className="bi bi-gear"></i>
-              </button>
-              <Popconfirm
-                title="Esta seguro de querer eliminar"
-                okText="Si"
-                cancelText="No"
-                onConfirm={() => {
-                  handleEliminar(carrera._id);
-                }}
-                onCancel={handleNoEliminar}
-              >
-                <button className="btn btn-link cardcarreraeliminar">
-                  <i className="bi bi-trash"></i>
+              <h5 className="card-title text-center card-title-carrera mb-1">
+                {capitalize(carrera.carrera)}
+              </h5>
+              <div className="d-flex justify-content-center">
+                <button className="btn btn-link cardcarreraeditar">
+                  <i className="bi bi-gear"></i>
                 </button>
-              </Popconfirm>
+                <Popconfirm
+                  title="Esta seguro de querer eliminar"
+                  okText="Si"
+                  cancelText="No"
+                  onConfirm={() => {
+                    handleEliminar(carrera._id);
+                  }}
+                  onCancel={handleNoEliminar}
+                >
+                  <button className="btn btn-link cardcarreraeliminar">
+                    <i className="bi bi-trash"></i>
+                  </button>
+                </Popconfirm>
+              </div>
             </h4>
-            <h5 className="card-title mb-4">{capitalize(carrera.carrera)}</h5>
 
             <button
               className="btn btn-outline-info btn-sms"
