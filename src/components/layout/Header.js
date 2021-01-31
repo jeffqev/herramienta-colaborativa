@@ -1,5 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import AuthContext from "../../context/auth/authContext";
+import { toast } from "react-toastify";
+
 function Header() {
   const authContext = useContext(AuthContext);
   const { usuario, usuarioAutenticado, cerrarSesion } = authContext;
@@ -8,6 +10,11 @@ function Header() {
     usuarioAutenticado();
     // eslint-disable-next-line
   }, []);
+
+  const perfilUsuario = () => {
+    console.log("xd");
+    toast.success("Wow so easy !");
+  };
 
   return (
     <header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -30,8 +37,7 @@ function Header() {
         {usuario ? (
           <span className="ms-3 navbar-text">
             <strong>
-              {" "}
-              Bienvenido: {usuario.nombre} {usuario.apellido}{" "}
+              Bienvenido: {usuario.nombre} {usuario.apellido}
             </strong>
           </span>
         ) : null}
@@ -39,7 +45,13 @@ function Header() {
       <ul className="navbar-nav px-3 ">
         <li className="nav-item text-nowrap ">
           <button
-            className="btn btn-outline-light btn-sm mb-2 mt-2"
+            className="btn btn-outline-light btn-sm mb-2 mt-2 ms-2"
+            onClick={() => perfilUsuario()}
+          >
+            Perfil
+          </button>
+          <button
+            className="btn btn-outline-light btn-sm mb-2 mt-2 ms-2"
             onClick={() => cerrarSesion()}
           >
             Cerrar sesión

@@ -1,6 +1,4 @@
 import {
-  REGISTRO_EXITOSO,
-  REGISTRO_ERROR,
   OBTENER_USUARIO,
   LOGIN_EXITOSO,
   LOGIN_ERROR,
@@ -9,14 +7,6 @@ import {
 
 const authReducer = (state, action) => {
   switch (action.type) {
-    case REGISTRO_EXITOSO:
-      return {
-        ...state,
-        mensaje: {
-          msg: action.payload.msg,
-          categoria: "success",
-        },
-      };
     case LOGIN_EXITOSO:
       localStorage.setItem("token", `Bearer ${action.payload.token}`);
       return {
@@ -31,11 +21,6 @@ const authReducer = (state, action) => {
         autenticado: true,
         usuario: action.payload,
         cargando: false,
-      };
-    case REGISTRO_ERROR:
-      return {
-        ...state,
-        mensaje: action.payload,
       };
     case LOGIN_ERROR:
     case CERRAR_SESION:

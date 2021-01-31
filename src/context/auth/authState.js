@@ -5,15 +5,14 @@ import clienteAxios from "../../config/axios";
 import tokenAuth from "../../config/token";
 
 import {
-  REGISTRO_EXITOSO,
-  REGISTRO_ERROR,
   OBTENER_USUARIO,
   LOGIN_EXITOSO,
   LOGIN_ERROR,
   CERRAR_SESION,
 } from "../../types";
 
-import { CREAR_USUARIO, PERFIL_USUARIO, LOGIN } from "../../config/rutasAPI";
+import { errorMsg } from "../../utils";
+import { PERFIL_USUARIO, LOGIN } from "../../config/rutasAPI";
 
 const AuthState = (props) => {
   const initialState = {
@@ -26,29 +25,6 @@ const AuthState = (props) => {
 
   const [state, dispatch] = useReducer(AuthReducer, initialState);
 
-  const registrarUsuario = async (datos) => {
-    try {
-      const respuesta = await clienteAxios.post(CREAR_USUARIO, datos);
-      console.log(respuesta.data);
-
-      dispatch({
-        type: REGISTRO_EXITOSO,
-        payload: respuesta.data,
-      });
-    } catch (error) {
-      // console.log(error.response.data.msg);
-      const alerta = {
-        msg: error.response.data.msg,
-        categoria: "danger",
-      };
-
-      dispatch({
-        type: REGISTRO_ERROR,
-        payload: alerta,
-      });
-    }
-  };
-
   const usuarioAutenticado = async () => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -57,10 +33,9 @@ const AuthState = (props) => {
 
     try {
       const respuesta = await clienteAxios.get(PERFIL_USUARIO);
-      // console.log(respuesta);
       dispatch({
         type: OBTENER_USUARIO,
-        payload: respuesta.data.data,
+        payload: respuesta?.data.data,
       });
     } catch (error) {
       console.log(error.response);
@@ -75,15 +50,14 @@ const AuthState = (props) => {
       const respuesta = await clienteAxios.post(LOGIN, datos);
       dispatch({
         type: LOGIN_EXITOSO,
-        payload: respuesta.data,
+        payload: respuesta?.data,
       });
 
       // Obtener el usuario
       usuarioAutenticado();
     } catch (error) {
-      console.log(error.response.data.msg);
       const alerta = {
-        msg: error.response.data.msg,
+        msg: errorMsg(error),
         categoria: "danger",
       };
 
@@ -107,7 +81,6 @@ const AuthState = (props) => {
         usuario: state.usuario,
         mensaje: state.mensaje,
         cargando: state.cargando,
-        registrarUsuario,
         iniciarSesion,
         usuarioAutenticado,
         cerrarSesion,
