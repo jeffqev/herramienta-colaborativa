@@ -13,9 +13,20 @@ export default function Login(props) {
 
   // Datos globales con useContext para la informacion de autenticación
   const authaContext = useContext(AuthContext);
-  const { iniciarSesion, autenticado, mensaje } = authaContext;
+  const {
+    iniciarSesion,
+    usuarioAutenticado,
+    autenticado,
+    mensaje,
+  } = authaContext;
 
   useEffect(() => {
+    // Si cuenta con un token en el localstorage verificar si es uno correcto
+    const token = localStorage.getItem("token");
+    if (token) {
+      usuarioAutenticado();
+    }
+
     // Si autenticado es verdadero cambiar de pagina
     if (autenticado) {
       props.history.push("/usuarios");

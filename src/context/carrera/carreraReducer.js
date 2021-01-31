@@ -22,6 +22,12 @@ const carreraReducer = (state, action) => {
       return {
         ...state,
         carreras: action.payload,
+        carrerasfiltro: action.payload.map(function (carrera) {
+          return {
+            text: carrera.carrera,
+            value: carrera.carrera,
+          };
+        }),
       };
 
     case CARRERA_BUSCAR_ERROR:

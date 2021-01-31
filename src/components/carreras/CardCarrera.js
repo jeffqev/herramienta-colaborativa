@@ -20,7 +20,7 @@ function CardCarrera({ carrera, eliminarCarrera }) {
   };
 
   const handleNoEliminar = (id) => {
-    mostrarMsg("eliminacion cancelada", "info");
+    mostrarMsg("Eliminacion cancelada", "info");
   };
 
   return (
@@ -28,10 +28,10 @@ function CardCarrera({ carrera, eliminarCarrera }) {
       <div className="col-md-4 col-sm-6 item mb-4">
         <div className="card card-carrera">
           <div className="card-body d-grid gap-2 ">
-            <h4 className="card-title text-left">
-              <h5 className="card-title text-center card-title-carrera mb-1">
+            <h5 className="card-title text-left">
+              <p className="text-center card-title-carrera mb-1">
                 {capitalize(carrera.carrera)}
-              </h5>
+              </p>
               <div className="d-flex justify-content-center">
                 <button className="btn btn-link cardcarreraeditar">
                   <i className="bi bi-gear"></i>
@@ -50,7 +50,7 @@ function CardCarrera({ carrera, eliminarCarrera }) {
                   </button>
                 </Popconfirm>
               </div>
-            </h4>
+            </h5>
 
             <button
               className="btn btn-outline-info btn-sms"

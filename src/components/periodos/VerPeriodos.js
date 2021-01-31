@@ -1,9 +1,9 @@
 import React, { useContext, useEffect } from "react";
-import { Table, Tag, Button } from "antd";
+import { Table, Tag } from "antd";
 import moment from "moment";
 import PeriodoContext from "../../context/periodo/periodoContext";
 import "moment/locale/es";
-import { DeleteOutlined } from "@ant-design/icons";
+import BotonEliminar from "../layout/extras/BotonEliminar";
 
 function VerPeriodos() {
   // Variables globales de periodos
@@ -69,16 +69,7 @@ function VerPeriodos() {
               >
                 ACTIVAR
               </Tag>
-              <Button
-                type="link"
-                danger
-                shape="round"
-                icon={<DeleteOutlined />}
-                size={"small"}
-                onClick={() => {
-                  handleEliminar(periodo._id);
-                }}
-              />
+              <BotonEliminar handleEliminar={handleEliminar} id={periodo._id} />
             </>
           )}
         </>

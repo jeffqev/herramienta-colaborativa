@@ -21,6 +21,7 @@ const CarreraState = (props) => {
     msg: null,
     nuevocambio: false,
     carreras: [],
+    carrerasfiltro: [],
   };
 
   const [state, dispatch] = useReducer(CarreraReducer, initialState);
@@ -86,6 +87,7 @@ const CarreraState = (props) => {
         msg: state.msg,
         nuevocambio: state.nuevocambio,
         carreras: state.carreras,
+        carrerasfiltro: state.carrerasfiltro,
         crearCarrera,
         buscarCarreras,
         eliminarCarrera,
