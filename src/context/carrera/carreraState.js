@@ -13,6 +13,8 @@ import {
   CARRERA_BUSCAR_ERROR,
   CARRERA_ELIMINAR_OK,
   CARRERA_ELIMINAR_ERROR,
+  ENVIAR_ASIGNATURA,
+  QUITAR_ASIGNATURA,
 } from "../../types";
 import { PATH_CARRERA } from "../../config/rutasAPI";
 
@@ -21,6 +23,8 @@ const CarreraState = (props) => {
     msg: null,
     nuevocambio: false,
     carreras: [],
+    carrerasfiltro: [],
+    carreranombrefiltro: null,
   };
 
   const [state, dispatch] = useReducer(CarreraReducer, initialState);
@@ -80,16 +84,33 @@ const CarreraState = (props) => {
     });
   };
 
+  const enviaraAsignatura = async (carrera) => {
+    dispatch({
+      type: ENVIAR_ASIGNATURA,
+      payload: carrera,
+    });
+
+    setTimeout(() => {
+      dispatch({
+        type: QUITAR_ASIGNATURA,
+        payload: null,
+      });
+    }, 3000);
+  };
+
   return (
     <CarreraContext.Provider
       value={{
         msg: state.msg,
         nuevocambio: state.nuevocambio,
         carreras: state.carreras,
+        carrerasfiltro: state.carrerasfiltro,
+        carreranombrefiltro: state.carreranombrefiltro,
         crearCarrera,
         buscarCarreras,
         eliminarCarrera,
         vaciarmsg,
+        enviaraAsignatura,
       }}
     >
       {props.children}

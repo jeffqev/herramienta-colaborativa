@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import AuthContext from "../../context/auth/authContext";
 import { toast } from "react-toastify";
+import { Button } from "antd";
 
 function Header() {
   const authContext = useContext(AuthContext);
@@ -18,7 +19,10 @@ function Header() {
 
   return (
     <header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-      <a className="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#!">
+      <a
+        className="navbar-brand col-md-3 col-lg-2 me-0 px-3 text-center"
+        href="#!"
+      >
         UPS
       </a>
       <button
@@ -35,27 +39,27 @@ function Header() {
 
       <div className="w-100">
         {usuario ? (
-          <span className="ms-3 navbar-text">
-            <strong>
-              Bienvenido: {usuario.nombre} {usuario.apellido}
-            </strong>
+          <span className="ms-3" style={{ color: "#fff" }}>
+            Bienvenido: {usuario.nombre} {usuario.apellido}
           </span>
         ) : null}
       </div>
       <ul className="navbar-nav px-3 ">
         <li className="nav-item text-nowrap ">
-          <button
-            className="btn btn-outline-light btn-sm mb-2 mt-2 ms-2"
+          <Button
+            style={{ color: "#fff" }}
+            type={"text"}
             onClick={() => perfilUsuario()}
           >
             Perfil
-          </button>
-          <button
-            className="btn btn-outline-light btn-sm mb-2 mt-2 ms-2"
+          </Button>
+          <Button
+            style={{ color: "#fff" }}
+            type={"text"}
             onClick={() => cerrarSesion()}
           >
             Cerrar sesión
-          </button>
+          </Button>
         </li>
       </ul>
     </header>

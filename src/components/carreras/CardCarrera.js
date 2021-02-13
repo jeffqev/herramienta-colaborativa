@@ -1,78 +1,68 @@
-import React, { useState } from "react";
-import { capitalize } from "../../utils";
-import { Popconfirm, Drawer, Divider } from "antd";
-import { mostrarMsg } from "../../utils";
+import React from "react";
 
-function CardCarrera({ carrera, eliminarCarrera }) {
-  // Configuracion Modal latera
-  const [visible, setVisible] = useState(false);
+import { Popconfirm } from "antd";
+import { useHistory } from "react-router-dom";
 
-  const showDrawer = () => {
-    setVisible(true);
-  };
-  const onClose = () => {
-    setVisible(false);
-  };
+import { capitalize, mostrarMsg } from "../../utils";
+
+function CardCarrera({ carrera, eliminarCarrera, enviaraAsignatura }) {
+  // Hook para cambiar de ventana
+  const history = useHistory();
 
   // Funciones para eliminar carrera
   const handleEliminar = (id) => {
     eliminarCarrera(id);
   };
 
-  const handleNoEliminar = (id) => {
-    mostrarMsg("eliminacion cancelada", "info");
+  const handleNoEliminar = () => {
+    mostrarMsg("Eliminacion cancelada", "info");
+  };
+
+  const handleFiltrar = (carrera) => {
+    enviaraAsignatura(carrera);
+    history.push("/asignaturas");
   };
 
   return (
     <>
       <div className="col-md-4 col-sm-6 item mb-4">
-        <div className="card">
+        <div className="card card-carrera">
           <div className="card-body d-grid gap-2 ">
-            <h4 className="card-title text-left">
-              <button className="btn btn-link cardcarreraeditar">
-                <i className="bi bi-gear"></i>
-              </button>
-              <Popconfirm
-                title="Esta seguro de querer eliminar"
-                okText="Si"
-                cancelText="No"
-                onConfirm={() => {
-                  handleEliminar(carrera._id);
-                }}
-                onCancel={handleNoEliminar}
-              >
-                <button className="btn btn-link cardcarreraeliminar">
-                  <i className="bi bi-trash"></i>
+            <h5 className="card-title text-left">
+              <p className="text-center card-title-carrera mb-1">
+                {capitalize(carrera.carrera)}
+              </p>
+              <div className="d-flex justify-content-center">
+                <button className="btn btn-link cardcarreraeditar">
+                  <i className="bi bi-gear"></i>
                 </button>
-              </Popconfirm>
-            </h4>
-            <h5 className="card-title mb-4">{capitalize(carrera.carrera)}</h5>
+                <Popconfirm
+                  title="Esta seguro de querer eliminar"
+                  okText="Si"
+                  cancelText="No"
+                  onConfirm={() => {
+                    handleEliminar(carrera._id);
+                  }}
+                  onCancel={handleNoEliminar}
+                >
+                  <button className="btn btn-link cardcarreraeliminar">
+                    <i className="bi bi-trash"></i>
+                  </button>
+                </Popconfirm>
+              </div>
+            </h5>
 
             <button
               className="btn btn-outline-info btn-sms"
-              onClick={showDrawer}
+              onClick={() => {
+                handleFiltrar(carrera.carrera);
+              }}
             >
               Ver Asignaturas
             </button>
           </div>
         </div>
       </div>
-
-      <Drawer
-        title="Asignaturas"
-        placement="right"
-        closable={false}
-        onClose={onClose}
-        visible={visible}
-      >
-        <h6 className="text-center"> {capitalize(carrera.carrera)} </h6>
-        <Divider>Asignaturas</Divider>
-        <ul>
-          <li>Programacion</li>
-          <li>Base de datos</li>
-          <li>Sistemas operativos</li>
-        </ul>
-      </Drawer>
     </>
   );
 }

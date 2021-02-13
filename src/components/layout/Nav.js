@@ -9,7 +9,7 @@ function Nav({ activa }) {
           id="sidebarMenu"
           className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse"
         >
-          <div className="position-sticky pt-3">
+          <div className=" pt-3">
             <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Administración</span>
             </h6>
@@ -37,6 +37,7 @@ function Nav({ activa }) {
                   Carreras
                 </Link>
               </li>
+
               <li className="nav-item">
                 <Link
                   className={`nav-link ${
@@ -46,6 +47,18 @@ function Nav({ activa }) {
                 >
                   <i className="bi bi-calendar-date feather"></i>
                   Periodos
+                </Link>
+              </li>
+
+              <li className="nav-item">
+                <Link
+                  className={`nav-link ${
+                    activa === "asignaturas" ? "active" : null
+                  }`}
+                  to={"/asignaturas"}
+                >
+                  <i className="bi bi-journal-text feather"></i>
+                  Asignaturas
                 </Link>
               </li>
             </ul>
