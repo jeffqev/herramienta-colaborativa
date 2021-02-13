@@ -10,6 +10,7 @@ function VerCarreras() {
     carreras,
     buscarCarreras,
     eliminarCarrera,
+    enviaraAsignatura,
   } = carreraContext;
 
   useEffect(() => {
@@ -25,6 +26,7 @@ function VerCarreras() {
             key={carrera._id}
             carrera={carrera}
             eliminarCarrera={eliminarCarrera}
+            enviaraAsignatura={enviaraAsignatura}
           />
         ))}
       </div>

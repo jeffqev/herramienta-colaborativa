@@ -20,7 +20,7 @@ function VerAsignaturas() {
 
   // Datos globales con useContext para usar los carreras
   const carreraContext = useContext(CarreraContext);
-  const { carrerasfiltro } = carreraContext;
+  const { carrerasfiltro, carreranombrefiltro } = carreraContext;
 
   // Si hay cambios volver a hacer la consulta
   useEffect(() => {
@@ -57,7 +57,7 @@ function VerAsignaturas() {
 
       filters: carrerasfiltro,
       filterMultiple: false,
-      defaultFilteredValue: null,
+      defaultFilteredValue: carreranombrefiltro ? [carreranombrefiltro] : null,
       onFilter: (value, record) => record.carrera.carrera.indexOf(value) === 0,
     },
     {

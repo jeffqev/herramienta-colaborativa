@@ -6,6 +6,8 @@ import {
   CARRERA_BUSCAR_ERROR,
   CARRERA_ELIMINAR_OK,
   CARRERA_ELIMINAR_ERROR,
+  ENVIAR_ASIGNATURA,
+  QUITAR_ASIGNATURA,
 } from "../../types";
 
 const carreraReducer = (state, action) => {
@@ -17,7 +19,6 @@ const carreraReducer = (state, action) => {
         msg: action.payload,
         nuevocambio: !state.nuevocambio,
       };
-
     case CARRERA_BUSCAR_OK:
       return {
         ...state,
@@ -38,6 +39,16 @@ const carreraReducer = (state, action) => {
         msg: action.payload,
       };
 
+    case ENVIAR_ASIGNATURA:
+      return {
+        ...state,
+        carreranombrefiltro: action.payload,
+      };
+    case QUITAR_ASIGNATURA:
+      return {
+        ...state,
+        carreranombrefiltro: action.payload,
+      };
     case VACIAR_MENSAJE:
       return {
         ...state,

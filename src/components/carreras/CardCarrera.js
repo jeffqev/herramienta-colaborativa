@@ -1,26 +1,26 @@
-import React, { useState } from "react";
-import { capitalize } from "../../utils";
-import { Popconfirm, Drawer, Divider } from "antd";
-import { mostrarMsg } from "../../utils";
+import React from "react";
 
-function CardCarrera({ carrera, eliminarCarrera }) {
-  // Configuracion Modal latera
-  const [visible, setVisible] = useState(false);
+import { Popconfirm } from "antd";
+import { useHistory } from "react-router-dom";
 
-  const showDrawer = () => {
-    setVisible(true);
-  };
-  const onClose = () => {
-    setVisible(false);
-  };
+import { capitalize, mostrarMsg } from "../../utils";
+
+function CardCarrera({ carrera, eliminarCarrera, enviaraAsignatura }) {
+  // Hook para cambiar de ventana
+  const history = useHistory();
 
   // Funciones para eliminar carrera
   const handleEliminar = (id) => {
     eliminarCarrera(id);
   };
 
-  const handleNoEliminar = (id) => {
+  const handleNoEliminar = () => {
     mostrarMsg("Eliminacion cancelada", "info");
+  };
+
+  const handleFiltrar = (carrera) => {
+    enviaraAsignatura(carrera);
+    history.push("/asignaturas");
   };
 
   return (
@@ -54,29 +54,15 @@ function CardCarrera({ carrera, eliminarCarrera }) {
 
             <button
               className="btn btn-outline-info btn-sms"
-              onClick={showDrawer}
+              onClick={() => {
+                handleFiltrar(carrera.carrera);
+              }}
             >
               Ver Asignaturas
             </button>
           </div>
         </div>
       </div>
-
-      <Drawer
-        title="Asignaturas"
-        placement="right"
-        closable={false}
-        onClose={onClose}
-        visible={visible}
-      >
-        <h6 className="text-center"> {capitalize(carrera.carrera)} </h6>
-        <Divider>Asignaturas</Divider>
-        <ul>
-          <li>Programacion</li>
-          <li>Base de datos</li>
-          <li>Sistemas operativos</li>
-        </ul>
-      </Drawer>
     </>
   );
 }
