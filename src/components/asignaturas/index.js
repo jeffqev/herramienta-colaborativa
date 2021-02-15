@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import AuthContext from "../../context/auth/authContext";
 
@@ -11,11 +12,18 @@ import AsignaturaForm from "./AsignaturaForm";
 function Usuario() {
   const authContext = useContext(AuthContext);
   const { usuario, usuarioAutenticado } = authContext;
+  const history = useHistory();
 
   useEffect(() => {
-    usuarioAutenticado();
+    if (usuario) {
+      if (usuario?.rol !== "administrador") {
+        history.push("/inicio");
+      }
+    } else {
+      usuarioAutenticado();
+    }
     // eslint-disable-next-line
-  }, []);
+  }, [usuarioAutenticado]);
 
   if (!usuario) return null;
 

@@ -29,7 +29,7 @@ export default function Login(props) {
 
     // Si autenticado es verdadero cambiar de pagina
     if (autenticado) {
-      props.history.push("/usuarios");
+      props.history.push("/inicio");
     }
 
     // En caso se detecte un nuevo mensaje lo mostrara

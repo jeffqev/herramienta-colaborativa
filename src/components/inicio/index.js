@@ -1,29 +1,20 @@
 import React, { useContext, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 
 import AuthContext from "../../context/auth/authContext";
+import AntHeader from "../layout/AntHeader";
 
-import UsuarioForm from "./UsuarioForm";
 import Header from "../layout/Header";
 import Nav from "../layout/Nav";
-import UsuarioTable from "./UsuarioTable";
-import Titulo from "../layout/Titulo";
 
-function Usuario() {
+function Inicio() {
   const authContext = useContext(AuthContext);
   const { usuario, usuarioAutenticado } = authContext;
-  const history = useHistory();
 
   useEffect(() => {
-    if (usuario) {
-      if (usuario?.rol !== "administrador") {
-        history.push("/inicio");
-      }
-    } else {
-      usuarioAutenticado();
-    }
+    usuarioAutenticado();
+
     // eslint-disable-next-line
-  }, [usuarioAutenticado]);
+  }, []);
 
   if (!usuario) return null;
 
@@ -36,15 +27,7 @@ function Usuario() {
         <div className="row">
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-2">
             <div className="row">
-              <Titulo titulo={"Gestión de usuarios"} />
-
-              <div className="col-md-8 me-4 mb-4">
-                <UsuarioTable />
-              </div>
-
-              <div className="col-md-3  ">
-                <UsuarioForm />
-              </div>
+              <AntHeader titulo={"Inicio"} subtitulo={"Bienvenido"} />
             </div>
           </main>
         </div>
@@ -53,4 +36,4 @@ function Usuario() {
   );
 }
 
-export default Usuario;
+export default Inicio;
