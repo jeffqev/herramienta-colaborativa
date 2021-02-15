@@ -3,9 +3,8 @@ export const PERFIL_USUARIO = "/api/usuarios/perfil";
 export const LOGIN = "/api/login";
 
 // Usuarios
-export const CREAR_USUARIO = "/api/usuarios";
-export const BUSCAR_USUARIOS = "/api/usuarios";
-export const ELIMINAR_USUARIOS = "/api/usuarios";
+export const PATH_USUARIO = "/api/usuarios";
+export const PATH_USUARIO_DOCENTES = "/api/usuarios/docente";
 
 // Carreras
 export const PATH_CARRERA = "/api/carrera";

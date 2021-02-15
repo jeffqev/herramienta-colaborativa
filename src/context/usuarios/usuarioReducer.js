@@ -5,6 +5,8 @@ import {
   USUARIO_BUSCAR_ERROR,
   USUARIO_ELIMINAR_OK,
   USUARIO_ELIMINAR_ERROR,
+  DOCENTE_BUSCAR_OK,
+  DOCENTE_BUSCAR_ERROR,
   VACIAR_MENSAJE,
 } from "../../types";
 
@@ -23,6 +25,7 @@ const usuarioState = (state, action) => {
     case USUARIO_BUSCAR_ERROR:
     case USUARIO_INGRESO_ERROR:
     case USUARIO_ELIMINAR_ERROR:
+    case DOCENTE_BUSCAR_ERROR:
       return {
         ...state,
         mensaje: action.payload,
@@ -33,7 +36,11 @@ const usuarioState = (state, action) => {
         ...state,
         usuarios: action.payload,
       };
-
+    case DOCENTE_BUSCAR_OK:
+      return {
+        ...state,
+        docentes: action.payload,
+      };
     case VACIAR_MENSAJE:
       return {
         ...state,

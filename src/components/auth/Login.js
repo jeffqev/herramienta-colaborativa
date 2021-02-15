@@ -41,8 +41,8 @@ export default function Login(props) {
 
   // Inicializar el State del formulario
   const [usuario, setUsuario] = useState({
-    correo: "jeff.qev4@gmail.com",
-    contrasena: "admin",
+    correo: "docente1@docente.com",
+    contrasena: "docente",
   });
 
   // Guardar en los values del formulario el state
