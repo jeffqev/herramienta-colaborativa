@@ -15,9 +15,12 @@ import {
   ASIGNATURA_ELIMINAR_ERROR,
   ASIGNATURA_DOCENTES_OK,
   ASIGNATURA_DOCENTES_ERROR,
+  ASIGNATURAS_COORDINADOR_OK,
+  ASIGNATURAS_COORDINADOR_ERROR,
 } from "../../types";
 import {
   PATH_ASIGNATURA,
+  PATH_ASIGNATURAS_COORDINADOR,
   PATH_ASIGNATURA_DOCENTES,
 } from "../../config/rutasAPI";
 
@@ -55,6 +58,21 @@ const AsignaturaState = (props) => {
     } catch (error) {
       dispatch({
         type: ASIGNATURA_BUSCAR_ERROR,
+        payload: { texto: errorMsg(error), tipo: "error" },
+      });
+    }
+  };
+
+  const buscarAsignaturasCoordinador = async () => {
+    try {
+      const respuesta = await clienteAxios.get(PATH_ASIGNATURAS_COORDINADOR);
+      dispatch({
+        type: ASIGNATURAS_COORDINADOR_OK,
+        payload: respuesta?.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: ASIGNATURAS_COORDINADOR_ERROR,
         payload: { texto: errorMsg(error), tipo: "error" },
       });
     }
@@ -111,6 +129,7 @@ const AsignaturaState = (props) => {
         buscarAsignaturas,
         eliminarAsignatura,
         docentesAsignatura,
+        buscarAsignaturasCoordinador,
         vaciarmsg,
       }}
     >

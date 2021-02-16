@@ -16,6 +16,7 @@ import tokenAuth from "./config/token";
 import RutaPrivada from "./privado/RutaPrivada";
 import Context from "./context";
 import NotFound from "./components/layout/NotFound";
+import CoordinarAsignatura from "./components/CoordinarAsignatura";
 // Si se encuentra logueado al recargar la pagina
 const token = localStorage.getItem("token");
 if (token) {
@@ -46,6 +47,11 @@ function App() {
 
           <RutaPrivada exact path="/inicio" component={Bienvenida} />
           <RutaPrivada exact path="/coordinador" component={Coordinador} />
+          <RutaPrivada
+            exact
+            path="/coordinador/:id"
+            component={CoordinarAsignatura}
+          />
 
           <Route component={NotFound} />
         </Switch>

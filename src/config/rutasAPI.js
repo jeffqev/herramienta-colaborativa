@@ -15,3 +15,4 @@ export const PATH_PERIODO = "/api/periodo";
 // Asignaturas
 export const PATH_ASIGNATURA = "/api/asignatura";
 export const PATH_ASIGNATURA_DOCENTES = "/api/asignatura/docentes";
+export const PATH_ASIGNATURAS_COORDINADOR = "/api/asignatura/coordinador";

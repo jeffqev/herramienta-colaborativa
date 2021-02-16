@@ -8,6 +8,8 @@ import {
   ASIGNATURA_ELIMINAR_ERROR,
   ASIGNATURA_DOCENTES_OK,
   ASIGNATURA_DOCENTES_ERROR,
+  ASIGNATURAS_COORDINADOR_OK,
+  ASIGNATURAS_COORDINADOR_ERROR,
 } from "../../types";
 
 const asignaturaReducer = (state, action) => {
@@ -22,6 +24,7 @@ const asignaturaReducer = (state, action) => {
       };
 
     case ASIGNATURA_BUSCAR_OK:
+    case ASIGNATURAS_COORDINADOR_OK:
       return {
         ...state,
         asignaturas: action.payload,
@@ -31,6 +34,7 @@ const asignaturaReducer = (state, action) => {
     case ASIGNATURA_INGRESO_ERROR:
     case ASIGNATURA_ELIMINAR_ERROR:
     case ASIGNATURA_DOCENTES_ERROR:
+    case ASIGNATURAS_COORDINADOR_ERROR:
       return {
         ...state,
         msg: action.payload,

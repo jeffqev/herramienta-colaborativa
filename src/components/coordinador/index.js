@@ -5,6 +5,7 @@ import AntHeader from "../layout/AntHeader";
 
 import Header from "../layout/Header";
 import Nav from "../layout/Nav";
+import VerCoordinador from "./VerCoordinador";
 
 function Coordinador() {
   const authContext = useContext(AuthContext);
@@ -31,6 +32,10 @@ function Coordinador() {
                 titulo={"Asignaturas"}
                 subtitulo={"Asignaturas actuales a coordinar"}
               />
+
+              <div className="col-md-12 mt-4">
+                <VerCoordinador />
+              </div>
             </div>
           </main>
         </div>
