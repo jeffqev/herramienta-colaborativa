@@ -25,6 +25,7 @@ function VerAsignaturas() {
   // Si hay cambios volver a hacer la consulta
   useEffect(() => {
     buscarAsignaturas();
+    console.log(carrerasfiltro);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nuevocambio, carrerasfiltro]);
 

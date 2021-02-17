@@ -36,6 +36,16 @@ function Coordinador() {
               <div className="col-md-12 mt-4">
                 <VerCoordinador />
               </div>
+
+              <div class="bg-light clearfix">
+                <span>Click any button to proceed</span>
+                <button type="button" class="btn btn-warning float-right">
+                  Save
+                </button>
+                <button type="button" class="btn btn-primary float-right">
+                  Cancel
+                </button>
+              </div>
             </div>
           </main>
         </div>
