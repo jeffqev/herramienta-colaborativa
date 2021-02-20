@@ -11,9 +11,13 @@ import AntHeader from "../layout/AntHeader";
 import Header from "../layout/Header";
 import Nav from "../layout/Nav";
 import { capitalize } from "../../utils";
-import TemaForm from "./TemaForm";
-import VerTemas from "./VerTemas";
-import VerTemasPadre from "./VerTemasPadre";
+
+import TemaForm from "../Temas/TemaForm";
+import VerTemas from "../Temas/VerTemas";
+import VerTemasPadre from "../Temas/VerTemasPadre";
+import FloatButton from "./FloatButton";
+import ReferenciaForm from "../referencia/ReferenciaForm";
+import VerReferencias from "../referencia/VerReferencias";
 
 function CoordinarAsignatura() {
   // tabs
@@ -65,7 +69,7 @@ function CoordinarAsignatura() {
     <>
       <Header />
       <Nav activa={"coordinar"} />
-
+      <FloatButton />
       <div className="container-fluid">
         <div className="row">
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-2">
@@ -74,18 +78,32 @@ function CoordinarAsignatura() {
                 titulo={capitalize(asignatura.nombre)}
                 subtitulo={""}
               />
-              <div className="col-md-3" style={{ marginTop: 40 }}>
-                <TemaForm idAsignatura={id} />
+              <div className="row">
+                <div className="col-md-3" style={{ marginTop: 45 }}>
+                  <TemaForm idAsignatura={id} />
+                </div>
+                <div className="col-md-9 mb-3">
+                  <Tabs defaultActiveKey="1">
+                    <TabPane tab="Temas" key="1">
+                      <VerTemas idAsignatura={id} />
+                    </TabPane>
+                    <TabPane tab="Temas padres" key="2">
+                      <VerTemasPadre idAsignatura={id} />
+                    </TabPane>
+                  </Tabs>
+                </div>
               </div>
-              <div className="col-md-9">
-                <Tabs defaultActiveKey="1">
-                  <TabPane tab="Temas" key="1">
-                    <VerTemas idAsignatura={id} />
-                  </TabPane>
-                  <TabPane tab="Temas padres" key="2">
-                    <VerTemasPadre idAsignatura={id} />
-                  </TabPane>
-                </Tabs>
+              <div className="row mt-4">
+                <div className="col-md-3" style={{ marginTop: 45 }}>
+                  <ReferenciaForm idAsignatura={id} />
+                </div>
+                <div className="col-md-9 mb-3">
+                  <Tabs defaultActiveKey="1">
+                    <TabPane tab="Referencias" key="1">
+                      <VerReferencias idAsignatura={id} />
+                    </TabPane>
+                  </Tabs>
+                </div>
               </div>
             </div>
           </main>

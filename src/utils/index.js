@@ -2,7 +2,16 @@ import { toast } from "react-toastify";
 
 // En caso de error retorna el mensaje de error o que no hay conexion
 export const errorMsg = (error) => {
-  return error.response?.data.msg || "No hay conexion con el servidor";
+  console.log(error.response);
+
+  if (error.response?.data.msg) {
+    return error.response?.data.msg;
+  }
+
+  if (error.response?.data.errores) {
+    return error.response?.data.errores[0].msg;
+  }
+  return "Error en el servidor";
 };
 
 // Muestra los mensajes en toast error o info

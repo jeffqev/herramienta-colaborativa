@@ -30,7 +30,7 @@ function CardCoordinador({ asignatura }) {
     <>
       <Card
         hoverable
-        style={{ width: 300, marginRight: 10, marginBottom: 10 }}
+        style={{ width: 350, marginRight: 10, marginBottom: 10 }}
         actions={[
           <UserOutlined key="docente" onClick={showModal} />,
           <SendOutlined

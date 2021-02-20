@@ -20,3 +20,7 @@ export const PATH_ASIGNATURAS_COORDINADOR = "/api/asignatura/coordinador";
 // Periodos
 export const PATH_TEMA = "/api/tema";
 export const PATH_TEMA_PADRE = "/api/tema/padre";
+
+// referencia
+export const PATH_REFERENCIA = "/api/referencia";
+export const PATH_REFERENCIA_ASIGNATURA = "/api/referencia/asignatura";

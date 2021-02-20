@@ -66,7 +66,7 @@ function VerTemasPadre({ idAsignatura }) {
         columns={columns}
         dataSource={padres}
         size="small"
-        pagination={{ position: ["topCenter"] }}
+        pagination={{ position: ["bottomCenter"] }}
         showSorterTooltip={false}
         bordered
         rowKey="_id"

@@ -77,7 +77,7 @@ function VerTemas({ idAsignatura }) {
         columns={columns}
         dataSource={temas}
         size="small"
-        pagination={{ position: ["topCenter"] }}
+        pagination={{ position: ["bottomCenter"] }}
         showSorterTooltip={false}
         bordered
         rowKey="_id"
