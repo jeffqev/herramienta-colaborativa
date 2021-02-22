@@ -5,11 +5,11 @@ import AuthContext from "../../context/auth/authContext";
 
 import Header from "../layout/Header";
 import Nav from "../layout/Nav";
+import UsuarioForm from "./UsuarioForm";
+import VerUsuarios from "./VerUsuarios";
 import AntHeader from "../layout/AntHeader";
-import VerAsignaturas from "./VerAsignaturas";
-import AsignaturaForm from "./AsignaturaForm";
 
-function Usuario() {
+function Usuarios() {
   const authContext = useContext(AuthContext);
   const { usuario, usuarioAutenticado } = authContext;
   const history = useHistory();
@@ -30,25 +30,23 @@ function Usuario() {
   return (
     <>
       <Header />
-      <Nav activa={"asignaturas"} />
+      <Nav activa={"usuarios"} />
 
       <div className="container-fluid">
         <div className="row">
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-2">
             <div className="row">
               <AntHeader
-                titulo={"Asignaturas"}
-                subtitulo={
-                  "Gestionar asignaturas junto a su coordinador y docentes"
-                }
+                titulo={"Usuarios"}
+                subtitulo={"Gestionar usuarios "}
               />
 
-              <div className="col-md-3">
-                <AsignaturaForm />
+              <div className="col-md-4" style={{ marginTop: 10 }}>
+                <UsuarioForm />
               </div>
 
-              <div className="col-md-9">
-                <VerAsignaturas />
+              <div className="col-md-8">
+                <VerUsuarios />
               </div>
             </div>
           </main>
@@ -58,4 +56,4 @@ function Usuario() {
   );
 }
 
-export default Usuario;
+export default Usuarios;

@@ -29,7 +29,7 @@ export default function Login(props) {
 
     // Si autenticado es verdadero cambiar de pagina
     if (autenticado) {
-      props.history.push("/usuarios");
+      props.history.push("/inicio");
     }
 
     // En caso se detecte un nuevo mensaje lo mostrara
@@ -41,8 +41,8 @@ export default function Login(props) {
 
   // Inicializar el State del formulario
   const [usuario, setUsuario] = useState({
-    correo: "jeff.qev4@gmail.com",
-    contrasena: "admin",
+    correo: "docente1@docente.com",
+    contrasena: "docente",
   });
 
   // Guardar en los values del formulario el state

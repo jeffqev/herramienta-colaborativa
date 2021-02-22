@@ -15,9 +15,12 @@ import {
   ASIGNATURA_ELIMINAR_ERROR,
   ASIGNATURA_DOCENTES_OK,
   ASIGNATURA_DOCENTES_ERROR,
+  ASIGNATURAS_COORDINADOR_OK,
+  ASIGNATURAS_COORDINADOR_ERROR,
 } from "../../types";
 import {
   PATH_ASIGNATURA,
+  PATH_ASIGNATURAS_COORDINADOR,
   PATH_ASIGNATURA_DOCENTES,
 } from "../../config/rutasAPI";
 
@@ -60,6 +63,21 @@ const AsignaturaState = (props) => {
     }
   };
 
+  const buscarAsignaturasCoordinador = async () => {
+    try {
+      const respuesta = await clienteAxios.get(PATH_ASIGNATURAS_COORDINADOR);
+      dispatch({
+        type: ASIGNATURAS_COORDINADOR_OK,
+        payload: respuesta?.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: ASIGNATURAS_COORDINADOR_ERROR,
+        payload: { texto: errorMsg(error), tipo: "error" },
+      });
+    }
+  };
+
   const eliminarAsignatura = async (id) => {
     try {
       const respuesta = await clienteAxios.delete(`${PATH_ASIGNATURA}/${id}`);
@@ -76,10 +94,11 @@ const AsignaturaState = (props) => {
     }
   };
 
-  const docentesAsignatura = async (id) => {
+  const docentesAsignatura = async (id, data) => {
     try {
       const respuesta = await clienteAxios.patch(
-        `${PATH_ASIGNATURA_DOCENTES}/${id}`
+        `${PATH_ASIGNATURA_DOCENTES}/${id}`,
+        data
       );
 
       dispatch({
@@ -111,6 +130,7 @@ const AsignaturaState = (props) => {
         buscarAsignaturas,
         eliminarAsignatura,
         docentesAsignatura,
+        buscarAsignaturasCoordinador,
         vaciarmsg,
       }}
     >

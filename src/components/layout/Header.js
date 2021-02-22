@@ -1,9 +1,13 @@
 import React, { useEffect, useContext } from "react";
-import AuthContext from "../../context/auth/authContext";
+import { useHistory } from "react-router-dom";
+
 import { toast } from "react-toastify";
 import { Button } from "antd";
 
+import AuthContext from "../../context/auth/authContext";
 function Header() {
+  const history = useHistory();
+
   const authContext = useContext(AuthContext);
   const { usuario, usuarioAutenticado, cerrarSesion } = authContext;
 
@@ -13,8 +17,7 @@ function Header() {
   }, []);
 
   const perfilUsuario = () => {
-    console.log("xd");
-    toast.success("Wow so easy !");
+    toast.success("Perfil ");
   };
 
   return (
@@ -46,6 +49,13 @@ function Header() {
       </div>
       <ul className="navbar-nav px-3 ">
         <li className="nav-item text-nowrap ">
+          <Button
+            style={{ color: "#fff" }}
+            type={"text"}
+            onClick={() => history.push("/inicio")}
+          >
+            Inicio
+          </Button>
           <Button
             style={{ color: "#fff" }}
             type={"text"}

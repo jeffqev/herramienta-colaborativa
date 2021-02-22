@@ -5,15 +5,18 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "react-toastify/dist/ReactToastify.css";
 
 import Login from "./components/auth/Login";
-import Usuarios from "./components/usuarios/Usuarios";
+import Usuarios from "./components/usuarios";
 import Carreras from "./components/carreras";
 import Periodos from "./components/periodos";
 import Asignaturas from "./components/asignaturas";
+import Bienvenida from "./components/inicio";
+import Coordinador from "./components/coordinador";
 
 import tokenAuth from "./config/token";
 import RutaPrivada from "./privado/RutaPrivada";
 import Context from "./context";
 import NotFound from "./components/layout/NotFound";
+import CoordinarAsignatura from "./components/CoordinarAsignatura";
 // Si se encuentra logueado al recargar la pagina
 const token = localStorage.getItem("token");
 if (token) {
@@ -40,7 +43,16 @@ function App() {
           <RutaPrivada exact path="/usuarios" component={Usuarios} />
           <RutaPrivada exact path="/carreras" component={Carreras} />
           <RutaPrivada exact path="/periodos" component={Periodos} />
-          <RutaPrivada path="/asignaturas" component={Asignaturas} />
+          <RutaPrivada exact path="/asignaturas" component={Asignaturas} />
+
+          <RutaPrivada exact path="/inicio" component={Bienvenida} />
+          <RutaPrivada exact path="/coordinador" component={Coordinador} />
+          <RutaPrivada
+            exact
+            path="/coordinador/:id"
+            component={CoordinarAsignatura}
+          />
+
           <Route component={NotFound} />
         </Switch>
       </Router>

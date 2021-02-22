@@ -11,42 +11,39 @@ import {
   USUARIO_BUSCAR_ERROR,
   USUARIO_ELIMINAR_OK,
   USUARIO_ELIMINAR_ERROR,
+  DOCENTE_BUSCAR_OK,
+  DOCENTE_BUSCAR_ERROR,
   VACIAR_MENSAJE,
+  CARGANDO,
 } from "../../types";
 
 import { errorMsg } from "../../utils";
-import {
-  CREAR_USUARIO,
-  BUSCAR_USUARIOS,
-  ELIMINAR_USUARIOS,
-} from "../../config/rutasAPI";
+import { PATH_USUARIO, PATH_USUARIO_DOCENTES } from "../../config/rutasAPI";
 
 const UsuarioState = (props) => {
   const initialState = {
-    mensaje: null,
-    nuevousuario: false,
+    msg: null,
+    nuevocambio: false,
+    usuariotransfer: [],
     usuarios: [],
+    docentes: [],
+    cargando: false,
   };
 
   const [state, dispatch] = useReducer(UsuarioReducer, initialState);
 
   const crearUsuario = async (datos) => {
     try {
-      const respuesta = await clienteAxios.post(CREAR_USUARIO, datos);
+      const respuesta = await clienteAxios.post(PATH_USUARIO, datos);
 
       dispatch({
         type: USUARIO_INGRESO_OK,
-        payload: respuesta?.data,
+        payload: { texto: respuesta?.data.msg, tipo: "info" },
       });
     } catch (error) {
-      const alerta = {
-        msg: errorMsg(error),
-        categoria: "danger",
-      };
-
       dispatch({
         type: USUARIO_INGRESO_ERROR,
-        payload: alerta,
+        payload: { texto: errorMsg(error), tipo: "error" },
       });
     }
   };
@@ -57,44 +54,54 @@ const UsuarioState = (props) => {
       payload: null,
     });
   };
+
   const eliminarUsuario = async (id) => {
     try {
-      const respuesta = await clienteAxios.delete(`${ELIMINAR_USUARIOS}/${id}`);
-      console.log(respuesta.data);
+      const respuesta = await clienteAxios.delete(`${PATH_USUARIO}/${id}`);
 
       dispatch({
         type: USUARIO_ELIMINAR_OK,
-        payload: respuesta?.data,
+        payload: { texto: respuesta?.data.msg, tipo: "info" },
       });
     } catch (error) {
-      const alerta = {
-        msg: errorMsg(error),
-        categoria: "danger",
-      };
-
       dispatch({
         type: USUARIO_ELIMINAR_ERROR,
-        payload: alerta,
+        payload: { texto: errorMsg(error), tipo: "error" },
       });
     }
   };
 
   const buscarUsuarios = async () => {
     try {
-      const respuesta = await clienteAxios.get(BUSCAR_USUARIOS);
+      const respuesta = await clienteAxios.get(PATH_USUARIO);
       dispatch({
         type: USUARIO_BUSCAR_OK,
         payload: respuesta?.data.data,
       });
     } catch (error) {
-      const alerta = {
-        msg: errorMsg(error),
-        categoria: "danger",
-      };
-      console.log(error.response);
       dispatch({
         type: USUARIO_BUSCAR_ERROR,
-        payload: alerta,
+        payload: { texto: errorMsg(error), tipo: "error" },
+      });
+    }
+  };
+
+  const buscarDocentes = async () => {
+    try {
+      dispatch({
+        type: CARGANDO,
+        payload: true,
+      });
+
+      const respuesta = await clienteAxios.get(PATH_USUARIO_DOCENTES);
+      dispatch({
+        type: DOCENTE_BUSCAR_OK,
+        payload: respuesta?.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: DOCENTE_BUSCAR_ERROR,
+        payload: { texto: errorMsg(error), tipo: "error" },
       });
     }
   };
@@ -102,12 +109,15 @@ const UsuarioState = (props) => {
   return (
     <UsuarioContext.Provider
       value={{
-        mensaje: state.mensaje,
+        msg: state.msg,
         usuarios: state.usuarios,
-        nuevousuario: state.nuevousuario,
+        nuevocambio: state.nuevocambio,
+        docentes: state.docentes,
+        usuariotransfer: state.usuariotransfer,
         crearUsuario,
         buscarUsuarios,
         eliminarUsuario,
+        buscarDocentes,
         vaciarmsg,
       }}
     >

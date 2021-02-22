@@ -13,7 +13,7 @@ function AsignaturaForm() {
 
   // Datos globales con useContext para usar los usuarios
   const usuarioContext = useContext(UsuarioContext);
-  const { usuarios, buscarUsuarios } = usuarioContext;
+  const { docentes, buscarDocentes } = usuarioContext;
 
   // Datos globales con useContext para usar los carreras
   const carreraContext = useContext(CarreraContext);
@@ -30,7 +30,8 @@ function AsignaturaForm() {
       vaciarmsg();
     }
     buscarCarreras();
-    buscarUsuarios();
+    buscarDocentes();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [msg, nuevocambio]);
 
@@ -97,8 +98,8 @@ function AsignaturaForm() {
                   .indexOf(input.toLowerCase()) >= 0
               }
             >
-              {usuarios.map((docente) => (
-                <Option key={docente.nombre} value={`${docente._id}`}>
+              {docentes.map((docente) => (
+                <Option key={docente._id} value={`${docente._id}`}>
                   {`${capitalize(docente.nombre)} ${capitalize(
                     docente.apellido
                   )}`}
@@ -119,8 +120,8 @@ function AsignaturaForm() {
                   .indexOf(input.toLowerCase()) >= 0
               }
             >
-              {usuarios.map((docente) => (
-                <Select.Option key={docente.nombre} value={docente._id}>
+              {docentes.map((docente) => (
+                <Select.Option key={docente._id} value={docente._id}>
                   {`${capitalize(docente.nombre)} ${capitalize(
                     docente.apellido
                   )}`}
