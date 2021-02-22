@@ -14,6 +14,7 @@ import {
   DOCENTE_BUSCAR_OK,
   DOCENTE_BUSCAR_ERROR,
   VACIAR_MENSAJE,
+  CARGANDO,
 } from "../../types";
 
 import { errorMsg } from "../../utils";
@@ -21,10 +22,12 @@ import { PATH_USUARIO, PATH_USUARIO_DOCENTES } from "../../config/rutasAPI";
 
 const UsuarioState = (props) => {
   const initialState = {
-    mensaje: null,
-    nuevousuario: false,
+    msg: null,
+    nuevocambio: false,
+    usuariotransfer: [],
     usuarios: [],
     docentes: [],
+    cargando: false,
   };
 
   const [state, dispatch] = useReducer(UsuarioReducer, initialState);
@@ -35,17 +38,12 @@ const UsuarioState = (props) => {
 
       dispatch({
         type: USUARIO_INGRESO_OK,
-        payload: respuesta?.data,
+        payload: { texto: respuesta?.data.msg, tipo: "info" },
       });
     } catch (error) {
-      const alerta = {
-        msg: errorMsg(error),
-        categoria: "danger",
-      };
-
       dispatch({
         type: USUARIO_INGRESO_ERROR,
-        payload: alerta,
+        payload: { texto: errorMsg(error), tipo: "error" },
       });
     }
   };
@@ -100,6 +98,11 @@ const UsuarioState = (props) => {
 
   const buscarDocentes = async () => {
     try {
+      dispatch({
+        type: CARGANDO,
+        payload: true,
+      });
+
       const respuesta = await clienteAxios.get(PATH_USUARIO_DOCENTES);
       dispatch({
         type: DOCENTE_BUSCAR_OK,
@@ -121,10 +124,11 @@ const UsuarioState = (props) => {
   return (
     <UsuarioContext.Provider
       value={{
-        mensaje: state.mensaje,
+        msg: state.msg,
         usuarios: state.usuarios,
-        nuevousuario: state.nuevousuario,
+        nuevocambio: state.nuevocambio,
         docentes: state.docentes,
+        usuariotransfer: state.usuariotransfer,
         crearUsuario,
         buscarUsuarios,
         eliminarUsuario,

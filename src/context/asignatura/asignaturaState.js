@@ -94,10 +94,11 @@ const AsignaturaState = (props) => {
     }
   };
 
-  const docentesAsignatura = async (id) => {
+  const docentesAsignatura = async (id, data) => {
     try {
       const respuesta = await clienteAxios.patch(
-        `${PATH_ASIGNATURA_DOCENTES}/${id}`
+        `${PATH_ASIGNATURA_DOCENTES}/${id}`,
+        data
       );
 
       dispatch({

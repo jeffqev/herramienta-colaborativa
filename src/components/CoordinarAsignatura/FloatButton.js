@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Fab, Action } from "react-tiny-fab";
+import { Modal } from "antd";
 import "react-tiny-fab/dist/styles.css";
 import {
   PlusOutlined,
@@ -8,24 +9,35 @@ import {
   DiffOutlined,
   AuditOutlined,
 } from "@ant-design/icons";
+import ModalFloat from "./ModalFloat";
 
-function FloatButton() {
+function FloatButton({ asignatura }) {
+  // Modal Docentes
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   return (
     <>
       <Fab
         mainButtonStyles={{ color: "white", backgroundColor: "#1890ff" }}
-        onClick={() => {
-          alert("1");
-        }}
         icon={<PlusOutlined style={{ fontSize: 25 }} />}
         alwaysShowTitle={true}
       >
         <Action
           text="Docentes"
           style={{ color: "white", backgroundColor: "#85a5ff" }}
-          onClick={() => {
-            alert("1");
-          }}
+          onClick={showModal}
         >
           <UserAddOutlined style={{ fontSize: 20 }} />
         </Action>
@@ -50,6 +62,15 @@ function FloatButton() {
           <DiffOutlined style={{ fontSize: 20 }} />
         </Action>
       </Fab>
+
+      <Modal
+        title="Docentes"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        <ModalFloat asignatura={asignatura} />
+      </Modal>
     </>
   );
 }

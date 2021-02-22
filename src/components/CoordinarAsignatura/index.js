@@ -46,7 +46,6 @@ function CoordinarAsignatura() {
     if (!usuario) {
       usuarioAutenticado();
     }
-
     // Cargar las asignaturas que coordina
     buscarAsignaturasCoordinador();
 
@@ -69,7 +68,7 @@ function CoordinarAsignatura() {
     <>
       <Header />
       <Nav activa={"coordinar"} />
-      <FloatButton />
+      <FloatButton asignatura={asignatura} />
       <div className="container-fluid">
         <div className="row">
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-2">
