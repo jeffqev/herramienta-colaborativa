@@ -54,24 +54,19 @@ const UsuarioState = (props) => {
       payload: null,
     });
   };
+
   const eliminarUsuario = async (id) => {
     try {
       const respuesta = await clienteAxios.delete(`${PATH_USUARIO}/${id}`);
-      console.log(respuesta.data);
 
       dispatch({
         type: USUARIO_ELIMINAR_OK,
-        payload: respuesta?.data,
+        payload: { texto: respuesta?.data.msg, tipo: "info" },
       });
     } catch (error) {
-      const alerta = {
-        msg: errorMsg(error),
-        categoria: "danger",
-      };
-
       dispatch({
         type: USUARIO_ELIMINAR_ERROR,
-        payload: alerta,
+        payload: { texto: errorMsg(error), tipo: "error" },
       });
     }
   };
@@ -84,14 +79,9 @@ const UsuarioState = (props) => {
         payload: respuesta?.data.data,
       });
     } catch (error) {
-      const alerta = {
-        msg: errorMsg(error),
-        categoria: "danger",
-      };
-      console.log(error.response);
       dispatch({
         type: USUARIO_BUSCAR_ERROR,
-        payload: alerta,
+        payload: { texto: errorMsg(error), tipo: "error" },
       });
     }
   };
@@ -109,14 +99,9 @@ const UsuarioState = (props) => {
         payload: respuesta?.data.data,
       });
     } catch (error) {
-      const alerta = {
-        msg: errorMsg(error),
-        categoria: "danger",
-      };
-      console.log(error.response);
       dispatch({
         type: DOCENTE_BUSCAR_ERROR,
-        payload: alerta,
+        payload: { texto: errorMsg(error), tipo: "error" },
       });
     }
   };

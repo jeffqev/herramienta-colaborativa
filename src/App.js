@@ -5,7 +5,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "react-toastify/dist/ReactToastify.css";
 
 import Login from "./components/auth/Login";
-import Usuarios from "./components/usuarios/Usuarios";
+import Usuarios from "./components/usuarios";
 import Carreras from "./components/carreras";
 import Periodos from "./components/periodos";
 import Asignaturas from "./components/asignaturas";

@@ -14,7 +14,7 @@ function ModalFloat({ asignatura }) {
         </TabPane>
 
         <TabPane tab="Agregar Docentes" key="3">
-          <DocenteForm />
+          <DocenteForm tipo={"docente"} />
         </TabPane>
       </Tabs>
     </div>

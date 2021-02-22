@@ -63,7 +63,7 @@ function AgregarDocente({ asignaturaActual }) {
 
         <Form.Item colon={false}>
           <Button block type="primary" htmlType="submit">
-            Agrear Asignatura
+            Agrear docentes
           </Button>
         </Form.Item>
       </Form>

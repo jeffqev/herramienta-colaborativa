@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import { Table, Tag } from "antd";
-import moment from "moment";
-import UsuarioContext from "../../context/usuario/usuarioContext";
-import "moment/locale/es";
+import { Button, Table, Tag } from "antd";
+import { EditOutlined } from "@ant-design/icons";
+
+import UsuarioContext from "../../context/usuarios/usuarioContext";
 import BotonEliminar from "../layout/extras/BotonEliminar";
+import { capitalize } from "../../utils";
 
 function VerUsuarios() {
   // Variables globales de usuarios
@@ -12,7 +13,6 @@ function VerUsuarios() {
     nuevocambio,
     usuarios,
     buscarUsuarios,
-    activarUsuario,
     eliminarUsuario,
   } = usuarioContext;
 
@@ -23,8 +23,8 @@ function VerUsuarios() {
   }, [nuevocambio]);
 
   // Funciones para activar y eliminar usuarios
-  const handleActivar = (id) => {
-    activarUsuario(id);
+  const handleModificar = (id) => {
+    alert(id);
   };
 
   const handleEliminar = (id) => {
@@ -33,45 +33,46 @@ function VerUsuarios() {
 
   const columns = [
     {
-      title: "Usuario",
-      dataIndex: "usuario",
-      defaultSortOrder: "descend",
-      sorter: (a, b) => a.usuario - b.usuario,
+      title: "Nombre",
+      dataIndex: "nombre",
+      key: "nombre",
+      render: (nombre, completo) =>
+        `${capitalize(nombre)} ${capitalize(completo.apellido)}`,
     },
     {
-      title: "Inicio usuario",
-      dataIndex: "fechainicio",
-      key: "fechainicio",
-      render: (fechainicio) => moment(fechainicio).format("DD/MM/YYYY"),
+      title: "Correo",
+      dataIndex: "correo",
+      key: "correo",
     },
     {
-      title: "Fin usuario",
-      dataIndex: "fechafin",
-      key: "fechafin",
-      render: (fechafin) => moment(fechafin).format("DD/MM/YYYY"),
-    },
-    {
-      title: "Estado",
-      dataIndex: "estado",
-      key: "estado",
-      render: (estado, usuario) => (
+      title: "rol",
+      dataIndex: "rol",
+      key: "rol",
+      render: (rol) => (
         <>
-          {estado ? (
-            <Tag color="success">ACTIVO</Tag>
+          {rol === "docente" ? (
+            <Tag color="orange">Docente</Tag>
           ) : (
-            <>
-              <Tag
-                className="pointer"
-                color="red"
-                onClick={() => {
-                  handleActivar(usuario._id);
-                }}
-              >
-                ACTIVAR
-              </Tag>
-              <BotonEliminar handleEliminar={handleEliminar} id={usuario._id} />
-            </>
+            <Tag color="geekblue">Administrador</Tag>
           )}
+        </>
+      ),
+    },
+    {
+      title: "",
+      render: (_, usuario) => (
+        <>
+          <Button
+            type="link"
+            style={{ padding: 0, marginRight: 5 }}
+            shape="round"
+            icon={<EditOutlined />}
+            size={"small"}
+            onClick={() => {
+              handleModificar(usuario._id);
+            }}
+          />
+          <BotonEliminar id={usuario._id} handleEliminar={handleEliminar} />
         </>
       ),
     },

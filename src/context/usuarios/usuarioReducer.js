@@ -50,7 +50,7 @@ const usuarioState = (state, action) => {
     case VACIAR_MENSAJE:
       return {
         ...state,
-        mensaje: action.payload,
+        msg: action.payload,
       };
 
     case CARGANDO:

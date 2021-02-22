@@ -21,7 +21,7 @@ function Inicio() {
   return (
     <>
       <Header />
-      <Nav activa={"usuarios"} />
+      <Nav activa={""} />
 
       <div className="container-fluid">
         <div className="row">

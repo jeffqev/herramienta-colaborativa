@@ -52,7 +52,7 @@ function CardCoordinador({ asignatura }) {
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
-        width={1000}
+        // width={1000}
       >
         <ModalDocentes docente={asignatura.docentes} />
       </Modal>

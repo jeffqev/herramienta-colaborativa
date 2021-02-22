@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from "react";
 
-import { Form, Input, Button } from "antd";
+import { Form, Input, Button, Radio } from "antd";
 
 import UsuarioContext from "../../context/usuarios/usuarioContext";
 
 import { mostrarMsg } from "../../utils";
 
-function DocenteForm() {
+function DocenteForm({ tipo }) {
   // Formularios de antd
 
   const [form] = Form.useForm();
@@ -28,11 +28,18 @@ function DocenteForm() {
   // Validar datos y guardar en la db
   const onFinish = (values) => {
     const { usuario } = values;
+
     crearUsuario(usuario);
     form.resetFields();
   };
   return (
-    <Form form={form} name="usuarioform" onFinish={onFinish} layout="vertical">
+    <Form
+      initialValues={{ usuario: { rol: "docente" } }}
+      form={form}
+      name="usuarioform"
+      onFinish={onFinish}
+      layout="vertical"
+    >
       <Form.Item
         name={["usuario", "nombre"]}
         label="Nombre"
@@ -67,6 +74,15 @@ function DocenteForm() {
       >
         <Input.Password />
       </Form.Item>
+
+      {tipo === "administrador" ? (
+        <Form.Item name={["usuario", "rol"]} label="Rol">
+          <Radio.Group buttonStyle="solid">
+            <Radio.Button value="docente">Docente</Radio.Button>
+            <Radio.Button value="administrador">Administrador</Radio.Button>
+          </Radio.Group>
+        </Form.Item>
+      ) : null}
 
       <Form.Item colon={false}>
         <Button block type="primary" htmlType="submit">
