@@ -17,10 +17,14 @@ export const PATH_ASIGNATURA = "/api/asignatura";
 export const PATH_ASIGNATURA_DOCENTES = "/api/asignatura/docentes";
 export const PATH_ASIGNATURAS_COORDINADOR = "/api/asignatura/coordinador";
 
-// Periodos
+// tema
 export const PATH_TEMA = "/api/tema";
 export const PATH_TEMA_PADRE = "/api/tema/padre";
 
 // referencia
 export const PATH_REFERENCIA = "/api/referencia";
 export const PATH_REFERENCIA_ASIGNATURA = "/api/referencia/asignatura";
+
+// practica
+export const PATH_PRACTICA = "/api/practica";
+export const PATH_PRACTICA_ASIG = "/api/practica/asignatura";

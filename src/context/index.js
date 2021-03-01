@@ -4,6 +4,7 @@ import AsignaturaState from "./asignatura/asignaturaState";
 import AuthState from "./auth/authState";
 import CarreraState from "./carrera/carreraState";
 import PeriodoState from "./periodo/periodoState";
+import PracticaState from "./practica/practicaState";
 import ReferenciaState from "./referencia/referenciaState";
 import TemaState from "./tema/temaState";
 import UsuarioState from "./usuarios/usuarioState";
@@ -17,7 +18,9 @@ function Context(props) {
             <PeriodoState>
               <TemaState>
                 <ReferenciaState>
-                  <AsignaturaState>{props.children}</AsignaturaState>
+                  <PracticaState>
+                    <AsignaturaState>{props.children}</AsignaturaState>
+                  </PracticaState>
                 </ReferenciaState>
               </TemaState>
             </PeriodoState>

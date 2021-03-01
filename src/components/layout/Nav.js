@@ -86,6 +86,28 @@ function Nav({ activa }) {
                       Asignaturas
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <Link
+                      className={`nav-link ${
+                        activa === "practicas" ? "active" : null
+                      }`}
+                      to={"/practicas"}
+                    >
+                      <i className="bi bi-files feather"></i>
+                      Practicas
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className={`nav-link ${
+                        activa === "ejercicios" ? "active" : null
+                      }`}
+                      to={"/ejercicios"}
+                    >
+                      <i className="bi bi-file-diff feather"></i>
+                      Ejercicios
+                    </Link>
+                  </li>
                 </ul>
               </>
             )}

@@ -10,7 +10,12 @@ import Carreras from "./components/carreras";
 import Periodos from "./components/periodos";
 import Asignaturas from "./components/asignaturas";
 import Bienvenida from "./components/inicio";
+
 import Coordinador from "./components/coordinador";
+import Practicas from "./components/practicas";
+import PracticaForm from "./components/practicas/PracticaForm";
+import GestionarPractica from "./components/practicas/GestionarPractica";
+import Practica from "./components/practicas/Practica";
 
 import tokenAuth from "./config/token";
 import RutaPrivada from "./privado/RutaPrivada";
@@ -47,10 +52,24 @@ function App() {
 
           <RutaPrivada exact path="/inicio" component={Bienvenida} />
           <RutaPrivada exact path="/coordinador" component={Coordinador} />
+
           <RutaPrivada
             exact
             path="/coordinador/:id"
             component={CoordinarAsignatura}
+          />
+
+          <RutaPrivada exact path="/practicas" component={Practicas} />
+          <RutaPrivada exact path="/practicas/:id" component={Practica} />
+          <RutaPrivada
+            exact
+            path="/gestionar/practicas/:id"
+            component={PracticaForm}
+          />
+          <RutaPrivada
+            exact
+            path="/gestionar/practicas"
+            component={GestionarPractica}
           />
 
           <Route component={NotFound} />

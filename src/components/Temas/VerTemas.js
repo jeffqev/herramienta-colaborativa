@@ -21,6 +21,7 @@ function VerTemas({ idAsignatura }) {
 
   // Si hay cambios volver a hacer la consulta
   useEffect(() => {
+    console.log(idAsignatura);
     buscarTemas(idAsignatura);
     buscarTemasPadre(idAsignatura);
 
