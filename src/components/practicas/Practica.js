@@ -101,7 +101,7 @@ function CoordinarAsignatura() {
                       </Title>
 
                       {practica.requisitos.map((requisito, index) => (
-                        <Text> {`${index + 1}.- ${requisito}`} </Text>
+                        <Text> {`‣ ${requisito}`} </Text>
                       ))}
                     </Space>
                   </Col>

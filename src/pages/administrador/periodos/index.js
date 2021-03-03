@@ -1,13 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import AuthContext from "../../context/auth/authContext";
+import AuthContext from "../../../context/auth/authContext";
 
-import Header from "../layout/Header";
-import Nav from "../layout/Nav";
-import PeriodoForm from "./PeriodoForm";
-import VerPeriodos from "./VerPeriodos";
-import AntHeader from "../layout/AntHeader";
+import Header from "../../../components/layout/Header";
+import Nav from "../../../components/layout/Nav";
+import PeriodoForm from "../../../components/periodos/PeriodoForm";
+import VerPeriodos from "../../../components/periodos/VerPeriodos";
+import AntHeader from "../../../components/layout/AntHeader";
 
 function Usuario() {
   const authContext = useContext(AuthContext);
@@ -42,7 +42,14 @@ function Usuario() {
               />
 
               <div className="col-md-4">
-                <PeriodoForm />
+                <div className="card cardform mb-3">
+                  <div className="card-header">
+                    <small>Agregar nuevo periodo</small>
+                  </div>
+                  <div className="card-body">
+                    <PeriodoForm />
+                  </div>
+                </div>
               </div>
 
               <div className="col-md-8">

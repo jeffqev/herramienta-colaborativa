@@ -19,18 +19,16 @@ function VerCarreras() {
   }, [nuevocambio]);
 
   return (
-    <div className="container mt-2">
-      <div className="row">
-        {carreras.map((carrera) => (
-          <CardCarrera
-            key={carrera._id}
-            carrera={carrera}
-            eliminarCarrera={eliminarCarrera}
-            enviaraAsignatura={enviaraAsignatura}
-          />
-        ))}
-      </div>
-    </div>
+    <>
+      {carreras.map((carrera) => (
+        <CardCarrera
+          key={carrera._id}
+          carrera={carrera}
+          eliminarCarrera={eliminarCarrera}
+          enviaraAsignatura={enviaraAsignatura}
+        />
+      ))}
+    </>
   );
 }
 

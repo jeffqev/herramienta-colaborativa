@@ -42,36 +42,29 @@ function CarreraForm() {
   };
 
   return (
-    <div className="card mt-2">
-      <div className="card-header">
-        <small>Agregar Nueva Carrera</small>
-      </div>
-      <div className="card-body">
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="carrera" className="form-label">
-            Carrera
-          </label>
-          <input
-            className="form-control"
-            id="carrera"
-            type="text"
-            name="carrera"
-            value={carrera}
-            placeholder="Nombre"
-            onChange={handleChange}
-          />
+    <form onSubmit={handleSubmit}>
+      <label htmlFor="carrera" className="form-label">
+        Carrera
+      </label>
+      <input
+        className="form-control"
+        id="carrera"
+        type="text"
+        name="carrera"
+        value={carrera}
+        placeholder="Nombre"
+        onChange={handleChange}
+      />
 
-          <div className="d-grid gap-2">
-            <button
-              type="submit"
-              className="mt-3 btn btn-outline-primary btn-block"
-            >
-              Agregar
-            </button>
-          </div>
-        </form>
+      <div className="d-grid gap-2">
+        <button
+          type="submit"
+          className="mt-3 btn btn-outline-primary btn-block"
+        >
+          Agregar
+        </button>
       </div>
-    </div>
+    </form>
   );
 }
 

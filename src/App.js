@@ -4,11 +4,11 @@ import { ToastContainer } from "react-toastify";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import Login from "./components/auth/Login";
-import Usuarios from "./components/usuarios";
-import Carreras from "./components/carreras";
-import Periodos from "./components/periodos";
-import Asignaturas from "./components/asignaturas";
+import Login from "./pages/auth/Login";
+import Usuarios from "./pages/administrador/usuarios";
+import Carreras from "./pages/administrador/carreras";
+import Periodos from "./pages/administrador/periodos";
+import Asignaturas from "./pages/administrador/asignaturas";
 import Bienvenida from "./components/inicio";
 
 import Coordinador from "./components/coordinador";

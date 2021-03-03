@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import AlertaContext from "../../context/alerta/alertaContext";
-import Alerta from "../layout/Alerta";
+import Alerta from "../../components/layout/Alerta";
 
 import "./login.css";
 

@@ -238,3 +238,14 @@ body {
   .filtros{
     border-bottom: 1px solid #f0f0f0;
   }
+
+  .sombra{
+    padding-bottom: 20px;
+    padding-top: 20px;
+    border-bottom: 1px solid #dfd6d6;
+  }
+
+  /* Migas */
+  .ant-breadcrumb-link{
+    /* padding-top: 80px !important; */
+  }

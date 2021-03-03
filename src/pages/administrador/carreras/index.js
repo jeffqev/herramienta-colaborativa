@@ -1,13 +1,14 @@
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import AuthContext from "../../context/auth/authContext";
-import AntHeader from "../layout/AntHeader";
+import AuthContext from "../../../context/auth/authContext";
 
-import Header from "../layout/Header";
-import Nav from "../layout/Nav";
-import CarreraForm from "./CarreraForm";
-import VerCarreras from "./VerCarreras";
+import AntHeader from "../../../components/layout/AntHeader";
+import Header from "../../../components/layout/Header";
+import Nav from "../../../components/layout/Nav";
+
+import CarreraForm from "../../../components/carreras/CarreraForm";
+import VerCarreras from "../../../components/carreras/VerCarreras";
 
 function Usuario() {
   const authContext = useContext(AuthContext);
@@ -41,11 +42,22 @@ function Usuario() {
               />
 
               <div className="col-md-9 mt-4">
-                <VerCarreras />
+                <div className="container mt-2">
+                  <div className="row">
+                    <VerCarreras />
+                  </div>
+                </div>
               </div>
 
               <div className="col-md-3 mt-4">
-                <CarreraForm />
+                <div className="card mt-2">
+                  <div className="card-header">
+                    <small>Agregar Nueva Carrera</small>
+                  </div>
+                  <div className="card-body">
+                    <CarreraForm />
+                  </div>
+                </div>
               </div>
             </div>
           </main>
