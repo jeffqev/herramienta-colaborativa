@@ -1,10 +1,10 @@
 import React, { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 
-import { toast } from "react-toastify";
 import { Button } from "antd";
 
 import AuthContext from "../../context/auth/authContext";
+import { capitalize } from "../../utils";
 function Header() {
   const history = useHistory();
 
@@ -15,10 +15,6 @@ function Header() {
     usuarioAutenticado();
     // eslint-disable-next-line
   }, []);
-
-  const perfilUsuario = () => {
-    toast.success("Perfil ");
-  };
 
   return (
     <header className="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
@@ -40,29 +36,19 @@ function Header() {
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      <div className="w-100">
-        {usuario ? (
-          <span className="ms-3" style={{ color: "#fff" }}>
-            Bienvenido: {usuario.nombre} {usuario.apellido}
-          </span>
-        ) : null}
-      </div>
+      <div className="w-100"></div>
       <ul className="navbar-nav px-3 ">
         <li className="nav-item text-nowrap ">
-          <Button
-            style={{ color: "#fff" }}
-            type={"text"}
-            onClick={() => history.push("/inicio")}
-          >
-            Inicio
-          </Button>
-          <Button
-            style={{ color: "#fff" }}
-            type={"text"}
-            onClick={() => perfilUsuario()}
-          >
-            Perfil
-          </Button>
+          {usuario ? (
+            <Button
+              style={{ color: "#fff" }}
+              type={"text"}
+              onClick={() => history.push("/perfil")}
+            >
+              {capitalize(usuario.nombre)} {capitalize(usuario.apellido)}
+            </Button>
+          ) : null}
+
           <Button
             style={{ color: "#fff" }}
             type={"text"}

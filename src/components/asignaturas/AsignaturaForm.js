@@ -38,7 +38,6 @@ function AsignaturaForm() {
   // Validar datos y guardar en la db
   const onFinish = (values) => {
     const { asignatura } = values;
-    console.log(asignatura);
     crearAsignatura(asignatura);
   };
   return (

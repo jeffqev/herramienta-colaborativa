@@ -21,7 +21,6 @@ function VerTemas({ idAsignatura }) {
 
   // Si hay cambios volver a hacer la consulta
   useEffect(() => {
-    console.log(idAsignatura);
     buscarTemas(idAsignatura);
     buscarTemasPadre(idAsignatura);
 
@@ -39,6 +38,31 @@ function VerTemas({ idAsignatura }) {
 
   const columns = [
     {
+      title: "Número",
+      dataIndex: "numero",
+      key: "numero",
+      render: (numero, todo) => {
+        return Number(
+          `${
+            todo.padre?.numero !== undefined ? todo.padre.numero + "." : ""
+          }${numero}`
+        );
+      },
+      defaultSortOrder: "ascend",
+      sorter: (a, b) =>
+        Number(
+          `${a.padre?.numero !== undefined ? a.padre.numero + "." : ""}${
+            a.numero
+          }`
+        ) -
+        Number(
+          `${b.padre?.numero !== undefined ? b.padre.numero + "." : ""}${
+            b.numero
+          }`
+        ),
+    },
+
+    {
       title: "Nombre",
       dataIndex: "nombre",
       key: "nombre",
@@ -51,7 +75,7 @@ function VerTemas({ idAsignatura }) {
 
       filters: padresfiltro,
       filterMultiple: false,
-      onFilter: (value, record) => record.padre.nombre.indexOf(value) === 0,
+      onFilter: (value, record) => record.padre?.nombre.indexOf(value) === 0,
     },
     {
       title: "",

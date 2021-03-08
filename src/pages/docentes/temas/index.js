@@ -1,25 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 
-import AuthContext from "../../context/auth/authContext";
-import AsignaturaContext from "../../context/asignatura/asignaturaContext";
+import AuthContext from "../../../context/auth/authContext";
+import AsignaturaContext from "../../../context/asignatura/asignaturaContext";
 
 import { Tabs } from "antd";
 
-import AntHeader from "../layout/AntHeader";
+import Header from "../../../components/layout/Header";
+import Nav from "../../../components/layout/Nav";
+import { capitalize } from "../../../utils";
 
-import Header from "../layout/Header";
-import Nav from "../layout/Nav";
-import { capitalize } from "../../utils";
+import TemaForm from "../../../components/Temas/TemaForm";
+import VerTemas from "../../../components/Temas/VerTemas";
+import FloatButton from "../../../components/CoordinarAsignatura/FloatButton";
+import Migas from "../../../components/layout/Migas";
 
-import TemaForm from "../Temas/TemaForm";
-import VerTemas from "../Temas/VerTemas";
-import VerTemasPadre from "../Temas/VerTemasPadre";
-import FloatButton from "./FloatButton";
-import ReferenciaForm from "../referencia/ReferenciaForm";
-import VerReferencias from "../referencia/VerReferencias";
-
-function CoordinarAsignatura() {
+function Temas() {
   // tabs
   const { TabPane } = Tabs;
 
@@ -53,7 +49,7 @@ function CoordinarAsignatura() {
     if (asignaturas) {
       const busqueda = asignaturas.find((asignatura) => asignatura._id === id);
       if (!busqueda) {
-        history.push(`/coordinador`);
+        history.push(`/dashboard`);
       } else {
         setAsignatura(busqueda);
       }
@@ -67,39 +63,43 @@ function CoordinarAsignatura() {
   return (
     <>
       <Header />
-      <Nav activa={"coordinar"} />
+      <Nav activa={"temas"} />
       <FloatButton asignatura={asignatura} />
       <div className="container-fluid">
         <div className="row">
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-2">
             <div className="row">
-              <AntHeader
-                titulo={capitalize(asignatura.nombre)}
-                subtitulo={""}
+              <Migas
+                rutas={[
+                  {
+                    path: "/dashboard",
+                    nombre: "Dashboard",
+                  },
+                  {
+                    path: "/asignatura/" + asignatura._id,
+                    nombre: capitalize(asignatura.nombre),
+                  },
+                  {
+                    path: null,
+                    nombre: "Temas",
+                  },
+                ]}
               />
               <div className="row">
                 <div className="col-md-3" style={{ marginTop: 45 }}>
-                  <TemaForm idAsignatura={id} />
+                  <div className="card  mt-3">
+                    <div className="card-header">
+                      <small>Agregar nueva tema</small>
+                    </div>
+                    <div className="card-body">
+                      <TemaForm idAsignatura={id} />
+                    </div>
+                  </div>
                 </div>
                 <div className="col-md-9 mb-3">
                   <Tabs defaultActiveKey="1">
                     <TabPane tab="Temas" key="1">
                       <VerTemas idAsignatura={id} />
-                    </TabPane>
-                    <TabPane tab="Temas padres" key="2">
-                      <VerTemasPadre idAsignatura={id} />
-                    </TabPane>
-                  </Tabs>
-                </div>
-              </div>
-              <div className="row mt-4">
-                <div className="col-md-3" style={{ marginTop: 45 }}>
-                  <ReferenciaForm idAsignatura={id} />
-                </div>
-                <div className="col-md-9 mb-3">
-                  <Tabs defaultActiveKey="1">
-                    <TabPane tab="Referencias" key="1">
-                      <VerReferencias idAsignatura={id} />
                     </TabPane>
                   </Tabs>
                 </div>
@@ -112,4 +112,4 @@ function CoordinarAsignatura() {
   );
 }
 
-export default CoordinarAsignatura;
+export default Temas;

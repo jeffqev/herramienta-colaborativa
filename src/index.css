@@ -240,12 +240,9 @@ body {
   }
 
   .sombra{
-    padding-bottom: 20px;
-    padding-top: 20px;
+    padding-bottom: 25px;
+    padding-top: 25px;
+    margin-left: 8px;
+    margin-right: 8px;
     border-bottom: 1px solid #dfd6d6;
-  }
-
-  /* Migas */
-  .ant-breadcrumb-link{
-    /* padding-top: 80px !important; */
   }

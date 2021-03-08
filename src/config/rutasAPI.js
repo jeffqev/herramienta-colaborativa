@@ -25,6 +25,10 @@ export const PATH_TEMA_PADRE = "/api/tema/padre";
 export const PATH_REFERENCIA = "/api/referencia";
 export const PATH_REFERENCIA_ASIGNATURA = "/api/referencia/asignatura";
 
-// practica
-export const PATH_PRACTICA = "/api/practica";
-export const PATH_PRACTICA_ASIG = "/api/practica/asignatura";
+// // practica
+// export const PATH_PRACTICA = "/api/practica";
+// export const PATH_PRACTICA_ASIG = "/api/practica/asignatura";
+
+// plantilla
+export const PATH_PLANTILLA = "/api/plantilla";
+export const PATH_PLANTILLA_ASIG = "/api/plantilla/asignatura";

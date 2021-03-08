@@ -1,4 +1,3 @@
-// import { toast } from "react-toastify";
 import { notification } from "antd";
 
 const openNotificationWithIcon = (type, tittle, msg) => {
@@ -11,8 +10,6 @@ const openNotificationWithIcon = (type, tittle, msg) => {
 
 // En caso de error retorna el mensaje de error o que no hay conexion
 export const errorMsg = (error) => {
-  console.log(error.response);
-
   if (error.response?.data.msg) {
     return error.response?.data.msg;
   }
@@ -26,11 +23,10 @@ export const errorMsg = (error) => {
 // Muestra los mensajes en toast error o info
 export const mostrarMsg = (msg, tipo) => {
   if (tipo === "error") {
-    // toast.error(msg);
     openNotificationWithIcon("error", "Error al realizar la accion", msg);
     return;
   }
-  // toast.info(msg);
+
   openNotificationWithIcon("success", "Accion realizada correctamente", msg);
 };
 
@@ -38,4 +34,49 @@ export const mostrarMsg = (msg, tipo) => {
 export const capitalize = (s) => {
   if (typeof s !== "string") return "";
   return s.charAt(0).toUpperCase() + s.slice(1);
+};
+
+// Retorna un string con la primera en mayuscula
+export const minAutores = (colaborador) => {
+  const separado = colaborador.split(" ");
+  if (separado.length !== 1) {
+    return `${separado[1]}, ${capitalize(separado[0].charAt(0))}. `;
+  }
+  return colaborador;
+};
+
+export const autoresReferencia = (colaborador) => {
+  const separado = colaborador.split(" ");
+  if (separado.length !== 1) {
+    return `${colaborador}. `;
+  }
+  return colaborador;
+};
+
+export const stringReferencia = (referencia) => {
+  if (referencia.tipo === "libro") {
+    return (
+      <p>
+        {`${referencia.colaboradores.map((colaborador) =>
+          minAutores(colaborador)
+        )} (${referencia.anio ? referencia.anio : "s.f."}). ${
+          referencia.titulo
+        } ${referencia.edicion ? "(" + referencia.edicion + " ed.)" : ""} ${
+          referencia.editorial ? referencia.editorial + "." : ""
+        }`}
+      </p>
+    );
+  }
+  return (
+    <div>
+      {`${referencia.colaboradores.map((colaborador) =>
+        minAutores(colaborador)
+      )} (${referencia.anio ? referencia.anio : "s.f."}). ${
+        referencia.titulo
+      }. `}
+      <a target="_blank" rel="noreferrer" href={referencia.url}>
+        [online]
+      </a>
+    </div>
+  );
 };

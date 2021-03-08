@@ -1,21 +1,19 @@
 import { Breadcrumb } from "antd";
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Migas({ rutas }) {
   const { Item } = Breadcrumb;
-
-  const history = useHistory();
   return (
     <div className="sombra">
       <Breadcrumb>
         {rutas.map((ruta) =>
           ruta.path ? (
-            <Item href onClick={() => history.push(ruta.path)}>
-              {ruta.nombre}
+            <Item key={ruta.path}>
+              <Link to={ruta.path}>{ruta.nombre}</Link>
             </Item>
           ) : (
-            <Item>{ruta.nombre}</Item>
+            <Item key={ruta.path}>{ruta.nombre}</Item>
           )
         )}
       </Breadcrumb>

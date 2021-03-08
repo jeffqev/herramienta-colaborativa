@@ -1,10 +1,14 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/authContext";
+import DashboardContext from "../../context/dashboard/dashboardContext";
 
 function Nav({ activa }) {
   const authContext = useContext(AuthContext);
   const { usuario } = authContext;
+
+  const dashboardContext = useContext(DashboardContext);
+  const { asignaturaid, tipoasignatura } = dashboardContext;
 
   return (
     <div className="container-fluid">
@@ -78,25 +82,56 @@ function Nav({ activa }) {
                   <li className="nav-item">
                     <Link
                       className={`nav-link ${
-                        activa === "coordinar" ? "active" : null
+                        activa === "asignatura" ? "active" : null
                       }`}
-                      to={"/coordinador"}
+                      to={"/asignatura/" + asignaturaid}
                     >
                       <i className="bi bi-journal-text feather"></i>
-                      Asignaturas
+                      Asignatura
                     </Link>
                   </li>
+
+                  {/* Si se envio con tipo coordinador mostrar  */}
+                  {tipoasignatura === "coordinador" ? (
+                    <>
+                      <li className="nav-item">
+                        <Link
+                          className={`nav-link ${
+                            activa === "plantillas" ? "active" : null
+                          }`}
+                          to={"/plantillas/" + asignaturaid}
+                        >
+                          <i className="bi bi-card-heading feather"></i>
+                          Plantillas
+                        </Link>
+                      </li>
+
+                      <li className="nav-item">
+                        <Link
+                          className={`nav-link ${
+                            activa === "temas" ? "active" : null
+                          }`}
+                          to={"/temas/" + asignaturaid}
+                        >
+                          <i className="bi bi-tags feather"></i>
+                          Temas
+                        </Link>
+                      </li>
+                    </>
+                  ) : null}
+
                   <li className="nav-item">
                     <Link
                       className={`nav-link ${
-                        activa === "practicas" ? "active" : null
+                        activa === "referencias" ? "active" : null
                       }`}
-                      to={"/practicas"}
+                      to={"/referencias/" + asignaturaid}
                     >
-                      <i className="bi bi-files feather"></i>
-                      Practicas
+                      <i className="bi bi-blockquote-right feather"></i>
+                      Referencias
                     </Link>
                   </li>
+
                   <li className="nav-item">
                     <Link
                       className={`nav-link ${
@@ -106,6 +141,17 @@ function Nav({ activa }) {
                     >
                       <i className="bi bi-file-diff feather"></i>
                       Ejercicios
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <Link
+                      className={`nav-link ${
+                        activa === "practicas" ? "active" : null
+                      }`}
+                      to={"/practicass"}
+                    >
+                      <i className="bi bi-files feather"></i>
+                      Practicas
                     </Link>
                   </li>
                 </ul>

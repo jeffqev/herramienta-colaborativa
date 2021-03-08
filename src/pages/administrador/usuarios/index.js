@@ -18,7 +18,7 @@ function Usuarios() {
   useEffect(() => {
     if (usuario) {
       if (usuario?.rol !== "administrador") {
-        history.push("/inicio");
+        history.push("/dashboard");
       }
     } else {
       usuarioAutenticado();

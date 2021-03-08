@@ -1,9 +1,12 @@
 import React from "react";
+
 import AlertaState from "./alerta/alertaState";
 import AsignaturaState from "./asignatura/asignaturaState";
 import AuthState from "./auth/authState";
 import CarreraState from "./carrera/carreraState";
+import DashboardState from "./dashboard/dashboardState";
 import PeriodoState from "./periodo/periodoState";
+import PlantillaState from "./plantilla/plantillaState";
 import PracticaState from "./practica/practicaState";
 import ReferenciaState from "./referencia/referenciaState";
 import TemaState from "./tema/temaState";
@@ -19,7 +22,11 @@ function Context(props) {
               <TemaState>
                 <ReferenciaState>
                   <PracticaState>
-                    <AsignaturaState>{props.children}</AsignaturaState>
+                    <DashboardState>
+                      <PlantillaState>
+                        <AsignaturaState>{props.children}</AsignaturaState>
+                      </PlantillaState>
+                    </DashboardState>
                   </PracticaState>
                 </ReferenciaState>
               </TemaState>

@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import { Table, Button } from "antd";
+import { Table, Button, Tag } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import ReferenciaContext from "../../context/referencia/referenciaContext";
 
 import BotonEliminar from "../layout/extras/BotonEliminar";
+import { autoresReferencia, stringReferencia } from "../../utils";
 
 function VerReferencias({ idAsignatura }) {
   // Datos globales con useContext para usar las referencias
@@ -33,9 +34,38 @@ function VerReferencias({ idAsignatura }) {
 
   const columns = [
     {
-      title: "Referencia",
-      dataIndex: "referencia",
-      key: "referencia",
+      title: "Titulo",
+      dataIndex: "titulo",
+      key: "titulo",
+    },
+    {
+      title: "Colaboradores",
+      dataIndex: "colaboradores",
+      key: "colaboradores",
+      render: (colaboradores) => {
+        return colaboradores.map((colaborador) =>
+          autoresReferencia(colaborador)
+        );
+      },
+    },
+    {
+      title: "Publicación",
+      dataIndex: "anio",
+      key: "anio",
+    },
+    {
+      title: "Tipo",
+      dataIndex: "tipo",
+      key: "tipo",
+      render: (rol) => (
+        <>
+          {rol === "libro" ? (
+            <Tag color="purple">Libro</Tag>
+          ) : (
+            <Tag color="geekblue">Web</Tag>
+          )}
+        </>
+      ),
     },
     {
       title: "",
@@ -69,6 +99,9 @@ function VerReferencias({ idAsignatura }) {
         showSorterTooltip={false}
         bordered
         rowKey="_id"
+        expandable={{
+          expandedRowRender: (referencia) => stringReferencia(referencia),
+        }}
       />
     </>
   );

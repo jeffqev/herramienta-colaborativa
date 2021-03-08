@@ -58,9 +58,9 @@ function AgregarDocente({ asignaturaActual }) {
             }
           >
             {docentes.map((docente) => (
-              <Select.Option key={docente._id} value={docente._id}>
-                {`${capitalize(docente.nombre)} ${capitalize(
-                  docente.apellido
+              <Select.Option key={docente?._id} value={docente?._id}>
+                {`${capitalize(docente?.nombre)} ${capitalize(
+                  docente?.apellido
                 )}`}
               </Select.Option>
             ))}

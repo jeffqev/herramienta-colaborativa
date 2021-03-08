@@ -86,7 +86,7 @@ function DocenteForm({ tipo }) {
 
       <Form.Item colon={false}>
         <Button block type="primary" htmlType="submit">
-          Agrear Usuario
+          Crear Usuario
         </Button>
       </Form.Item>
     </Form>

@@ -24,18 +24,18 @@ const temaReducer = (state, action) => {
       return {
         ...state,
         temas: action.payload,
-      };
-
-    case TEMA_PADRE_BUSCAR_OK:
-      return {
-        ...state,
-        padres: action.payload,
         padresfiltro: action.payload.map(function (padre) {
           return {
             text: padre.nombre,
             value: padre.nombre,
           };
         }),
+      };
+
+    case TEMA_PADRE_BUSCAR_OK:
+      return {
+        ...state,
+        padres: action.payload,
       };
 
     case TEMA_BUSCAR_ERROR:
