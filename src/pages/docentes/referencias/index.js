@@ -10,7 +10,6 @@ import Header from "../../../components/layout/Header";
 import Nav from "../../../components/layout/Nav";
 import { capitalize } from "../../../utils";
 
-import FloatButton from "../../../components/CoordinarAsignatura/FloatButton";
 import ReferenciaForm from "../../../components/referencia/ReferenciaForm";
 import VerReferencias from "../../../components/referencia/VerReferencias";
 import Migas from "../../../components/layout/Migas";
@@ -68,7 +67,6 @@ function Referencias() {
     <>
       <Header />
       <Nav activa={"referencias"} />
-      <FloatButton asignatura={asignatura} />
       <div className="container-fluid">
         <div className="row">
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-2">

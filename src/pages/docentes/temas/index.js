@@ -12,7 +12,6 @@ import { capitalize } from "../../../utils";
 
 import TemaForm from "../../../components/Temas/TemaForm";
 import VerTemas from "../../../components/Temas/VerTemas";
-import FloatButton from "../../../components/CoordinarAsignatura/FloatButton";
 import Migas from "../../../components/layout/Migas";
 
 function Temas() {
@@ -64,7 +63,7 @@ function Temas() {
     <>
       <Header />
       <Nav activa={"temas"} />
-      <FloatButton asignatura={asignatura} />
+      {/* <FloatButton asignatura={asignatura} /> */}
       <div className="container-fluid">
         <div className="row">
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-2">

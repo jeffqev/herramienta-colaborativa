@@ -37,12 +37,16 @@ export const capitalize = (s) => {
 };
 
 // Retorna un string con la primera en mayuscula
-export const minAutores = (colaborador) => {
-  const separado = colaborador.split(" ");
-  if (separado.length !== 1) {
-    return `${separado[1]}, ${capitalize(separado[0].charAt(0))}. `;
-  }
-  return colaborador;
+export const minAutores = (colaboradores) => {
+  return colaboradores.map((colaborador, i, j) => {
+    const separado = colaborador.split(" ");
+    if (separado.length !== 1) {
+      return `${capitalize(separado[1])}, ${capitalize(
+        separado[0].charAt(0)
+      )}. ${i + 1 === j.length ? "" : "& "} `;
+    }
+    return `${colaborador}. ${i + 1 === j.length ? "" : "& "}`;
+  });
 };
 
 export const autoresReferencia = (colaborador) => {
@@ -50,33 +54,33 @@ export const autoresReferencia = (colaborador) => {
   if (separado.length !== 1) {
     return `${colaborador}. `;
   }
-  return colaborador;
+  return colaborador + ". ";
 };
 
 export const stringReferencia = (referencia) => {
   if (referencia.tipo === "libro") {
     return (
       <p>
-        {`${referencia.colaboradores.map((colaborador) =>
-          minAutores(colaborador)
-        )} (${referencia.anio ? referencia.anio : "s.f."}). ${
-          referencia.titulo
-        } ${referencia.edicion ? "(" + referencia.edicion + " ed.)" : ""} ${
-          referencia.editorial ? referencia.editorial + "." : ""
-        }`}
+        {`${minAutores(referencia.colaboradores).join("")} (${
+          referencia.anio ? referencia.anio : "s.f."
+        }). ${referencia.titulo} ${
+          referencia.edicion ? "(" + referencia.edicion + " ed.)" : ""
+        } ${referencia.editorial ? referencia.editorial + "." : ""}`}
       </p>
     );
   }
   return (
     <div>
-      {`${referencia.colaboradores.map((colaborador) =>
-        minAutores(colaborador)
-      )} (${referencia.anio ? referencia.anio : "s.f."}). ${
-        referencia.titulo
-      }. `}
+      {`${minAutores(referencia.colaboradores).join("")} (${
+        referencia.anio ? referencia.anio : "s.f."
+      }). ${referencia.titulo}. `}
       <a target="_blank" rel="noreferrer" href={referencia.url}>
         [online]
       </a>
     </div>
   );
+};
+
+export const eliminarUltimocaracter = (cadena) => {
+  return cadena.substring(0, cadena.length - 2);
 };

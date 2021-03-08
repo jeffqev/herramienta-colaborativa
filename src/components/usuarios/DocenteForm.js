@@ -28,7 +28,6 @@ function DocenteForm({ tipo }) {
   // Validar datos y guardar en la db
   const onFinish = (values) => {
     const { usuario } = values;
-
     crearUsuario(usuario);
     form.resetFields();
   };
@@ -70,7 +69,10 @@ function DocenteForm({ tipo }) {
       <Form.Item
         name={["usuario", "contrasena"]}
         label="Contraseña"
-        rules={[{ required: true, message: "La contraseña es requerido" }]}
+        rules={[
+          { required: true, message: "La contraseña es requerido" },
+          { min: 6, message: "La contraseña debe tener minimo 6 caracteres" },
+        ]}
       >
         <Input.Password />
       </Form.Item>

@@ -89,7 +89,6 @@ function TemaForm({ idAsignatura }) {
         <Select
           showSearch
           allowClear
-          placeholder="Seleccionar un tema padre"
           optionFilterProp="children"
           filterOption={(input, option) =>
             option.props.children.toLowerCase().indexOf(input.toLowerCase()) >=
