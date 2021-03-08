@@ -9,11 +9,11 @@ function ModalFloat({ asignatura }) {
   return (
     <div>
       <Tabs defaultActiveKey="1">
-        <TabPane tab="Docentes" key="1">
+        <TabPane tab="Agregar Docentes" key="1">
           <AgregarDocente asignaturaActual={asignatura} />
         </TabPane>
 
-        <TabPane tab="Agregar Docentes" key="3">
+        <TabPane tab="Crear Docentes" key="2">
           <DocenteForm tipo={"docente"} />
         </TabPane>
       </Tabs>

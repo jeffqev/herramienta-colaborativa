@@ -5,8 +5,9 @@ import AntHeader from "../layout/AntHeader";
 
 import Header from "../layout/Header";
 import Nav from "../layout/Nav";
+import PracticasCoordinador from "./PracticasCoordinador";
 
-function Inicio() {
+function GestionarPractica() {
   const authContext = useContext(AuthContext);
   const { usuario, usuarioAutenticado } = authContext;
 
@@ -21,13 +22,20 @@ function Inicio() {
   return (
     <>
       <Header />
-      <Nav activa={""} />
+      <Nav activa={"practicas"} />
 
       <div className="container-fluid">
         <div className="row">
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-2">
             <div className="row">
-              <AntHeader titulo={"Inicio"} subtitulo={"Bienvenido"} />
+              <AntHeader
+                titulo={"Practicas"}
+                subtitulo={"Ver y administrar practicas"}
+              />
+
+              <div className="col-md-12 mt-4">
+                <PracticasCoordinador />
+              </div>
             </div>
           </main>
         </div>
@@ -36,4 +44,4 @@ function Inicio() {
   );
 }
 
-export default Inicio;
+export default GestionarPractica;

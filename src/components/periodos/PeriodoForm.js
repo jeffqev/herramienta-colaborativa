@@ -48,52 +48,45 @@ function PeriodoForm() {
   };
 
   return (
-    <div className="card cardform mb-3">
-      <div className="card-header">
-        <small>Agregar nuevo periodo</small>
-      </div>
-      <div className="card-body">
-        <Form
-          name="Periodo"
-          onFinish={onFinish}
-          validateMessages={validateMessages}
-        >
-          <Form.Item
-            name={["periodo", "periodo"]}
-            label="Periodo"
-            rules={[
-              {
-                required: true,
-                type: "number",
-                min: 1,
-                max: 1000,
-              },
-            ]}
-          >
-            <InputNumber />
-          </Form.Item>
+    <Form
+      name="Periodo"
+      onFinish={onFinish}
+      validateMessages={validateMessages}
+    >
+      <Form.Item
+        name={["periodo", "periodo"]}
+        label="Periodo"
+        rules={[
+          {
+            required: true,
+            type: "number",
+            min: 1,
+            max: 1000,
+          },
+        ]}
+      >
+        <InputNumber />
+      </Form.Item>
 
-          <Form.Item
-            name={["periodo", "fecha"]}
-            label="Fecha"
-            rules={[
-              {
-                required: true,
-              },
-            ]}
-          >
-            <RangePicker
-              locale={locale}
-              placeholder={["Inicio periodo", "Fin periodo"]}
-            />
-          </Form.Item>
+      <Form.Item
+        name={["periodo", "fecha"]}
+        label="Fecha"
+        rules={[
+          {
+            required: true,
+          },
+        ]}
+      >
+        <RangePicker
+          locale={locale}
+          placeholder={["Inicio periodo", "Fin periodo"]}
+        />
+      </Form.Item>
 
-          <Button block htmlType="submit">
-            Guardar Periodo
-          </Button>
-        </Form>
-      </div>
-    </div>
+      <Button block htmlType="submit">
+        Guardar Periodo
+      </Button>
+    </Form>
   );
 }
 

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import AlertaContext from "../../context/alerta/alertaContext";
-import Alerta from "../layout/Alerta";
+import Alerta from "../../components/layout/Alerta";
 
 import "./login.css";
 
@@ -29,7 +29,7 @@ export default function Login(props) {
 
     // Si autenticado es verdadero cambiar de pagina
     if (autenticado) {
-      props.history.push("/inicio");
+      props.history.push("/dashboard");
     }
 
     // En caso se detecte un nuevo mensaje lo mostrara

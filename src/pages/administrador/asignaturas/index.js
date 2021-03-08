@@ -1,13 +1,13 @@
 import React, { useContext, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
-import AuthContext from "../../context/auth/authContext";
+import AuthContext from "../../../context/auth/authContext";
 
-import Header from "../layout/Header";
-import Nav from "../layout/Nav";
-import AntHeader from "../layout/AntHeader";
-import VerAsignaturas from "./VerAsignaturas";
-import AsignaturaForm from "./AsignaturaForm";
+import Header from "../../../components/layout/Header";
+import Nav from "../../../components/layout/Nav";
+import AntHeader from "../../../components/layout/AntHeader";
+import VerAsignaturas from "../../../components/asignaturas/VerAsignaturas";
+import AsignaturaForm from "../../../components/asignaturas/AsignaturaForm";
 
 function Usuario() {
   const authContext = useContext(AuthContext);
@@ -17,7 +17,7 @@ function Usuario() {
   useEffect(() => {
     if (usuario) {
       if (usuario?.rol !== "administrador") {
-        history.push("/inicio");
+        history.push("/dashboard");
       }
     } else {
       usuarioAutenticado();
@@ -44,7 +44,14 @@ function Usuario() {
               />
 
               <div className="col-md-3">
-                <AsignaturaForm />
+                <div className="card  mt-3">
+                  <div className="card-header">
+                    <small>Agregar nueva asignatura</small>
+                  </div>
+                  <div className="card-body">
+                    <AsignaturaForm />
+                  </div>
+                </div>
               </div>
 
               <div className="col-md-9">

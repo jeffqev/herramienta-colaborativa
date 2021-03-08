@@ -52,7 +52,6 @@ const CarreraState = (props) => {
         payload: respuesta?.data.data,
       });
     } catch (error) {
-      console.log(error.response);
       dispatch({
         type: CARRERA_BUSCAR_ERROR,
         payload: { texto: errorMsg(error), tipo: "error" },
@@ -63,7 +62,6 @@ const CarreraState = (props) => {
   const eliminarCarrera = async (id) => {
     try {
       const respuesta = await clienteAxios.delete(`${PATH_CARRERA}/${id}`);
-      console.log(respuesta.data);
 
       dispatch({
         type: CARRERA_ELIMINAR_OK,

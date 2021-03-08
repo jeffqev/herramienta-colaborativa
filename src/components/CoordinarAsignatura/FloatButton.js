@@ -10,8 +10,11 @@ import {
   AuditOutlined,
 } from "@ant-design/icons";
 import ModalFloat from "./ModalFloat";
+import { useHistory } from "react-router-dom";
 
 function FloatButton({ asignatura }) {
+  const history = useHistory();
+
   // Modal Docentes
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -46,7 +49,7 @@ function FloatButton({ asignatura }) {
           text="Practicas"
           style={{ color: "white", backgroundColor: "#85a5ff" }}
           onClick={() => {
-            alert("1");
+            history.push(`/gestionar/practicas/${asignatura._id}`);
           }}
         >
           <AuditOutlined style={{ fontSize: 20 }} />

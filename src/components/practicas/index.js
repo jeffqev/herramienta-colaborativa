@@ -5,9 +5,9 @@ import AntHeader from "../layout/AntHeader";
 
 import Header from "../layout/Header";
 import Nav from "../layout/Nav";
-import VerCoordinador from "./VerCoordinador";
+import ListadoPracticas from "./ListadoPracticas";
 
-function Coordinador() {
+function Practica() {
   const authContext = useContext(AuthContext);
   const { usuario, usuarioAutenticado } = authContext;
 
@@ -22,19 +22,19 @@ function Coordinador() {
   return (
     <>
       <Header />
-      <Nav activa={"coordinar"} />
+      <Nav activa={"practicas"} />
 
       <div className="container-fluid">
         <div className="row">
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-2">
             <div className="row">
               <AntHeader
-                titulo={"Asignaturas"}
-                subtitulo={"Asignaturas actuales a coordinar"}
+                titulo={"Practicas"}
+                subtitulo={"Ver y administrar practicas"}
               />
 
               <div className="col-md-12 mt-4">
-                <VerCoordinador />
+                <ListadoPracticas />
               </div>
             </div>
           </main>
@@ -44,4 +44,4 @@ function Coordinador() {
   );
 }
 
-export default Coordinador;
+export default Practica;

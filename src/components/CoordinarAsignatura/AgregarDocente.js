@@ -35,12 +35,18 @@ function AgregarDocente({ asignaturaActual }) {
 
   return (
     <>
-      <Form name="asignaturaform" onFinish={onFinish} layout="vertical">
+      <Form
+        initialValues={{
+          asignatura: {
+            docentes: asignaturaActual.docentes.map((docente) => docente._id),
+          },
+        }}
+        name="asignaturaform"
+        onFinish={onFinish}
+        layout="vertical"
+      >
         <Form.Item name={["asignatura", "docentes"]} label="Docentes">
           <Select
-            defaultValue={asignaturaActual.docentes.map(
-              (docente) => docente._id
-            )}
             mode="multiple"
             placeholder="Seleccionar docentes"
             style={{ width: "100%" }}
@@ -52,9 +58,9 @@ function AgregarDocente({ asignaturaActual }) {
             }
           >
             {docentes.map((docente) => (
-              <Select.Option key={docente._id} value={docente._id}>
-                {`${capitalize(docente.nombre)} ${capitalize(
-                  docente.apellido
+              <Select.Option key={docente?._id} value={docente?._id}>
+                {`${capitalize(docente?.nombre)} ${capitalize(
+                  docente?.apellido
                 )}`}
               </Select.Option>
             ))}
