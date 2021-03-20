@@ -5,6 +5,7 @@ const tokenAuth = (token) => {
     clienteAxios.defaults.headers.common["Authorization"] = token;
   } else {
     delete clienteAxios.defaults.headers.common["Authorization"];
+    window.location.replace("/");
   }
 };
 
