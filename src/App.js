@@ -15,6 +15,9 @@ import Referencias from "./pages/docentes/referencias";
 import Plantillas from "./pages/docentes/plantillas";
 import Plantilla from "./pages/docentes/plantillas/plantilla";
 
+import Ejercicios from "./pages/docentes/ejercicios";
+import Ejercicio from "./pages/docentes/ejercicios/ejercicio";
+
 import Practicas from "./components/practicas";
 import PracticaForm from "./components/practicas/PracticaForm";
 import GestionarPractica from "./components/practicas/GestionarPractica";
@@ -24,6 +27,7 @@ import tokenAuth from "./config/token";
 import RutaPrivada from "./privado/RutaPrivada";
 import Context from "./context";
 import NotFound from "./components/layout/NotFound";
+import Prubas from "./components/Ejercicio/Prubas";
 
 // Si se encuentra logueado al recargar la pagina
 const token = localStorage.getItem("token");
@@ -53,6 +57,15 @@ function App() {
             path="/plantillas/:id/:idplantilla"
             component={Plantilla}
           />
+
+          <RutaPrivada exact path="/ejercicios/:id" component={Ejercicios} />
+          <RutaPrivada
+            exact
+            path="/ejercicios/:id/:idejercicio"
+            component={Ejercicio}
+          />
+
+          <RutaPrivada exact path="/pruebas" component={Prubas} />
 
           <RutaPrivada exact path="/practicas" component={Practicas} />
           <RutaPrivada exact path="/practicas/:id" component={Practica} />

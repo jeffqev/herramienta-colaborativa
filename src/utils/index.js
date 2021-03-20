@@ -59,26 +59,29 @@ export const autoresReferencia = (colaborador) => {
 
 export const stringReferencia = (referencia) => {
   if (referencia.tipo === "libro") {
-    return (
-      <p>
-        {`${minAutores(referencia.colaboradores).join("")} (${
-          referencia.anio ? referencia.anio : "s.f."
-        }). ${referencia.titulo} ${
-          referencia.edicion ? "(" + referencia.edicion + " ed.)" : ""
-        } ${referencia.editorial ? referencia.editorial + "." : ""}`}
-      </p>
-    );
+    return <p>{textReferencia(referencia)}</p>;
   }
   return (
-    <div>
-      {`${minAutores(referencia.colaboradores).join("")} (${
-        referencia.anio ? referencia.anio : "s.f."
-      }). ${referencia.titulo}. `}
+    <>
+      {textReferencia(referencia)}
       <a target="_blank" rel="noreferrer" href={referencia.url}>
         [online]
       </a>
-    </div>
+    </>
   );
+};
+
+export const textReferencia = (referencia) => {
+  if (referencia.tipo === "libro") {
+    return `${minAutores(referencia.colaboradores).join("")} (${
+      referencia.anio ? referencia.anio : "s.f."
+    }). ${referencia.titulo} ${
+      referencia.edicion ? "(" + referencia.edicion + " ed.)" : ""
+    } ${referencia.editorial ? referencia.editorial + "." : ""}`;
+  }
+  return `${minAutores(referencia.colaboradores).join("")} (${
+    referencia.anio ? referencia.anio : "s.f."
+  }). ${referencia.titulo}. `;
 };
 
 export const eliminarUltimocaracter = (cadena) => {

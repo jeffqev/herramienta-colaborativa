@@ -10,11 +10,11 @@ import Header from "../../../components/layout/Header";
 import Nav from "../../../components/layout/Nav";
 import { capitalize } from "../../../utils";
 
-import ReferenciaForm from "../../../components/referencia/ReferenciaForm";
-import VerReferencias from "../../../components/referencia/VerReferencias";
 import Migas from "../../../components/layout/Migas";
+import EjercicioForm from "../../../components/Ejercicio/EjercicioForm";
+import VerEjercicio from "../../../components/Ejercicio/VerEjercicios";
 
-function Referencias() {
+function Ejercicios() {
   // tabs
   const { TabPane } = Tabs;
 
@@ -66,15 +66,12 @@ function Referencias() {
   return (
     <>
       <Header />
-      <Nav activa={"referencias"} />
+      <Nav activa={"ejercicios"} />
+
       <div className="container-fluid">
         <div className="row">
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-2">
             <div className="row">
-              {/* <AntHeader
-                titulo={capitalize(asignatura.nombre)}
-                subtitulo={""}
-              /> */}
               <Migas
                 rutas={[
                   {
@@ -87,26 +84,19 @@ function Referencias() {
                   },
                   {
                     path: null,
-                    nombre: "Referencias",
+                    nombre: "Ejercicios",
                   },
                 ]}
               />
 
               <div className="row">
-                <div className="col-md-3">
-                  <div className="card  mt-3">
-                    <div className="card-header">
-                      <small>Agregar nueva referencia</small>
-                    </div>
-                    <div className="card-body">
-                      <ReferenciaForm idAsignatura={id} />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-9 mb-3">
+                <div className="col-md-12 mb-3">
                   <Tabs defaultActiveKey="1">
-                    <TabPane tab="Referencias" key="1">
-                      <VerReferencias idAsignatura={id} />
+                    <TabPane tab="Listado de ejercicios" key="1">
+                      <VerEjercicio idAsignatura={id} />
+                    </TabPane>
+                    <TabPane tab="Crear nuevo ejercicio" key="2">
+                      <EjercicioForm idAsignatura={id} />
                     </TabPane>
                   </Tabs>
                 </div>
@@ -119,4 +109,4 @@ function Referencias() {
   );
 }
 
-export default Referencias;
+export default Ejercicios;

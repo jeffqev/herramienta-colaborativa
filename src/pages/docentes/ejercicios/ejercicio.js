@@ -3,24 +3,21 @@ import { useParams, useHistory } from "react-router-dom";
 
 import AuthContext from "../../../context/auth/authContext";
 import AsignaturaContext from "../../../context/asignatura/asignaturaContext";
-
-import { Tabs } from "antd";
+import EjercicioContext from "../../../context/ejercicio/ejercicioContext";
 
 import Header from "../../../components/layout/Header";
 import Nav from "../../../components/layout/Nav";
 import { capitalize } from "../../../utils";
 
-import ReferenciaForm from "../../../components/referencia/ReferenciaForm";
-import VerReferencias from "../../../components/referencia/VerReferencias";
 import Migas from "../../../components/layout/Migas";
+import EjercicioInfo from "../../../components/Ejercicio/EjercicioInfo";
 
-function Referencias() {
-  // tabs
-  const { TabPane } = Tabs;
+// import EjercicioInfo from "../../../components/ejercicios/EjercicioInfo";
 
+function Ejercicio() {
   // Rutas
   const history = useHistory();
-  const { id } = useParams();
+  const { id, idejercicio } = useParams();
 
   // asignatura seleccionada
   const [asignatura, setAsignatura] = useState("");
@@ -29,13 +26,13 @@ function Referencias() {
   const authContext = useContext(AuthContext);
   const { usuario, usuarioAutenticado } = authContext;
 
+  // Variables globales de ejercicios
+  const ejercicioContext = useContext(EjercicioContext);
+  const { nuevocambio, ejercicio, buscarEjercicioID } = ejercicioContext;
+
   // Variables globales de asignaturas
   const asignaturaContext = useContext(AsignaturaContext);
-  const {
-    nuevocambio,
-    asignaturas,
-    buscarAsignaturasCoordinador,
-  } = asignaturaContext;
+  const { asignaturas, buscarAsignaturasCoordinador } = asignaturaContext;
 
   useEffect(() => {
     if (usuario) {
@@ -55,6 +52,7 @@ function Referencias() {
         history.push(`/dashboard`);
       } else {
         setAsignatura(busqueda);
+        buscarEjercicioID(idejercicio);
       }
     }
 
@@ -66,15 +64,12 @@ function Referencias() {
   return (
     <>
       <Header />
-      <Nav activa={"referencias"} />
+      <Nav activa={"ejercicios"} />
+
       <div className="container-fluid">
         <div className="row">
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-2">
             <div className="row">
-              {/* <AntHeader
-                titulo={capitalize(asignatura.nombre)}
-                subtitulo={""}
-              /> */}
               <Migas
                 rutas={[
                   {
@@ -86,29 +81,20 @@ function Referencias() {
                     nombre: capitalize(asignatura.nombre),
                   },
                   {
+                    path: "/ejercicios/" + id,
+                    nombre: "Ejercicio",
+                  },
+                  {
                     path: null,
-                    nombre: "Referencias",
+                    nombre: capitalize(ejercicio?.titulo),
                   },
                 ]}
               />
 
               <div className="row">
-                <div className="col-md-3">
-                  <div className="card  mt-3">
-                    <div className="card-header">
-                      <small>Agregar nueva referencia</small>
-                    </div>
-                    <div className="card-body">
-                      <ReferenciaForm idAsignatura={id} />
-                    </div>
-                  </div>
-                </div>
-                <div className="col-md-9 mb-3">
-                  <Tabs defaultActiveKey="1">
-                    <TabPane tab="Referencias" key="1">
-                      <VerReferencias idAsignatura={id} />
-                    </TabPane>
-                  </Tabs>
+                <div className="col-md-12 mb-3">
+                  {/* <EjercicioInfo id={idejercicio} /> */}
+                  <EjercicioInfo id={idejercicio} />
                 </div>
               </div>
             </div>
@@ -119,4 +105,4 @@ function Referencias() {
   );
 }
 
-export default Referencias;
+export default Ejercicio;

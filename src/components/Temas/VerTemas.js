@@ -41,25 +41,8 @@ function VerTemas({ idAsignatura }) {
       title: "Número",
       dataIndex: "numero",
       key: "numero",
-      render: (numero, todo) => {
-        return Number(
-          `${
-            todo.padre?.numero !== undefined ? todo.padre.numero + "." : ""
-          }${numero}`
-        );
-      },
       defaultSortOrder: "ascend",
-      sorter: (a, b) =>
-        Number(
-          `${a.padre?.numero !== undefined ? a.padre.numero + "." : ""}${
-            a.numero
-          }`
-        ) -
-        Number(
-          `${b.padre?.numero !== undefined ? b.padre.numero + "." : ""}${
-            b.numero
-          }`
-        ),
+      sorter: (a, b) => a.numero - b.numero,
     },
 
     {

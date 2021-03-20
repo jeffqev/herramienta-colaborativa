@@ -137,7 +137,7 @@ function Nav({ activa }) {
                       className={`nav-link ${
                         activa === "ejercicios" ? "active" : null
                       }`}
-                      to={"/ejercicios"}
+                      to={"/ejercicios/" + asignaturaid}
                     >
                       <i className="bi bi-file-diff feather"></i>
                       Ejercicios
