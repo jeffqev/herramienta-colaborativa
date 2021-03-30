@@ -49,6 +49,7 @@ function VerTemas({ idAsignatura }) {
       title: "Nombre",
       dataIndex: "nombre",
       key: "nombre",
+      render: (nombre) => capitalize(nombre),
     },
     {
       title: "Padre",

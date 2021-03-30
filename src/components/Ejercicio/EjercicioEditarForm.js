@@ -2,26 +2,26 @@ import React, { useContext, useEffect, useState } from "react";
 
 import { Form, Input, Button, Select, Row, Col, Typography, Rate } from "antd";
 
-import EjercicioContext from "../../context/ejercicio/ejercicioContext";
 import TemaContext from "../../context/tema/temaContext";
 import ReferenciaContext from "../../context/referencia/referenciaContext";
 import RichText from "./RichText";
 
-import { capitalize, mostrarMsg, textReferencia } from "../../utils";
+import {
+  capitalize,
+  mostrarMsg,
+  obtenerColor,
+  textReferencia,
+} from "../../utils";
 import { FrownOutlined, MehOutlined, SmileOutlined } from "@ant-design/icons";
 
-function EjercicioForm({ idAsignatura }) {
+function EjercicioEditorForm({ idAsignatura, ejercicio, editarEjercicio }) {
   const [form] = Form.useForm();
   const { Title } = Typography;
 
-  const [ejercicioEditor, setEjercicioEditor] = useState("");
-  const [solucionEditor, setSolucionEditor] = useState("");
-  const [ejemploEditor, setEjemploEditor] = useState("");
-  const [color, setcolor] = useState("green");
-
-  // Datos globales con useContext para usar las ejercicioss
-  const ejercicioContext = useContext(EjercicioContext);
-  const { crearEjercicio } = ejercicioContext;
+  const [ejercicioEditor, setEjercicioEditor] = useState(ejercicio.ejercicio);
+  const [solucionEditor, setSolucionEditor] = useState(ejercicio.solucion);
+  const [ejemploEditor, setEjemploEditor] = useState(ejercicio.ejemplo);
+  const [color, setcolor] = useState(obtenerColor(ejercicio.dificultad));
 
   // Datos globales con useContext para usar los temas
   const temaContext = useContext(TemaContext);
@@ -44,9 +44,7 @@ function EjercicioForm({ idAsignatura }) {
 
   // Validar datos y guardar en la db
   const onFinish = (values) => {
-    const { ejercicio } = values;
-
-    ejercicio.asignatura = idAsignatura;
+    values.ejercicio.asignatura = idAsignatura;
 
     if (ejercicioEditor.trim() === "") {
       mostrarMsg("El ejercicio no puede ser vacio", "error");
@@ -58,16 +56,13 @@ function EjercicioForm({ idAsignatura }) {
       return;
     }
 
-    ejercicio.ejercicio = ejercicioEditor;
-    ejercicio.ejemplo = ejemploEditor;
-    ejercicio.solucion = solucionEditor;
+    values.ejercicio.ejercicio = ejercicioEditor;
+    values.ejercicio.ejemplo = ejemploEditor;
+    values.ejercicio.solucion = solucionEditor;
 
-    console.log(ejercicio);
-    crearEjercicio(ejercicio);
-    form.resetFields();
-    setEjercicioEditor("");
-    setEjemploEditor("");
-    setSolucionEditor("");
+    console.log(values.ejercicio);
+    console.log(ejercicio._id);
+    editarEjercicio(ejercicio._id, values.ejercicio);
   };
 
   // Rate
@@ -80,24 +75,25 @@ function EjercicioForm({ idAsignatura }) {
   const desc = ["Fácil", "Medio", "Difícil"];
 
   const handleColor = (value) => {
-    if (value === 1) {
-      setcolor("green");
-    }
-
-    if (value === 2) {
-      setcolor("#fadb14");
-    }
-
-    if (value === 3) {
-      setcolor("red");
-    }
+    setcolor(obtenerColor(value));
   };
 
   return (
     <div className="mt-3 ms-3">
-      <h3 className=" mt-3  text-center"> Nueva ejercicio</h3>
+      <h3 className=" mt-3  text-center"> Editar ejercicio</h3>
 
       <Form
+        initialValues={{
+          ejercicio: {
+            titulo: ejercicio?.titulo,
+            descripcion: ejercicio?.descripcion,
+            dificultad: ejercicio?.dificultad,
+            tema: ejercicio.tema?._id,
+            referencia: ejercicio?.referencia.map(
+              (referencia) => referencia?._id
+            ),
+          },
+        }}
         form={form}
         name="ejerciciosform"
         onFinish={onFinish}
@@ -228,7 +224,7 @@ function EjercicioForm({ idAsignatura }) {
 
         <Form.Item>
           <Button className="text-center" type="primary" htmlType="submit">
-            Agrear Ejercicios
+            Editar Ejercicio
           </Button>
         </Form.Item>
       </Form>
@@ -236,4 +232,4 @@ function EjercicioForm({ idAsignatura }) {
   );
 }
 
-export default EjercicioForm;
+export default EjercicioEditorForm;

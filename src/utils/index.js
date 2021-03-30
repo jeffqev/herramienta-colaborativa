@@ -87,3 +87,23 @@ export const textReferencia = (referencia) => {
 export const eliminarUltimocaracter = (cadena) => {
   return cadena.substring(0, cadena.length - 2);
 };
+
+export const eliminarDuplicado = (array) => {
+  let hash = {};
+  array = array.filter((o) => (hash[o.value] ? false : (hash[o.value] = true)));
+  return array;
+};
+
+export const obtenerColor = (value) => {
+  if (value === 1) {
+    return "green";
+  }
+
+  if (value === 2) {
+    return "#fadb14";
+  }
+
+  if (value === 3) {
+    return "red";
+  }
+};

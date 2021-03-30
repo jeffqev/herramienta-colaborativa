@@ -3,22 +3,21 @@ import { useParams, useHistory } from "react-router-dom";
 
 import AuthContext from "../../../context/auth/authContext";
 import AsignaturaContext from "../../../context/asignatura/asignaturaContext";
-import EjercicioContext from "../../../context/ejercicio/ejercicioContext";
+import PlantillaContext from "../../../context/plantilla/plantillaContext";
 
 import Header from "../../../components/layout/Header";
 import Nav from "../../../components/layout/Nav";
 import { capitalize, mostrarMsg } from "../../../utils";
 
 import Migas from "../../../components/layout/Migas";
-import EjercicioEditorForm from "../../../components/Ejercicio/EjercicioEditarForm";
+
+import PlantillaEditarForm from "../../../components/plantillas/PlantillaEditarForm";
 import Spinner from "../../../components/layout/extras/Spinner";
 
-// import EjercicioInfo from "../../../components/ejercicios/EjercicioInfo";
-
-function Ejercicio() {
+function Plantilla() {
   // Rutas
   const history = useHistory();
-  const { id, idejercicio } = useParams();
+  const { id, idplantilla } = useParams();
 
   // asignatura seleccionada
   const [asignatura, setAsignatura] = useState("");
@@ -27,25 +26,19 @@ function Ejercicio() {
   const authContext = useContext(AuthContext);
   const { usuario, usuarioAutenticado } = authContext;
 
-  // Variables globales de ejercicios
-  const ejercicioContext = useContext(EjercicioContext);
+  // Variables globales de plantillas
+  const plantillaContext = useContext(PlantillaContext);
   const {
-    msg,
     nuevocambio,
-    ejercicio,
-    buscarEjercicioID,
-    editarEjercicio,
+    plantilla,
+    msg,
+    buscarPlantillaID,
     vaciarmsg,
-  } = ejercicioContext;
+  } = plantillaContext;
 
   // Variables globales de asignaturas
   const asignaturaContext = useContext(AsignaturaContext);
-  const {
-    asignaturas,
-    asignaturasDocente,
-    buscarAsignaturasCoordinador,
-    buscarAsignaturasDocente,
-  } = asignaturaContext;
+  const { asignaturas, buscarAsignaturasCoordinador } = asignaturaContext;
 
   useEffect(() => {
     if (msg) {
@@ -54,7 +47,7 @@ function Ejercicio() {
     }
 
     if (usuario) {
-      if (usuario?.rol === "administrador") {
+      if (usuario?.rol !== "docente") {
         history.push("/usuarios");
       }
     } else {
@@ -62,27 +55,15 @@ function Ejercicio() {
     }
     // Cargar las asignaturas que coordina
     buscarAsignaturasCoordinador();
-    buscarAsignaturasDocente();
-    // Verificar si es coordinador o docente de dicha asignatura
+
+    // Verificar si es coordinador de dicha asignatura
     if (asignaturas) {
-      //Busqueda si es coordinador
       const busqueda = asignaturas.find((asignatura) => asignatura._id === id);
       if (!busqueda) {
-        //Busqueda si es docente
-        const busquedaDocente = asignaturasDocente.find(
-          (asignatura) => asignatura._id === id
-        );
-        if (!busquedaDocente) {
-          history.push(`/dashboard`);
-        } else {
-          setAsignatura(busquedaDocente);
-          buscarEjercicioID(idejercicio);
-          // setTipo("docente");
-        }
+        history.push(`/dashboard`);
       } else {
         setAsignatura(busqueda);
-        buscarEjercicioID(idejercicio);
-        // setTipo("coordinador");
+        buscarPlantillaID(idplantilla);
       }
     }
 
@@ -94,7 +75,7 @@ function Ejercicio() {
   return (
     <>
       <Header />
-      <Nav activa={"ejercicios"} />
+      <Nav activa={"plantillas"} />
 
       <div className="container-fluid">
         <div className="row">
@@ -111,24 +92,24 @@ function Ejercicio() {
                     nombre: capitalize(asignatura.nombre),
                   },
                   {
-                    path: "/ejercicios/" + id,
-                    nombre: "Ejercicio",
+                    path: "/plantillas/" + id,
+                    nombre: "Plantilla",
                   },
                   {
                     path: null,
-                    nombre: capitalize(ejercicio?.titulo),
+                    nombre: capitalize(plantilla?.titulo),
                   },
                 ]}
               />
+
               <div className="row">
                 <div className="col-md-12 mb-3">
-                  {/* <EjercicioInfo id={idejercicio} /> */}
-
-                  {Object.keys(ejercicio).length !== 0 ? (
-                    <EjercicioEditorForm
+                  {/* <PlantillaInfo id={idplantilla} /> */}
+                  {Object.keys(plantilla).length !== 0 ? (
+                    <PlantillaEditarForm
                       idAsignatura={id}
-                      ejercicio={ejercicio}
-                      editarEjercicio={editarEjercicio}
+                      plantilla={plantilla}
+                      // editarEjercicio={editarEjercicio}
                     />
                   ) : (
                     <Spinner />
@@ -143,4 +124,4 @@ function Ejercicio() {
   );
 }
 
-export default Ejercicio;
+export default Plantilla;

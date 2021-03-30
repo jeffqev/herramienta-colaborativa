@@ -17,6 +17,9 @@ import {
   EJERCICIO_ASIG_BUSCAR_ERROR,
   EJERCICIO_ID_BUSCAR_OK,
   EJERCICIO_ID_BUSCAR_ERROR,
+  CARGANDO,
+  EJERCICIO_EDITAR_OK,
+  EJERCICIO_EDITAR_ERROR,
 } from "../../types";
 import { PATH_EJERCICIO, PATH_EJERCICIO_ASIG } from "../../config/rutasAPI";
 
@@ -25,7 +28,9 @@ const EjercicioState = (props) => {
     msg: null,
     nuevocambio: false,
     ejercicios: [],
+    temafiltro: [],
     ejercicio: {},
+    cargandoejercicio: false,
   };
 
   const [state, dispatch] = useReducer(EjercicioReducer, initialState);
@@ -61,6 +66,11 @@ const EjercicioState = (props) => {
   };
 
   const buscarEjercicioID = async (id) => {
+    dispatch({
+      type: CARGANDO,
+      payload: true,
+    });
+
     try {
       const respuesta = await clienteAxios.get(`${PATH_EJERCICIO}/${id}`);
       dispatch({
@@ -106,6 +116,25 @@ const EjercicioState = (props) => {
     }
   };
 
+  const editarEjercicio = async (id, datos) => {
+    try {
+      const respuesta = await clienteAxios.put(
+        `${PATH_EJERCICIO}/${id}`,
+        datos
+      );
+
+      dispatch({
+        type: EJERCICIO_EDITAR_OK,
+        payload: { texto: respuesta?.data.msg, tipo: "info" },
+      });
+    } catch (error) {
+      dispatch({
+        type: EJERCICIO_EDITAR_ERROR,
+        payload: { texto: errorMsg(error), tipo: "error" },
+      });
+    }
+  };
+
   const vaciarmsg = async () => {
     dispatch({
       type: VACIAR_MENSAJE,
@@ -120,11 +149,14 @@ const EjercicioState = (props) => {
         nuevocambio: state.nuevocambio,
         ejercicios: state.ejercicios,
         ejercicio: state.ejercicio,
+        temafiltro: state.temafiltro,
+        cargandoejercicio: state.cargandoejercicio,
         crearEjercicio,
         buscarEjercicios,
         eliminarEjercicio,
         buscarEjerciciosAsig,
         buscarEjercicioID,
+        editarEjercicio,
         vaciarmsg,
       }}
     >

@@ -10,7 +10,7 @@ import { capitalize } from "../../utils";
 import ModalDocentes from "./ModalDocentes";
 const { Meta } = Card;
 
-function CardCoordinador({ asignatura }) {
+function CardCoordinador({ asignatura, tipo }) {
   const dashboardContext = useContext(DashboardContext);
   const { guardarAsignatura } = dashboardContext;
 
@@ -32,7 +32,7 @@ function CardCoordinador({ asignatura }) {
   };
 
   const handleEnviar = () => {
-    guardarAsignatura(asignatura._id, "coordinador");
+    guardarAsignatura(asignatura._id, tipo);
     history.push(`/asignatura/${asignatura._id}`);
   };
 

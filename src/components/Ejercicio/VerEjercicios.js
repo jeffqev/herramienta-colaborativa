@@ -10,13 +10,14 @@ import { capitalize, mostrarMsg } from "../../utils";
 
 import { useHistory } from "react-router";
 
-function VerEjercicio({ idAsignatura }) {
+function VerEjercicio({ idAsignatura, idusuario, tipo }) {
   const history = useHistory();
 
   // Datos globales con useContext para usar las ejercicio
   const ejercicioContext = useContext(EjercicioContext);
   const {
     ejercicios,
+    temafiltro,
     msg,
     vaciarmsg,
     nuevocambio,
@@ -34,7 +35,7 @@ function VerEjercicio({ idAsignatura }) {
     buscarEjerciciosAsig(idAsignatura);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nuevocambio]);
+  }, [nuevocambio, msg]);
 
   const handleEliminar = (id) => {
     eliminarEjercicio(id);
@@ -46,7 +47,40 @@ function VerEjercicio({ idAsignatura }) {
 
   const handleModificar = (id) => {
     console.log(id);
+    history.push(`/editar/ejercicios/${idAsignatura}/${id}`);
     // eliminarEjercicio(id);
+  };
+
+  const setColor = (value) => {
+    if (value === 1) {
+      return "green";
+    }
+
+    if (value === 2) {
+      return "gold";
+    }
+
+    if (value === 3) {
+      return "red";
+    }
+
+    return "blue";
+  };
+
+  const setDificultad = (value) => {
+    if (value === 1) {
+      return "Fácil";
+    }
+
+    if (value === 2) {
+      return "Medio";
+    }
+
+    if (value === 3) {
+      return "Difícil";
+    }
+
+    return "";
   };
 
   const columns = [
@@ -63,16 +97,28 @@ function VerEjercicio({ idAsignatura }) {
       render: (objetivos) => capitalize(objetivos),
     },
     {
+      title: "Tema",
+      dataIndex: "tema",
+      key: "tema",
+      render: (tema) => capitalize(tema?.nombre),
+
+      filters: temafiltro,
+      filterMultiple: false,
+      onFilter: (value, record) => record.tema?.nombre.indexOf(value) === 0,
+    },
+    {
       title: "Dificultad",
       dataIndex: "dificultad",
       key: "dificultad",
-      render: (dificultad) => <Tag color={"blue"}>{dificultad}</Tag>,
+      render: (dificultad) => (
+        <Tag color={setColor(dificultad)}>{setDificultad(dificultad)}</Tag>
+      ),
     },
 
     {
       title: "Acciones",
       render: (_text, refasignatura) => (
-        <>
+        <div className="text-center">
           <Button
             type="link"
             style={{ padding: 0, marginRight: 5 }}
@@ -84,21 +130,26 @@ function VerEjercicio({ idAsignatura }) {
             }}
           />
 
-          <Button
-            type="link"
-            style={{ padding: 0, marginRight: 5 }}
-            shape="round"
-            icon={<EditOutlined />}
-            size={"small"}
-            onClick={() => {
-              handleModificar(refasignatura._id);
-            }}
-          />
-          <BotonEliminar
-            id={refasignatura._id}
-            handleEliminar={handleEliminar}
-          />
-        </>
+          {refasignatura?.docente._id === idusuario ||
+          tipo === "coordinador" ? (
+            <>
+              <Button
+                type="link"
+                style={{ padding: 0, marginRight: 5 }}
+                shape="round"
+                icon={<EditOutlined />}
+                size={"small"}
+                onClick={() => {
+                  handleModificar(refasignatura._id);
+                }}
+              />
+              <BotonEliminar
+                id={refasignatura._id}
+                handleEliminar={handleEliminar}
+              />
+            </>
+          ) : null}
+        </div>
       ),
     },
   ];

@@ -32,11 +32,16 @@ function Ejercicio() {
 
   // Variables globales de asignaturas
   const asignaturaContext = useContext(AsignaturaContext);
-  const { asignaturas, buscarAsignaturasCoordinador } = asignaturaContext;
+  const {
+    asignaturas,
+    asignaturasDocente,
+    buscarAsignaturasCoordinador,
+    buscarAsignaturasDocente,
+  } = asignaturaContext;
 
   useEffect(() => {
     if (usuario) {
-      if (usuario?.rol !== "docente") {
+      if (usuario?.rol === "administrador") {
         history.push("/usuarios");
       }
     } else {
@@ -44,15 +49,27 @@ function Ejercicio() {
     }
     // Cargar las asignaturas que coordina
     buscarAsignaturasCoordinador();
-
-    // Verificar si es coordinador de dicha asignatura
+    buscarAsignaturasDocente();
+    // Verificar si es coordinador o docente de dicha asignatura
     if (asignaturas) {
+      //Busqueda si es coordinador
       const busqueda = asignaturas.find((asignatura) => asignatura._id === id);
       if (!busqueda) {
-        history.push(`/dashboard`);
+        //Busqueda si es docente
+        const busquedaDocente = asignaturasDocente.find(
+          (asignatura) => asignatura._id === id
+        );
+        if (!busquedaDocente) {
+          history.push(`/dashboard`);
+        } else {
+          setAsignatura(busquedaDocente);
+          buscarEjercicioID(idejercicio);
+          // setTipo("docente");
+        }
       } else {
         setAsignatura(busqueda);
         buscarEjercicioID(idejercicio);
+        // setTipo("coordinador");
       }
     }
 

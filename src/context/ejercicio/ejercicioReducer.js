@@ -10,12 +10,17 @@ import {
   EJERCICIO_ASIG_BUSCAR_ERROR,
   EJERCICIO_ID_BUSCAR_OK,
   EJERCICIO_ID_BUSCAR_ERROR,
+  CARGANDO,
+  EJERCICIO_EDITAR_OK,
+  EJERCICIO_EDITAR_ERROR,
 } from "../../types";
+import { eliminarDuplicado } from "../../utils";
 
 const ejercicioReducer = (state, action) => {
   switch (action.type) {
     case EJERCICIO_INGRESO_OK:
     case EJERCICIO_ELIMINAR_OK:
+    case EJERCICIO_EDITAR_OK:
       return {
         ...state,
         msg: action.payload,
@@ -27,12 +32,28 @@ const ejercicioReducer = (state, action) => {
       return {
         ...state,
         ejercicios: action.payload,
+        temafiltro: eliminarDuplicado(
+          action.payload.map(function (ejercicio) {
+            return {
+              text: ejercicio.tema?.nombre,
+              value: ejercicio.tema?.nombre,
+            };
+          })
+        ),
+      };
+
+    case CARGANDO:
+      return {
+        ...state,
+        cargandoejercicio: action.payload,
+        ejercicio: {},
       };
 
     case EJERCICIO_ID_BUSCAR_OK:
       return {
         ...state,
         ejercicio: action.payload,
+        cargandoejercicio: false,
       };
 
     case EJERCICIO_BUSCAR_ERROR:
@@ -40,6 +61,7 @@ const ejercicioReducer = (state, action) => {
     case EJERCICIO_ELIMINAR_ERROR:
     case EJERCICIO_ID_BUSCAR_ERROR:
     case EJERCICIO_ASIG_BUSCAR_ERROR:
+    case EJERCICIO_EDITAR_ERROR:
       return {
         ...state,
         msg: action.payload,

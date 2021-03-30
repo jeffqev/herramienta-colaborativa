@@ -24,7 +24,7 @@ function Ejercicios() {
 
   // asignatura seleccionada
   const [asignatura, setAsignatura] = useState("");
-
+  const [tipo, setTipo] = useState("");
   // Variables globales usuario logueado
   const authContext = useContext(AuthContext);
   const { usuario, usuarioAutenticado } = authContext;
@@ -34,12 +34,14 @@ function Ejercicios() {
   const {
     nuevocambio,
     asignaturas,
+    asignaturasDocente,
     buscarAsignaturasCoordinador,
+    buscarAsignaturasDocente,
   } = asignaturaContext;
 
   useEffect(() => {
     if (usuario) {
-      if (usuario?.rol !== "docente") {
+      if (usuario?.rol === "administrador") {
         history.push("/usuarios");
       }
     } else {
@@ -47,14 +49,25 @@ function Ejercicios() {
     }
     // Cargar las asignaturas que coordina
     buscarAsignaturasCoordinador();
-
-    // Verificar si es coordinador de dicha asignatura
+    buscarAsignaturasDocente();
+    // Verificar si es coordinador o docente de dicha asignatura
     if (asignaturas) {
+      //Busqueda si es coordinador
       const busqueda = asignaturas.find((asignatura) => asignatura._id === id);
       if (!busqueda) {
-        history.push(`/dashboard`);
+        //Busqueda si es docente
+        const busquedaDocente = asignaturasDocente.find(
+          (asignatura) => asignatura._id === id
+        );
+        if (!busquedaDocente) {
+          history.push(`/dashboard`);
+        } else {
+          setAsignatura(busquedaDocente);
+          setTipo("docente");
+        }
       } else {
         setAsignatura(busqueda);
+        setTipo("coordinador");
       }
     }
 
@@ -93,7 +106,11 @@ function Ejercicios() {
                 <div className="col-md-12 mb-3">
                   <Tabs defaultActiveKey="1">
                     <TabPane tab="Listado de ejercicios" key="1">
-                      <VerEjercicio idAsignatura={id} />
+                      <VerEjercicio
+                        idAsignatura={id}
+                        tipo={tipo}
+                        idusuario={usuario._id}
+                      />
                     </TabPane>
                     <TabPane tab="Crear nuevo ejercicio" key="2">
                       <EjercicioForm idAsignatura={id} />

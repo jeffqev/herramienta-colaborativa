@@ -17,6 +17,8 @@ import {
   PLANTILLA_ASIG_BUSCAR_ERROR,
   PLANTILLA_ID_BUSCAR_OK,
   PLANTILLA_ID_BUSCAR_ERROR,
+  CARGANDO,
+  PLANTILLA_EDITAR_OK,
 } from "../../types";
 import { PATH_PLANTILLA, PATH_PLANTILLA_ASIG } from "../../config/rutasAPI";
 
@@ -26,6 +28,7 @@ const PlantillaState = (props) => {
     nuevocambio: false,
     plantillas: [],
     plantilla: {},
+    cargandoplantilla: false,
   };
 
   const [state, dispatch] = useReducer(PlantillaReducer, initialState);
@@ -61,6 +64,11 @@ const PlantillaState = (props) => {
   };
 
   const buscarPlantillaID = async (id) => {
+    dispatch({
+      type: CARGANDO,
+      payload: true,
+    });
+
     try {
       const respuesta = await clienteAxios.get(`${PATH_PLANTILLA}/${id}`);
       dispatch({
@@ -85,6 +93,25 @@ const PlantillaState = (props) => {
     } catch (error) {
       dispatch({
         type: PLANTILLA_ASIG_BUSCAR_ERROR,
+        payload: { texto: errorMsg(error), tipo: "error" },
+      });
+    }
+  };
+
+  const editarPlantilla = async (id, datos) => {
+    try {
+      const respuesta = await clienteAxios.put(
+        `${PATH_PLANTILLA}/${id}`,
+        datos
+      );
+
+      dispatch({
+        type: PLANTILLA_EDITAR_OK,
+        payload: { texto: respuesta?.data.msg, tipo: "info" },
+      });
+    } catch (error) {
+      dispatch({
+        type: PLANTILLA_EDITAR_OK,
         payload: { texto: errorMsg(error), tipo: "error" },
       });
     }
@@ -120,11 +147,13 @@ const PlantillaState = (props) => {
         nuevocambio: state.nuevocambio,
         plantillas: state.plantillas,
         plantilla: state.plantilla,
+        cargandoplantilla: state.cargandoplantilla,
         crearPlantilla,
         buscarPlantillas,
         eliminarPlantilla,
         buscarPlantillasAsig,
         buscarPlantillaID,
+        editarPlantilla,
         vaciarmsg,
       }}
     >
