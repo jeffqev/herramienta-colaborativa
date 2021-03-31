@@ -33,6 +33,10 @@ export const PATH_REFERENCIA_ASIGNATURA = "/api/referencia/asignatura";
 export const PATH_PLANTILLA = "/api/plantilla";
 export const PATH_PLANTILLA_ASIG = "/api/plantilla/asignatura";
 
-// plantilla
+// ejercicios
 export const PATH_EJERCICIO = "/api/ejercicio";
 export const PATH_EJERCICIO_ASIG = "/api/ejercicio/asignatura";
+
+// calificaciones
+export const PATH_CALIFICACION = "/api/calificacion";
+export const PATH_CALIFICACION_EJER = "/api/calificacion/ejercicio";

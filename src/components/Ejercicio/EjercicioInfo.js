@@ -5,6 +5,7 @@ import htmlParce from "react-html-parser";
 
 import EjercicioContext from "../../context/ejercicio/ejercicioContext";
 import { capitalize, mostrarMsg } from "../../utils";
+import Calificacion from "./Calificacion";
 
 function EjercicioInfo({ id }) {
   const { Text, Title } = Typography;
@@ -44,33 +45,25 @@ function EjercicioInfo({ id }) {
             >
               <Title level={4}>{ejercicio.titulo.toUpperCase()}</Title>
             </Col>
+            <Col md={12}>
+              <Col md={24}>
+                <Text strong>Descripción: </Text>
+                <Text>{capitalize(ejercicio.descripcion)} </Text>
+              </Col>
 
-            <Col md={24}>
-              <Text strong>Descripción: </Text>
-              <Text>{capitalize(ejercicio.descripcion)} </Text>
+              <Col md={24}>
+                <Text strong>Dificultad: </Text>
+                <Text>{ejercicio.dificultad} </Text>
+              </Col>
+
+              <Col md={24}>
+                <Text strong>Tema: </Text>
+                <Text>{capitalize(ejercicio.tema?.nombre)} </Text>
+              </Col>
             </Col>
-
-            <Col md={24}>
-              <Text strong>Dificultad: </Text>
-              <Text>{ejercicio.dificultad} </Text>
+            <Col md={12}>
+              <Calificacion idEjercicio={id} />
             </Col>
-
-            <Col md={24}>
-              <Text strong>Tema: </Text>
-              <Text>{capitalize(ejercicio.tema?.nombre)} </Text>
-            </Col>
-
-            {/* <Col md={24} style={{ marginTop: 20 }}>
-            <Space direction="vertical">
-              <Title level={5} strong>
-                Objetivos:
-              </Title>
-
-              {ejercicio.objetivos.map((objetivo) => (
-                <Text key={objetivo}> {`‣ ${objetivo}`} </Text>
-              ))}
-            </Space>
-          </Col> */}
           </Row>
 
           <h4 className="sombra">Ejercicio </h4>
