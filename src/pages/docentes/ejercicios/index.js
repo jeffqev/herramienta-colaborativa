@@ -25,6 +25,7 @@ function Ejercicios() {
   // asignatura seleccionada
   const [asignatura, setAsignatura] = useState("");
   const [tipo, setTipo] = useState("");
+  const [activeTab, setactiveTab] = useState("1");
   // Variables globales usuario logueado
   const authContext = useContext(AuthContext);
   const { usuario, usuarioAutenticado } = authContext;
@@ -74,6 +75,10 @@ function Ejercicios() {
     // eslint-disable-next-line
   }, [nuevocambio]);
 
+  const handleChange = (value) => {
+    setactiveTab(value);
+  };
+
   if (!usuario) return null;
 
   return (
@@ -104,8 +109,12 @@ function Ejercicios() {
 
               <div className="row">
                 <div className="col-md-12 mb-3">
-                  <Tabs defaultActiveKey="1">
-                    <TabPane tab="Listado de ejercicios" key="1">
+                  <Tabs
+                    defaultActiveKey="1"
+                    activeKey={activeTab}
+                    onChange={handleChange}
+                  >
+                    <TabPane tab="Listado de ejercicios" key="1" on>
                       <VerEjercicio
                         idAsignatura={id}
                         tipo={tipo}
@@ -113,7 +122,10 @@ function Ejercicios() {
                       />
                     </TabPane>
                     <TabPane tab="Crear nuevo ejercicio" key="2">
-                      <EjercicioForm idAsignatura={id} />
+                      <EjercicioForm
+                        setactiveTab={setactiveTab}
+                        idAsignatura={id}
+                      />
                     </TabPane>
                   </Tabs>
                 </div>

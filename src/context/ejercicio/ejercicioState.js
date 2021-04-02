@@ -20,14 +20,22 @@ import {
   CARGANDO,
   EJERCICIO_EDITAR_OK,
   EJERCICIO_EDITAR_ERROR,
+  EJERCICIO_PLANT_BUSCAR_OK,
+  EJERCICIO_PLANT_BUSCAR_ERROR,
+  EJERCICIO_PLANT_VACIAR,
 } from "../../types";
-import { PATH_EJERCICIO, PATH_EJERCICIO_ASIG } from "../../config/rutasAPI";
+import {
+  PATH_EJERCICIO,
+  PATH_EJERCICIO_ASIG,
+  PATH_EJERCICIO_PLANT,
+} from "../../config/rutasAPI";
 
 const EjercicioState = (props) => {
   const initialState = {
     msg: null,
     nuevocambio: false,
     ejercicios: [],
+    ejerciciosTema: [],
     temafiltro: [],
     ejercicio: {},
     cargandoejercicio: false,
@@ -100,6 +108,21 @@ const EjercicioState = (props) => {
     }
   };
 
+  const buscarEjerciciosPlant = async (id) => {
+    try {
+      const respuesta = await clienteAxios.get(`${PATH_EJERCICIO_PLANT}/${id}`);
+      dispatch({
+        type: EJERCICIO_PLANT_BUSCAR_OK,
+        payload: respuesta?.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: EJERCICIO_PLANT_BUSCAR_ERROR,
+        payload: { texto: errorMsg(error), tipo: "error" },
+      });
+    }
+  };
+
   const eliminarEjercicio = async (id) => {
     try {
       const respuesta = await clienteAxios.delete(`${PATH_EJERCICIO}/${id}`);
@@ -142,6 +165,12 @@ const EjercicioState = (props) => {
     });
   };
 
+  const vaciarEjerciciosPlant = async () => {
+    dispatch({
+      type: EJERCICIO_PLANT_VACIAR,
+    });
+  };
+
   return (
     <PeridoContext.Provider
       value={{
@@ -151,11 +180,14 @@ const EjercicioState = (props) => {
         ejercicio: state.ejercicio,
         temafiltro: state.temafiltro,
         cargandoejercicio: state.cargandoejercicio,
+        ejerciciosTema: state.ejerciciosTema,
         crearEjercicio,
         buscarEjercicios,
         eliminarEjercicio,
         buscarEjerciciosAsig,
         buscarEjercicioID,
+        buscarEjerciciosPlant,
+        vaciarEjerciciosPlant,
         editarEjercicio,
         vaciarmsg,
       }}

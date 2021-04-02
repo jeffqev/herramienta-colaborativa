@@ -23,10 +23,15 @@ const practicaReducer = (state, action) => {
       };
 
     case PRACTICA_BUSCAR_OK:
-    case PRACTICA_ASIG_BUSCAR_OK:
       return {
         ...state,
         practicas: action.payload,
+      };
+
+    case PRACTICA_ASIG_BUSCAR_OK:
+      return {
+        ...state,
+        practicasAsignatura: action.payload,
       };
 
     case PRACTICA_ID_BUSCAR_OK:

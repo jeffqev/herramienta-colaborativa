@@ -13,6 +13,8 @@ import {
   CARGANDO,
   EJERCICIO_EDITAR_OK,
   EJERCICIO_EDITAR_ERROR,
+  EJERCICIO_PLANT_BUSCAR_OK,
+  EJERCICIO_PLANT_VACIAR,
 } from "../../types";
 import { eliminarDuplicado } from "../../utils";
 
@@ -40,6 +42,18 @@ const ejercicioReducer = (state, action) => {
             };
           })
         ),
+      };
+
+    case EJERCICIO_PLANT_BUSCAR_OK:
+      return {
+        ...state,
+        ejerciciosTema: action.payload,
+      };
+
+    case EJERCICIO_PLANT_VACIAR:
+      return {
+        ...state,
+        ejerciciosTema: [],
       };
 
     case CARGANDO:

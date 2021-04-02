@@ -20,10 +20,13 @@ import Ejercicios from "./pages/docentes/ejercicios";
 import Ejercicio from "./pages/docentes/ejercicios/ejercicio";
 import ejercicioEditar from "./pages/docentes/ejercicios/ejercicioEditar";
 
-import Practicas from "./components/practicas";
-import PracticaForm from "./components/practicas/PracticaForm";
-import GestionarPractica from "./components/practicas/GestionarPractica";
-import Practica from "./components/practicas/Practica";
+import Practica from "./pages/docentes/practica";
+import PracticaNueva from "./pages/docentes/practica/practicaNueva";
+
+// import Practicas from "./components/practicas";
+// import PracticaForm from "./components/practicas/PracticaForm";
+// import GestionarPractica from "./components/practicas/GestionarPractica";
+// import Practica from "./components/practicas/Practica";
 
 import tokenAuth from "./config/token";
 import RutaPrivada from "./privado/RutaPrivada";
@@ -78,9 +81,15 @@ function App() {
             component={ejercicioEditar}
           />
 
-          <RutaPrivada exact path="/pruebas" component={Prubas} />
+          <RutaPrivada exact path="/practicas/:id" component={Practica} />
+          <RutaPrivada
+            exact
+            path="/nueva/practica/:id"
+            component={PracticaNueva}
+          />
 
-          <RutaPrivada exact path="/practicas" component={Practicas} />
+          <RutaPrivada exact path="/pruebas" component={Prubas} />
+          {/* <RutaPrivada exact path="/practicas" component={Practicas} />
           <RutaPrivada exact path="/practicas/:id" component={Practica} />
           <RutaPrivada
             exact
@@ -91,7 +100,7 @@ function App() {
             exact
             path="/gestionar/practicas"
             component={GestionarPractica}
-          />
+          /> */}
 
           <Route component={NotFound} />
         </Switch>

@@ -25,10 +25,6 @@ export const PATH_TEMA_PADRE = "/api/tema/padre";
 export const PATH_REFERENCIA = "/api/referencia";
 export const PATH_REFERENCIA_ASIGNATURA = "/api/referencia/asignatura";
 
-// // practica
-// export const PATH_PRACTICA = "/api/practica";
-// export const PATH_PRACTICA_ASIG = "/api/practica/asignatura";
-
 // plantilla
 export const PATH_PLANTILLA = "/api/plantilla";
 export const PATH_PLANTILLA_ASIG = "/api/plantilla/asignatura";
@@ -36,7 +32,11 @@ export const PATH_PLANTILLA_ASIG = "/api/plantilla/asignatura";
 // ejercicios
 export const PATH_EJERCICIO = "/api/ejercicio";
 export const PATH_EJERCICIO_ASIG = "/api/ejercicio/asignatura";
-
+export const PATH_EJERCICIO_PLANT = "/api/ejercicio/plantilla";
 // calificaciones
 export const PATH_CALIFICACION = "/api/calificacion";
 export const PATH_CALIFICACION_EJER = "/api/calificacion/ejercicio";
+
+// practica
+export const PATH_PRACTICA = "/api/practica";
+export const PATH_PRACTICA_ASIG = "/api/practica/asignatura";

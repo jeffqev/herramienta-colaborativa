@@ -112,6 +112,7 @@ function PlantillaForm({ idAsignatura }) {
               ]}
             >
               <Select
+                showSearch
                 placeholder="Seleccionar docentes"
                 style={{ width: "100%" }}
                 optionFilterProp="children"

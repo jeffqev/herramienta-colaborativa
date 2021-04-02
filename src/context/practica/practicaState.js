@@ -18,13 +18,14 @@ import {
   PRACTICA_ID_BUSCAR_OK,
   PRACTICA_ID_BUSCAR_ERROR,
 } from "../../types";
-import { PATH_PLANTILLA, PATH_PLANTILLA_ASIG } from "../../config/rutasAPI";
+import { PATH_PRACTICA, PATH_PRACTICA_ASIG } from "../../config/rutasAPI";
 
 const PracticaState = (props) => {
   const initialState = {
     msg: null,
     nuevocambio: false,
     practicas: [],
+    practicasAsignatura: [],
     practica: {},
   };
 
@@ -32,7 +33,7 @@ const PracticaState = (props) => {
 
   const crearPractica = async (datos) => {
     try {
-      const respuesta = await clienteAxios.post(PATH_PLANTILLA, datos);
+      const respuesta = await clienteAxios.post(PATH_PRACTICA, datos);
       dispatch({
         type: PRACTICA_INGRESO_OK,
         payload: { texto: respuesta?.data.msg, tipo: "info" },
@@ -45,9 +46,9 @@ const PracticaState = (props) => {
     }
   };
 
-  const buscarPracticas = async (id) => {
+  const buscarPracticas = async () => {
     try {
-      const respuesta = await clienteAxios.get(PATH_PLANTILLA);
+      const respuesta = await clienteAxios.get(PATH_PRACTICA);
       dispatch({
         type: PRACTICA_BUSCAR_OK,
         payload: respuesta?.data.data,
@@ -62,7 +63,7 @@ const PracticaState = (props) => {
 
   const buscarPracticaID = async (id) => {
     try {
-      const respuesta = await clienteAxios.get(`${PATH_PLANTILLA}/${id}`);
+      const respuesta = await clienteAxios.get(`${PATH_PRACTICA}/${id}`);
       dispatch({
         type: PRACTICA_ID_BUSCAR_OK,
         payload: respuesta?.data.data,
@@ -77,7 +78,7 @@ const PracticaState = (props) => {
 
   const buscarPracticasAsig = async (id) => {
     try {
-      const respuesta = await clienteAxios.get(`${PATH_PLANTILLA_ASIG}/${id}`);
+      const respuesta = await clienteAxios.get(`${PATH_PRACTICA_ASIG}/${id}`);
       dispatch({
         type: PRACTICA_ASIG_BUSCAR_OK,
         payload: respuesta?.data.data,
@@ -92,7 +93,7 @@ const PracticaState = (props) => {
 
   const eliminarPractica = async (id) => {
     try {
-      const respuesta = await clienteAxios.delete(`${PATH_PLANTILLA}/${id}`);
+      const respuesta = await clienteAxios.delete(`${PATH_PRACTICA}/${id}`);
 
       dispatch({
         type: PRACTICA_ELIMINAR_OK,
@@ -120,6 +121,7 @@ const PracticaState = (props) => {
         nuevocambio: state.nuevocambio,
         practicas: state.practicas,
         practica: state.practica,
+        practicasAsignatura: state.practicasAsignatura,
         crearPractica,
         buscarPracticas,
         eliminarPractica,

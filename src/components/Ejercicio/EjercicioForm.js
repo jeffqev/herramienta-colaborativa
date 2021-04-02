@@ -10,7 +10,7 @@ import RichText from "./RichText";
 import { capitalize, mostrarMsg, textReferencia } from "../../utils";
 import { FrownOutlined, MehOutlined, SmileOutlined } from "@ant-design/icons";
 
-function EjercicioForm({ idAsignatura }) {
+function EjercicioForm({ idAsignatura, setactiveTab }) {
   const [form] = Form.useForm();
   const { Title } = Typography;
 
@@ -68,6 +68,7 @@ function EjercicioForm({ idAsignatura }) {
     setEjercicioEditor("");
     setEjemploEditor("");
     setSolucionEditor("");
+    setactiveTab("1");
   };
 
   // Rate

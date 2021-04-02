@@ -3,36 +3,30 @@ import { useParams, useHistory } from "react-router-dom";
 
 import AuthContext from "../../../context/auth/authContext";
 import AsignaturaContext from "../../../context/asignatura/asignaturaContext";
-import EjercicioContext from "../../../context/ejercicio/ejercicioContext";
 
 import Header from "../../../components/layout/Header";
 import Nav from "../../../components/layout/Nav";
 import { capitalize } from "../../../utils";
 
 import Migas from "../../../components/layout/Migas";
-import EjercicioInfo from "../../../components/Ejercicio/EjercicioInfo";
+import PracticaForm from "../../../components/practica/PracticaForm";
 
-// import EjercicioInfo from "../../../components/ejercicios/EjercicioInfo";
-
-function Ejercicio() {
+function PracticaNueva() {
   // Rutas
   const history = useHistory();
-  const { id, idejercicio } = useParams();
+  const { id } = useParams();
 
   // asignatura seleccionada
   const [asignatura, setAsignatura] = useState("");
-
+  const [tipo, setTipo] = useState("");
   // Variables globales usuario logueado
   const authContext = useContext(AuthContext);
   const { usuario, usuarioAutenticado } = authContext;
 
-  // Variables globales de ejercicios
-  const ejercicioContext = useContext(EjercicioContext);
-  const { nuevocambio, ejercicio, buscarEjercicioID } = ejercicioContext;
-
   // Variables globales de asignaturas
   const asignaturaContext = useContext(AsignaturaContext);
   const {
+    nuevocambio,
     asignaturas,
     asignaturasDocente,
     buscarAsignaturasCoordinador,
@@ -63,13 +57,11 @@ function Ejercicio() {
           history.push(`/dashboard`);
         } else {
           setAsignatura(busquedaDocente);
-          buscarEjercicioID(idejercicio);
-          // setTipo("docente");
+          setTipo("docente");
         }
       } else {
         setAsignatura(busqueda);
-        buscarEjercicioID(idejercicio);
-        // setTipo("coordinador");
+        setTipo("coordinador");
       }
     }
 
@@ -81,7 +73,7 @@ function Ejercicio() {
   return (
     <>
       <Header />
-      <Nav activa={"ejercicios"} />
+      <Nav activa={"practicas"} />
 
       <div className="container-fluid">
         <div className="row">
@@ -98,20 +90,20 @@ function Ejercicio() {
                     nombre: capitalize(asignatura.nombre),
                   },
                   {
-                    path: "/ejercicios/" + id,
-                    nombre: "Ejercicios",
+                    path: "/practicas/" + asignatura._id,
+                    nombre: "Practicas",
                   },
                   {
                     path: null,
-                    nombre: capitalize(ejercicio?.titulo),
+                    nombre: "Nueva Practica",
                   },
                 ]}
               />
 
               <div className="row">
                 <div className="col-md-12 mb-3">
-                  {/* <EjercicioInfo id={idejercicio} /> */}
-                  <EjercicioInfo id={idejercicio} />
+                  <p>{tipo}</p>
+                  <PracticaForm idAsignatura={id} />
                 </div>
               </div>
             </div>
@@ -122,4 +114,4 @@ function Ejercicio() {
   );
 }
 
-export default Ejercicio;
+export default PracticaNueva;

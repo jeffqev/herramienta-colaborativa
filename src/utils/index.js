@@ -107,3 +107,35 @@ export const obtenerColor = (value) => {
     return "red";
   }
 };
+
+export const setColorDificultad = (value) => {
+  if (value === 1) {
+    return "green";
+  }
+
+  if (value === 2) {
+    return "gold";
+  }
+
+  if (value === 3) {
+    return "red";
+  }
+
+  return "blue";
+};
+
+export const setDificultadText = (value) => {
+  if (value === 1) {
+    return "Fácil";
+  }
+
+  if (value === 2) {
+    return "Medio";
+  }
+
+  if (value === 3) {
+    return "Difícil";
+  }
+
+  return "";
+};
