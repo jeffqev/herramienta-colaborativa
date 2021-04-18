@@ -20,8 +20,9 @@ import Ejercicios from "./pages/docentes/ejercicios";
 import Ejercicio from "./pages/docentes/ejercicios/ejercicio";
 import ejercicioEditar from "./pages/docentes/ejercicios/ejercicioEditar";
 
-import Practica from "./pages/docentes/practica";
+import Practicas from "./pages/docentes/practica";
 import PracticaNueva from "./pages/docentes/practica/practicaNueva";
+import Practica from "./pages/docentes/practica/practica";
 
 // import Practicas from "./components/practicas";
 // import PracticaForm from "./components/practicas/PracticaForm";
@@ -81,11 +82,16 @@ function App() {
             component={ejercicioEditar}
           />
 
-          <RutaPrivada exact path="/practicas/:id" component={Practica} />
+          <RutaPrivada exact path="/practicas/:id" component={Practicas} />
           <RutaPrivada
             exact
             path="/nueva/practica/:id"
             component={PracticaNueva}
+          />
+          <RutaPrivada
+            exact
+            path="/practica/:id/:idpractica/:tipopractica"
+            component={Practica}
           />
 
           <RutaPrivada exact path="/pruebas" component={Prubas} />

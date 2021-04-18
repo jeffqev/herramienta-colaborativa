@@ -1,35 +1,33 @@
 import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
-function RichText({ htmleditor, sethtmlEditor }) {
-  const handleChange = (content, editor) => {
-    sethtmlEditor(content);
-  };
+function TextPDF({ handleChange, editorPrint, initial }) {
   return (
     <Editor
-      value={htmleditor}
       apiKey={process.env.REACT_APP_RICHTEXT_KEY}
+      onEditorChange={handleChange}
+      // disabled={true}
+      textareaName="myTextArea"
+      ref={editorPrint}
       init={{
-        height: 300,
-        language: "es",
+        selector: "myTextArea",
+        height: 10000,
+        menubar: false,
+        // readonly: true,
         plugins: [
-          "advlist autolink lists link image charmap print preview anchor",
-          "searchreplace visualblocks code fullscreen",
+          "advlist autolink lists link image charmap  preview anchor",
+          "searchreplace visualblocks code print fullscreen",
           "insertdatetime media table paste code help wordcount",
         ],
-        toolbar: `fullscreen | undo redo | formatselect | bold italic backcolor | 
-             alignleft aligncenter alignright alignjustify | 
-             bullist numlist outdent indent | removeformat | charmap |
-             table | media image | searchreplace `,
-        // paste_as_text: true,
         images_upload_handler: example_image_upload_handler,
+        // toolbar: `preview | print`,
       }}
-      onEditorChange={handleChange}
+      value={initial}
     />
   );
 }
 
-export default RichText;
+export default TextPDF;
 
 function example_image_upload_handler(blobInfo, success, failure, progress) {
   var xhr, formData;

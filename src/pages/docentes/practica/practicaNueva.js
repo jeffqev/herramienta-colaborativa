@@ -18,7 +18,7 @@ function PracticaNueva() {
 
   // asignatura seleccionada
   const [asignatura, setAsignatura] = useState("");
-  const [tipo, setTipo] = useState("");
+  // const [tipo, setTipo] = useState("");
   // Variables globales usuario logueado
   const authContext = useContext(AuthContext);
   const { usuario, usuarioAutenticado } = authContext;
@@ -57,11 +57,11 @@ function PracticaNueva() {
           history.push(`/dashboard`);
         } else {
           setAsignatura(busquedaDocente);
-          setTipo("docente");
+          // setTipo("docente");
         }
       } else {
         setAsignatura(busqueda);
-        setTipo("coordinador");
+        // setTipo("coordinador");
       }
     }
 
@@ -101,8 +101,7 @@ function PracticaNueva() {
               />
 
               <div className="row">
-                <div className="col-md-12 mb-3">
-                  <p>{tipo}</p>
+                <div className="col-md-12 mb-3 mt-2">
                   <PracticaForm idAsignatura={id} />
                 </div>
               </div>

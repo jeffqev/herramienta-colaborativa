@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 
-import { Form, Input, Button, Select, Row, Col } from "antd";
+import { Form, Input, Button, Select, Row, Col, InputNumber } from "antd";
+import Title from "antd/lib/typography/Title";
 
 import PlantillaContext from "../../context/plantilla/plantillaContext";
 import TemaContext from "../../context/tema/temaContext";
@@ -35,22 +36,22 @@ function PlantillaEditarForm({ idAsignatura, plantilla }) {
     // form.resetFields();
   };
 
-  const formItemLayout = {
-    labelCol: {
-      xs: { span: 24 },
-      sm: { span: 4 },
-    },
-    wrapperCol: {
-      xs: { span: 24 },
-      sm: { span: 20 },
-    },
-  };
-  const formItemLayoutWithOutLabel = {
-    wrapperCol: {
-      xs: { span: 24, offset: 0 },
-      sm: { span: 20, offset: 4 },
-    },
-  };
+  // const formItemLayout = {
+  //   labelCol: {
+  //     xs: { span: 24 },
+  //     sm: { span: 4 },
+  //   },
+  //   wrapperCol: {
+  //     xs: { span: 24 },
+  //     sm: { span: 20 },
+  //   },
+  // };
+  // const formItemLayoutWithOutLabel = {
+  //   wrapperCol: {
+  //     xs: { span: 24, offset: 0 },
+  //     sm: { span: 20, offset: 4 },
+  //   },
+  // };
 
   return (
     <div className="mt-3 ms-3">
@@ -66,17 +67,19 @@ function PlantillaEditarForm({ idAsignatura, plantilla }) {
             instrucciones: plantilla?.instrucciones,
             requisitos: plantilla?.requisitos,
             resultados: plantilla?.resultados,
+            numero: plantilla?.numero,
             temas: plantilla.temas?._id,
           },
         }}
         form={form}
         name="practicasform"
         onFinish={onFinish}
+        layout="vertical"
         style={{ paddingLeft: "5%", paddingRight: "5%" }}
       >
         <Form.Item
           name={["plantilla", "titulo"]}
-          label="Título"
+          label={<Title level={4}>Título</Title>}
           rules={[
             {
               required: true,
@@ -84,13 +87,13 @@ function PlantillaEditarForm({ idAsignatura, plantilla }) {
             },
           ]}
         >
-          <Input className="ms-3" />
+          <Input />
         </Form.Item>
         <Row>
-          <Col span={12} style={{ paddingRight: 10 }}>
+          <Col span={8} style={{ paddingRight: 10 }}>
             <Form.Item
               name={["plantilla", "formato"]}
-              label="Formato"
+              label={<Title level={4}>Formato</Title>}
               rules={[
                 {
                   required: true,
@@ -109,10 +112,29 @@ function PlantillaEditarForm({ idAsignatura, plantilla }) {
               </Select>
             </Form.Item>
           </Col>
-          <Col span={12} style={{ paddingLeft: 10 }}>
+          <Col span={8} style={{ paddingRight: 10 }}>
+            <Form.Item
+              name={["plantilla", "numero"]}
+              label={<Title level={4}>Número Practica</Title>}
+              rules={[
+                {
+                  required: true,
+                  message: "El número de la practica es requerido",
+                },
+                {
+                  type: "number",
+                  min: 1,
+                  message: "Ingrese un numero valido mayor a 0",
+                },
+              ]}
+            >
+              <InputNumber style={{ width: "100%" }} />
+            </Form.Item>
+          </Col>
+          <Col span={8} style={{ paddingLeft: 10 }}>
             <Form.Item
               name={["plantilla", "temas"]}
-              label="Tema"
+              label={<Title level={4}>Tema</Title>}
               rules={[
                 {
                   required: true,
@@ -121,7 +143,7 @@ function PlantillaEditarForm({ idAsignatura, plantilla }) {
               ]}
             >
               <Select
-                placeholder="Seleccionar docentes"
+                placeholder="Seleccionar tema"
                 style={{ width: "100%" }}
                 optionFilterProp="children"
                 filterOption={(input, option) =>
@@ -140,7 +162,7 @@ function PlantillaEditarForm({ idAsignatura, plantilla }) {
           </Col>
         </Row>
 
-        <h5> Objetivos </h5>
+        <Title level={4}>Objetivos</Title>
         <Form.List
           name={["plantilla", "objetivos"]}
           rules={[
@@ -154,9 +176,6 @@ function PlantillaEditarForm({ idAsignatura, plantilla }) {
             <>
               {fields.map((field, index) => (
                 <Form.Item
-                  {...(index === 0
-                    ? formItemLayout
-                    : formItemLayoutWithOutLabel)}
                   label={index === 0 ? "Objetivos" : ""}
                   required={false}
                   key={field.key}
@@ -202,7 +221,7 @@ function PlantillaEditarForm({ idAsignatura, plantilla }) {
           )}
         </Form.List>
 
-        <h5> Pre-Requisitos</h5>
+        <Title level={4}>Pre-Requisitos</Title>
         <Form.List
           name={["plantilla", "requisitos"]}
           rules={[
@@ -216,9 +235,6 @@ function PlantillaEditarForm({ idAsignatura, plantilla }) {
             <>
               {fields.map((field, index) => (
                 <Form.Item
-                  {...(index === 0
-                    ? formItemLayout
-                    : formItemLayoutWithOutLabel)}
                   label={index === 0 ? "Requisitos" : ""}
                   required={false}
                   key={field.key}
@@ -264,7 +280,7 @@ function PlantillaEditarForm({ idAsignatura, plantilla }) {
           )}
         </Form.List>
 
-        <h5> Instrucciones</h5>
+        <Title level={4}>Instrucciones</Title>
         <Form.List
           name={["plantilla", "instrucciones"]}
           rules={[
@@ -278,9 +294,6 @@ function PlantillaEditarForm({ idAsignatura, plantilla }) {
             <>
               {fields.map((field, index) => (
                 <Form.Item
-                  {...(index === 0
-                    ? formItemLayout
-                    : formItemLayoutWithOutLabel)}
                   label={index === 0 ? "Instrucciones" : ""}
                   required={false}
                   key={field.key}
@@ -326,7 +339,7 @@ function PlantillaEditarForm({ idAsignatura, plantilla }) {
           )}
         </Form.List>
 
-        <h5> Resultados obtenidos </h5>
+        <Title level={4}>Resultados obtenidos</Title>
         <Form.List
           name={["plantilla", "resultados"]}
           rules={[
@@ -340,9 +353,6 @@ function PlantillaEditarForm({ idAsignatura, plantilla }) {
             <>
               {fields.map((field, index) => (
                 <Form.Item
-                  {...(index === 0
-                    ? formItemLayout
-                    : formItemLayoutWithOutLabel)}
                   label={index === 0 ? "Resultado" : ""}
                   required={false}
                   key={field.key}

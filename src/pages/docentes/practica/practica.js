@@ -3,31 +3,37 @@ import { useParams, useHistory } from "react-router-dom";
 
 import AuthContext from "../../../context/auth/authContext";
 import AsignaturaContext from "../../../context/asignatura/asignaturaContext";
+import PracticaContext from "../../../context/practica/practicaContext";
 
 import Header from "../../../components/layout/Header";
 import Nav from "../../../components/layout/Nav";
 import { capitalize } from "../../../utils";
 
 import Migas from "../../../components/layout/Migas";
-import ListadoPracticas from "../../../components/practica/ListaPracticas";
-import { Tabs } from "antd";
+import RichTextPDF from "../../../components/practica/RichTextPDF";
+// import EjercicioInfo from "../../../components/Ejercicio/EjercicioInfo";
+
+// import EjercicioInfo from "../../../components/ejercicios/EjercicioInfo";
 
 function Practica() {
   // Rutas
   const history = useHistory();
-  const { id } = useParams();
+  const { id, idpractica, tipopractica } = useParams();
 
   // asignatura seleccionada
   const [asignatura, setAsignatura] = useState("");
-  const [tipo, setTipo] = useState("");
+
   // Variables globales usuario logueado
   const authContext = useContext(AuthContext);
   const { usuario, usuarioAutenticado } = authContext;
 
+  // Variables globales de practicas
+  const practicaContext = useContext(PracticaContext);
+  const { practica, nuevocambio, buscarPracticaID } = practicaContext;
+
   // Variables globales de asignaturas
   const asignaturaContext = useContext(AsignaturaContext);
   const {
-    nuevocambio,
     asignaturas,
     asignaturasDocente,
     buscarAsignaturasCoordinador,
@@ -57,12 +63,19 @@ function Practica() {
         if (!busquedaDocente) {
           history.push(`/dashboard`);
         } else {
+          console.log("entro c");
           setAsignatura(busquedaDocente);
-          setTipo("docente");
+          console.log(practica);
+          buscarPracticaID(idpractica);
+
+          // setTipo("docente");
         }
       } else {
+        console.log("entro d");
         setAsignatura(busqueda);
-        setTipo("coordinador");
+        console.log(practica);
+        buscarPracticaID(idpractica);
+        // setTipo("coordinador");
       }
     }
 
@@ -79,6 +92,7 @@ function Practica() {
       <div className="container-fluid">
         <div className="row">
           <main className="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-2">
+            {/* {practica.plantilla ? ( */}
             <div className="row">
               <Migas
                 rutas={[
@@ -91,22 +105,30 @@ function Practica() {
                     nombre: capitalize(asignatura.nombre),
                   },
                   {
-                    path: null,
+                    path: "/practicas/" + id,
                     nombre: "Practicas",
+                  },
+                  {
+                    path: null,
+                    nombre: capitalize(practica?.plantilla?.titulo),
                   },
                 ]}
               />
 
               <div className="row">
                 <div className="col-md-12 mb-3">
-                  <Tabs defaultActiveKey="1">
-                    <Tabs.TabPane tab="Practicas generadas" key="1">
-                      <ListadoPracticas tipo={tipo} idAsignatura={id} />
-                    </Tabs.TabPane>
-                  </Tabs>
+                  {practica?.plantilla ? (
+                    <RichTextPDF
+                      requets2={practica}
+                      tipopractica={tipopractica}
+                      idpractica={idpractica}
+                      idAsignatura={id}
+                    />
+                  ) : null}
                 </div>
               </div>
             </div>
+            {/* ) : null} */}
           </main>
         </div>
       </div>

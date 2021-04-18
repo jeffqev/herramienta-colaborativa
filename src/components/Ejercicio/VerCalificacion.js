@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
-import { Rate } from "antd";
+import { Alert, Rate, Typography } from "antd";
 import CalificacionContext from "../../context/calificacion/calificacionContext";
+import { SumPuntaje } from "../../utils";
 
 function VerCalificacion({ idEjercicio }) {
   // Datos globales con useContext para usar las calificacions
@@ -14,7 +15,7 @@ function VerCalificacion({ idEjercicio }) {
 
   useEffect(() => {
     buscarCalificacionEjercicio(idEjercicio);
-    console.log(SumArray(calificacionesEjercicio));
+    console.log(SumPuntaje(calificacionesEjercicio));
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [msg, nuevocambio]);
@@ -34,25 +35,35 @@ function VerCalificacion({ idEjercicio }) {
   return (
     <>
       {calificacionesEjercicio.length !== 0 ? (
-        <Rate
-          onChange={handleChange}
-          allowHalf
-          disabled
-          defaultValue={
-            SumArray(calificacionesEjercicio) / calificacionesEjercicio.length
-          }
+        <>
+          <Rate
+            onChange={handleChange}
+            allowHalf
+            disabled
+            defaultValue={
+              SumPuntaje(calificacionesEjercicio) /
+              calificacionesEjercicio.length
+            }
+          />
+          {calificacionesEjercicio.length === 1 ? (
+            <Typography.Text style={{ marginLeft: 5 }} type="secondary">
+              {calificacionesEjercicio.length} Calificación
+            </Typography.Text>
+          ) : (
+            <Typography.Text style={{ marginLeft: 5 }} type="secondary">
+              {calificacionesEjercicio.length} Calificaciones
+            </Typography.Text>
+          )}
+        </>
+      ) : (
+        <Alert
+          message="El ejercicio no cuenta con calificaciones"
+          type="success"
+          showIcon
         />
-      ) : null}
+      )}
     </>
   );
 }
 
 export default VerCalificacion;
-
-function SumArray(array) {
-  let total = 0;
-  for (const i in array) {
-    total += array[i].puntaje;
-  }
-  return total;
-}

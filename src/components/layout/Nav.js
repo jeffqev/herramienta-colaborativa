@@ -97,24 +97,24 @@ function Nav({ activa }) {
                       <li className="nav-item">
                         <Link
                           className={`nav-link ${
-                            activa === "plantillas" ? "active" : null
-                          }`}
-                          to={"/plantillas/" + asignaturaid}
-                        >
-                          <i className="bi bi-card-heading feather"></i>
-                          Plantillas
-                        </Link>
-                      </li>
-
-                      <li className="nav-item">
-                        <Link
-                          className={`nav-link ${
                             activa === "temas" ? "active" : null
                           }`}
                           to={"/temas/" + asignaturaid}
                         >
                           <i className="bi bi-tags feather"></i>
                           Temas
+                        </Link>
+                      </li>
+
+                      <li className="nav-item">
+                        <Link
+                          className={`nav-link ${
+                            activa === "plantillas" ? "active" : null
+                          }`}
+                          to={"/plantillas/" + asignaturaid}
+                        >
+                          <i className="bi bi-card-heading feather"></i>
+                          Plantillas
                         </Link>
                       </li>
                     </>

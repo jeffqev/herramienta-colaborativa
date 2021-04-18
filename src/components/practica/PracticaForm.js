@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { Button, Col, InputNumber, Row, Select, Table, Tag } from "antd";
+import { Button, Col, Row, Select, Table, Tag } from "antd";
 
 import PracticaContext from "../../context/practica/practicaContext";
 import PlantillaContext from "../../context/plantilla/plantillaContext";
@@ -16,8 +16,11 @@ import { EyeOutlined } from "@ant-design/icons";
 import Text from "antd/lib/typography/Text";
 import Modal from "antd/lib/modal/Modal";
 import EjercicioInfo from "../Ejercicio/EjercicioInfo";
+import { useHistory } from "react-router";
+// import RichText from "./RichTextPDF";
 
 function PracticaForm({ idAsignatura }) {
+  const history = useHistory();
   // Modal
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [modalID, setModalID] = useState("");
@@ -54,13 +57,13 @@ function PracticaForm({ idAsignatura }) {
   } = ejercicioContext;
 
   const [idPlantilla, setIDPlantilla] = useState(null);
-  const [cantidad, setCatindad] = useState("5");
 
   // Si existe un mensaje mostrarlo
   useEffect(() => {
     if (msg) {
       mostrarMsg(msg.texto, msg.tipo);
       vaciarmsg();
+      history.push(`/practicas/${idAsignatura}`);
     }
 
     buscarPlantillasAsig(idAsignatura);
@@ -82,12 +85,6 @@ function PracticaForm({ idAsignatura }) {
     setIDPlantilla(value);
   };
 
-  const handleCantidad = (value) => {
-    console.log(value);
-    setCatindad(value);
-    setselectedRowKeys([]);
-  };
-
   // Manejar ejercicios
 
   const [selectedRowKeys, setselectedRowKeys] = useState([]);
@@ -99,27 +96,21 @@ function PracticaForm({ idAsignatura }) {
   };
 
   const handleConfirmar = () => {
-    if (selectedRowKeys.length !== Number(cantidad)) {
-      mostrarMsg(`Seleccione los ${cantidad} ejercicios`, "error");
+    if (selectedRowKeys.length === 0) {
+      mostrarMsg(`Seleccione almenos 1 ejercicio`, "error");
       return;
     }
-
-    setcompleto(true);
 
     const nuevaPractica = {
       plantilla: idPlantilla,
       ejercicios: selectedRowKeys,
     };
-
+    setcompleto(true);
     crearPractica(nuevaPractica);
   };
 
   const onSelectChange = (rows) => {
     console.log(rows);
-    if (rows.length > cantidad) {
-      mostrarMsg("Solo puede seleccionar " + cantidad + " ejercicios", "error");
-      return;
-    }
     setselectedRowKeys(rows);
   };
 
@@ -145,6 +136,12 @@ function PracticaForm({ idAsignatura }) {
       render: (objetivos) => capitalize(objetivos),
     },
     {
+      title: "Tema",
+      dataIndex: "tema",
+      key: "tema",
+      render: (tema) => capitalize(tema?.nombre),
+    },
+    {
       title: "Dificultad",
       dataIndex: "dificultad",
       key: "dificultad",
@@ -153,6 +150,14 @@ function PracticaForm({ idAsignatura }) {
           {setDificultadText(dificultad)}
         </Tag>
       ),
+    },
+    {
+      title: "Veces usado",
+      dataIndex: "usado",
+      key: "usado",
+      defaultSortOrder: "ascend",
+      sorter: (a, b) => a.usado - b.usado,
+      render: (usado) => <Tag color={"blue"}>{usado}</Tag>,
     },
 
     {
@@ -197,20 +202,12 @@ function PracticaForm({ idAsignatura }) {
             ))}
           </Select>
         </Col>
-        <Col span={8} style={{ paddingRight: 20, paddingLeft: 20 }}>
-          <Text>Cantidad </Text>
-          <InputNumber
-            defaultValue={cantidad}
-            style={{ width: "100%" }}
-            min={1}
-            onChange={handleCantidad}
-          />
-        </Col>
+        <Col span={8} style={{ paddingRight: 20, paddingLeft: 20 }}></Col>
         {idPlantilla !== "" ? (
           <>
             <Col span={8} style={{ marginTop: "auto", textAlign: "right" }}>
               <span style={{ marginLeft: 8, marginRight: 8 }}>
-                {`Seleccionados ${selectedRowKeys.length} ejercicios de ${cantidad}`}
+                {`Seleccionados ${selectedRowKeys.length}`}
               </span>
               <Button onClick={handleConfirmar}>Confirmar</Button>
             </Col>
@@ -233,7 +230,7 @@ function PracticaForm({ idAsignatura }) {
         visible={isModalVisible}
         onOk={handleOk}
         onCancel={handleCancel}
-        // width={1000}
+        width={900}
       >
         {modalID ? <EjercicioInfo id={modalID} /> : null}
       </Modal>

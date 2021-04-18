@@ -1,7 +1,7 @@
+import { Tabs } from "antd";
 import React, { useContext, useEffect } from "react";
 
 import AsignaturaContext from "../../context/asignatura/asignaturaContext";
-import TituloStep from "../layout/extras/TituloStep";
 
 import CardCoordinador from "./CardCoordinador";
 
@@ -21,31 +21,41 @@ function VerCoordinador() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nuevocambio]);
   return (
-    <div className="container mt-2">
+    <div className="container ">
       {asignaturas.length > 0 ? (
-        <div className="row d-flex justify-content-center mt-2">
-          <TituloStep texto={"Coordinador"} />
-          {asignaturas.map((asignatura) => (
-            <CardCoordinador
-              key={asignatura._id}
-              asignatura={asignatura}
-              tipo={"coordinador"}
-            />
-          ))}
-        </div>
+        <Tabs defaultActiveKey="1">
+          <Tabs.TabPane tab="Asignaturas Coordinador" key="1">
+            <div className="row d-flex justify-content-center mt-2">
+              {/* <TituloStep texto={"Coordinador"} /> */}
+              {asignaturas.map((asignatura) => (
+                <CardCoordinador
+                  key={asignatura._id}
+                  asignatura={asignatura}
+                  tipo={"coordinador"}
+                  colorcard={"#6f42c1"}
+                />
+              ))}
+            </div>
+          </Tabs.TabPane>
+        </Tabs>
       ) : null}
 
       {asignaturasDocente.length > 0 ? (
-        <div className="row d-flex justify-content-center">
-          <TituloStep texto={"Docente"} />
-          {asignaturasDocente.map((asignatura) => (
-            <CardCoordinador
-              key={asignatura._id}
-              tipo={"docente"}
-              asignatura={asignatura}
-            />
-          ))}
-        </div>
+        <Tabs defaultActiveKey="1">
+          <Tabs.TabPane tab="Asignaturas Docente" key="1">
+            <div className="row d-flex justify-content-center">
+              {/* <TituloStep texto={"Docente"} /> */}
+              {asignaturasDocente.map((asignatura) => (
+                <CardCoordinador
+                  key={asignatura._id}
+                  tipo={"docente"}
+                  asignatura={asignatura}
+                  colorcard={"#1f74bd"}
+                />
+              ))}
+            </div>
+          </Tabs.TabPane>
+        </Tabs>
       ) : null}
     </div>
   );

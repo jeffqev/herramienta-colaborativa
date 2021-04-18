@@ -39,14 +39,38 @@ function PlantillaInfo({ id }) {
             <Title level={4}>{plantilla.titulo.toUpperCase()}</Title>
           </Col>
 
-          <Col md={12}>
-            <Text strong>Formato: </Text>
-            <Text>{capitalize(plantilla.formato)} </Text>
+          <Col md={24} style={{ marginTop: 20 }}>
+            <Space direction="vertical">
+              <Title level={5} strong>
+                Numero de practica:
+              </Title>
+
+              <Text style={{ marginLeft: 20 }}>{plantilla.numero} </Text>
+            </Space>
           </Col>
 
-          <Col md={12}>
-            <Text strong>Temas: </Text>
-            <Text>{capitalize(plantilla.temas?.nombre)} </Text>
+          <Col md={24} style={{ marginTop: 20 }}>
+            <Space direction="vertical">
+              <Title level={5} strong>
+                Formato:
+              </Title>
+
+              <Text style={{ marginLeft: 20 }}>
+                {capitalize(plantilla.formato)}{" "}
+              </Text>
+            </Space>
+          </Col>
+
+          <Col md={24} style={{ marginTop: 20 }}>
+            <Space direction="vertical">
+              <Title level={5} strong>
+                Tema:
+              </Title>
+
+              <Text style={{ marginLeft: 20 }}>
+                {capitalize(plantilla.temas?.nombre)}{" "}
+              </Text>
+            </Space>
           </Col>
 
           {/* <Col md={8}>
@@ -61,7 +85,10 @@ function PlantillaInfo({ id }) {
               </Title>
 
               {plantilla.objetivos.map((objetivo) => (
-                <Text key={objetivo}> {`‣ ${objetivo}`} </Text>
+                <Text style={{ marginLeft: 20 }} key={objetivo}>
+                  {" "}
+                  {`‣ ${objetivo}`}{" "}
+                </Text>
               ))}
             </Space>
           </Col>
@@ -73,7 +100,10 @@ function PlantillaInfo({ id }) {
               </Title>
 
               {plantilla.requisitos.map((requisito) => (
-                <Text key={requisito}> {`‣ ${requisito}`} </Text>
+                <Text style={{ marginLeft: 20 }} key={requisito}>
+                  {" "}
+                  {`‣ ${requisito}`}{" "}
+                </Text>
               ))}
             </Space>
           </Col>
@@ -85,7 +115,10 @@ function PlantillaInfo({ id }) {
               </Title>
 
               {plantilla.instrucciones.map((instruccion, index) => (
-                <Text key={index + 1}> {`${index + 1}.- ${instruccion}`} </Text>
+                <Text style={{ marginLeft: 20 }} key={index + 1}>
+                  {" "}
+                  {`${index + 1}.- ${instruccion}`}{" "}
+                </Text>
               ))}
             </Space>
           </Col>
@@ -97,7 +130,10 @@ function PlantillaInfo({ id }) {
               </Title>
 
               {plantilla.resultados.map((resultado, index) => (
-                <Text key={index + 1}> {`${index + 1}.- ${resultado}`} </Text>
+                <Text style={{ marginLeft: 20 }} key={index + 1}>
+                  {" "}
+                  {`${index + 1}.- ${resultado}`}{" "}
+                </Text>
               ))}
             </Space>
           </Col>

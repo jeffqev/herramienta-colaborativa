@@ -1,10 +1,11 @@
+import { Typography } from "antd";
 import React, { useContext, useEffect } from "react";
 import CalificacionContext from "../../context/calificacion/calificacionContext";
 import { mostrarMsg } from "../../utils";
 import Calificar from "./Calificar";
-import VerCalificacion from "./VerCalificacion";
+import EditarCalificacion from "./EditarCalificacion";
 
-function Calificacion({ idEjercicio }) {
+function MiCalificacion({ idEjercicio }) {
   // Datos globales con useContext para usar las calificacions
   const calificacionContext = useContext(CalificacionContext);
   const {
@@ -31,8 +32,12 @@ function Calificacion({ idEjercicio }) {
     <>
       {calificacion.length !== 0 ? (
         <>
-          <p>Calificación del ejercicio </p>
-          <VerCalificacion idEjercicio={idEjercicio} />
+          {/* <Space direction="vertical"> */}
+          <EditarCalificacion idEjercicio={idEjercicio} />
+          <Typography.Text style={{ marginLeft: 5 }} type="secondary">
+            Modificar Calificación
+          </Typography.Text>
+          {/* </Space> */}
         </>
       ) : (
         <Calificar idEjercicio={idEjercicio} />
@@ -41,4 +46,4 @@ function Calificacion({ idEjercicio }) {
   );
 }
 
-export default Calificacion;
+export default MiCalificacion;

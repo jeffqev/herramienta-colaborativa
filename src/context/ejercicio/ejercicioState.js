@@ -23,6 +23,7 @@ import {
   EJERCICIO_PLANT_BUSCAR_OK,
   EJERCICIO_PLANT_BUSCAR_ERROR,
   EJERCICIO_PLANT_VACIAR,
+  EJERCICIO_ID_CARGANDO,
 } from "../../types";
 import {
   PATH_EJERCICIO,
@@ -75,7 +76,7 @@ const EjercicioState = (props) => {
 
   const buscarEjercicioID = async (id) => {
     dispatch({
-      type: CARGANDO,
+      type: EJERCICIO_ID_CARGANDO,
       payload: true,
     });
 
@@ -94,6 +95,10 @@ const EjercicioState = (props) => {
   };
 
   const buscarEjerciciosAsig = async (id) => {
+    dispatch({
+      type: CARGANDO,
+    });
+
     try {
       const respuesta = await clienteAxios.get(`${PATH_EJERCICIO_ASIG}/${id}`);
       dispatch({

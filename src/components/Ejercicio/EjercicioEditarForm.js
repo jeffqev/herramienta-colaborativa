@@ -1,6 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { Form, Input, Button, Select, Row, Col, Typography, Rate } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Select,
+  Row,
+  Col,
+  Typography,
+  Rate,
+  Radio,
+} from "antd";
 
 import TemaContext from "../../context/tema/temaContext";
 import ReferenciaContext from "../../context/referencia/referenciaContext";
@@ -39,6 +49,7 @@ function EjercicioEditorForm({ idAsignatura, ejercicio, editarEjercicio }) {
   useEffect(() => {
     buscarTemas(idAsignatura);
     buscarReferenciasAsignatura(idAsignatura);
+    console.log(ejercicio);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nuevocambio, nuevocambior]);
 
@@ -89,6 +100,7 @@ function EjercicioEditorForm({ idAsignatura, ejercicio, editarEjercicio }) {
             descripcion: ejercicio?.descripcion,
             dificultad: ejercicio?.dificultad,
             tema: ejercicio.tema?._id,
+            evaluacion: ejercicio.evaluacion.toString(),
             referencia: ejercicio?.referencia.map(
               (referencia) => referencia?._id
             ),
@@ -97,14 +109,14 @@ function EjercicioEditorForm({ idAsignatura, ejercicio, editarEjercicio }) {
         form={form}
         name="ejerciciosform"
         onFinish={onFinish}
-        // layout="vertical"
+        layout="vertical"
         style={{ paddingLeft: "5%", paddingRight: "5%" }}
       >
         <Row>
           <Col span={24} style={{ paddingRight: 40 }}>
             <Form.Item
               name={["ejercicio", "titulo"]}
-              label="Título"
+              label={<Title level={4}>Titulo</Title>}
               rules={[
                 {
                   required: true,
@@ -112,26 +124,20 @@ function EjercicioEditorForm({ idAsignatura, ejercicio, editarEjercicio }) {
                 },
               ]}
             >
-              <Input style={{ marginLeft: 50 }} />
+              <Input />
             </Form.Item>
 
             <Form.Item
               name={["ejercicio", "descripcion"]}
-              label="Descripcion"
-              rules={[
-                {
-                  required: true,
-                  message: "la descripcion del ejercicio es requerido",
-                },
-              ]}
+              label={<Title level={4}>Descripcion</Title>}
             >
-              <Input className="ms-3" />
+              <Input />
             </Form.Item>
           </Col>
-          <Col span={12} style={{ paddingRight: 10 }}>
+          <Col span={8} style={{ paddingRight: 10 }}>
             <Form.Item
               name={["ejercicio", "dificultad"]}
-              label="Dificultad"
+              label={<Title level={4}>Dificultad</Title>}
               rules={[
                 {
                   required: true,
@@ -148,10 +154,27 @@ function EjercicioEditorForm({ idAsignatura, ejercicio, editarEjercicio }) {
               />
             </Form.Item>
           </Col>
-          <Col span={12} style={{ paddingLeft: 10 }}>
+          <Col span={8} style={{ paddingRight: 10 }}>
+            <Form.Item
+              name={["ejercicio", "evaluacion"]}
+              label={<Title level={4}>Tipo</Title>}
+              rules={[
+                {
+                  required: true,
+                  message: "El tipo es requerido",
+                },
+              ]}
+            >
+              <Radio.Group buttonStyle="solid">
+                <Radio.Button value="0">Practica</Radio.Button>
+                <Radio.Button value="1">Evaluación</Radio.Button>
+              </Radio.Group>
+            </Form.Item>
+          </Col>
+          <Col span={8} style={{ paddingLeft: 10 }}>
             <Form.Item
               name={["ejercicio", "tema"]}
-              label="Tema"
+              label={<Title level={4}>Tema</Title>}
               rules={[
                 {
                   required: true,
@@ -162,7 +185,7 @@ function EjercicioEditorForm({ idAsignatura, ejercicio, editarEjercicio }) {
               <Select
                 showSearch
                 placeholder="Seleccionar Tema"
-                style={{ width: "100%" }}
+                style={{ width: "93%" }}
                 optionFilterProp="children"
                 filterOption={(input, option) =>
                   option.props.children
@@ -201,7 +224,7 @@ function EjercicioEditorForm({ idAsignatura, ejercicio, editarEjercicio }) {
         <Form.Item
           style={{ marginTop: 30 }}
           name={["ejercicio", "referencia"]}
-          label="Referencia"
+          label={<Title level={4}>Referencia</Title>}
         >
           <Select
             mode="multiple"

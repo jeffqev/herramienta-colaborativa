@@ -1,6 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { Form, Input, Button, Select, Row, Col, Typography, Rate } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  Select,
+  Row,
+  Col,
+  Typography,
+  Rate,
+  Radio,
+} from "antd";
 
 import EjercicioContext from "../../context/ejercicio/ejercicioContext";
 import TemaContext from "../../context/tema/temaContext";
@@ -96,20 +106,21 @@ function EjercicioForm({ idAsignatura, setactiveTab }) {
 
   return (
     <div className="mt-3 ms-3">
-      <h3 className=" mt-3  text-center"> Nueva ejercicio</h3>
+      <h3 className=" mt-3  text-center"> Nuevo ejercicio</h3>
 
       <Form
+        initialValues={{ ejercicio: { evaluacion: "0" } }}
         form={form}
         name="ejerciciosform"
         onFinish={onFinish}
-        // layout="vertical"
+        layout="vertical"
         style={{ paddingLeft: "5%", paddingRight: "5%" }}
       >
         <Row>
           <Col span={24} style={{ paddingRight: 40 }}>
             <Form.Item
               name={["ejercicio", "titulo"]}
-              label="Título"
+              label={<Title level={4}>Titulo</Title>}
               rules={[
                 {
                   required: true,
@@ -117,26 +128,23 @@ function EjercicioForm({ idAsignatura, setactiveTab }) {
                 },
               ]}
             >
-              <Input style={{ marginLeft: 50 }} />
+              <Input />
             </Form.Item>
 
             <Form.Item
               name={["ejercicio", "descripcion"]}
-              label="Descripcion"
-              rules={[
-                {
-                  required: true,
-                  message: "la descripcion del ejercicio es requerido",
-                },
-              ]}
+              label={<Title level={4}>Descripcion</Title>}
             >
-              <Input className="ms-3" />
+              <Input
+                maxLength={255}
+                placeholder="Pequeña descripción del ejercicio"
+              />
             </Form.Item>
           </Col>
-          <Col span={12} style={{ paddingRight: 10 }}>
+          <Col span={8} style={{ paddingRight: 10 }}>
             <Form.Item
               name={["ejercicio", "dificultad"]}
-              label="Dificultad"
+              label={<Title level={4}>Dificultad</Title>}
               rules={[
                 {
                   required: true,
@@ -153,10 +161,27 @@ function EjercicioForm({ idAsignatura, setactiveTab }) {
               />
             </Form.Item>
           </Col>
-          <Col span={12} style={{ paddingLeft: 10 }}>
+          <Col span={8} style={{ paddingRight: 10 }}>
+            <Form.Item
+              name={["ejercicio", "evaluacion"]}
+              label={<Title level={4}>Tipo</Title>}
+              rules={[
+                {
+                  required: true,
+                  message: "El tipo es requerido",
+                },
+              ]}
+            >
+              <Radio.Group buttonStyle="solid">
+                <Radio.Button value="0">Practica</Radio.Button>
+                <Radio.Button value="1">Evaluación</Radio.Button>
+              </Radio.Group>
+            </Form.Item>
+          </Col>
+          <Col span={8} style={{ paddingLeft: 10 }}>
             <Form.Item
               name={["ejercicio", "tema"]}
-              label="Tema"
+              label={<Title level={4}>Tema</Title>}
               rules={[
                 {
                   required: true,
@@ -167,7 +192,7 @@ function EjercicioForm({ idAsignatura, setactiveTab }) {
               <Select
                 showSearch
                 placeholder="Seleccionar Tema"
-                style={{ width: "100%" }}
+                style={{ width: "93%" }}
                 optionFilterProp="children"
                 filterOption={(input, option) =>
                   option.props.children
@@ -206,7 +231,7 @@ function EjercicioForm({ idAsignatura, setactiveTab }) {
         <Form.Item
           style={{ marginTop: 30 }}
           name={["ejercicio", "referencia"]}
-          label="Referencia"
+          label={<Title level={4}>Referencias</Title>}
         >
           <Select
             mode="multiple"

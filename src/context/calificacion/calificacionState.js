@@ -100,6 +100,25 @@ const CalificacionState = (props) => {
     }
   };
 
+  const editarCalificacion = async (id, values) => {
+    try {
+      const respuesta = await clienteAxios.put(
+        `${PATH_CALIFICACION}/${id}`,
+        values
+      );
+      console.log(respuesta);
+      dispatch({
+        type: CALIFICACION_ELIMINAR_OK,
+        payload: { texto: respuesta?.data.msg, tipo: "info" },
+      });
+    } catch (error) {
+      dispatch({
+        type: CALIFICACION_ELIMINAR_ERROR,
+        payload: { texto: errorMsg(error), tipo: "error" },
+      });
+    }
+  };
+
   const vaciarmsg = async () => {
     dispatch({
       type: VACIAR_MENSAJE,
@@ -118,6 +137,7 @@ const CalificacionState = (props) => {
         crearCalificacion,
         buscarCalificaciones,
         eliminarCalificacion,
+        editarCalificacion,
         buscarCalificacionEjercicio,
         vaciarmsg,
       }}

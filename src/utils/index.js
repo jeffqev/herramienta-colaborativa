@@ -139,3 +139,33 @@ export const setDificultadText = (value) => {
 
   return "";
 };
+
+export const setTipoEjercicio = (value) => {
+  if (value === 0) {
+    return { texto: "Practica", color: "blue" };
+  }
+
+  if (value === 1) {
+    return { texto: "Evaluación", color: "gold" };
+  }
+
+  return { texto: "", color: "" };
+};
+
+export const setArchivado = (value) => {
+  if (value) {
+    return "Archivado";
+  }
+
+  if (!value) {
+    return "Sin Archivar";
+  }
+};
+
+export const SumPuntaje = (array) => {
+  let total = 0;
+  for (const i in array) {
+    total += array[i].puntaje;
+  }
+  return total;
+};
