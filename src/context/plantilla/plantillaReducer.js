@@ -10,11 +10,15 @@ import {
   PLANTILLA_ASIG_BUSCAR_ERROR,
   PLANTILLA_ID_BUSCAR_OK,
   PLANTILLA_ID_BUSCAR_ERROR,
+  CARGANDO,
+  PLANTILLA_EDITAR_OK,
+  PLANTILLA_EDITAR_ERROR,
 } from "../../types";
 
 const plantillaReducer = (state, action) => {
   switch (action.type) {
     case PLANTILLA_INGRESO_OK:
+    case PLANTILLA_EDITAR_OK:
     case PLANTILLA_ELIMINAR_OK:
       return {
         ...state,
@@ -38,11 +42,19 @@ const plantillaReducer = (state, action) => {
     case PLANTILLA_BUSCAR_ERROR:
     case PLANTILLA_INGRESO_ERROR:
     case PLANTILLA_ELIMINAR_ERROR:
+    case PLANTILLA_EDITAR_ERROR:
     case PLANTILLA_ID_BUSCAR_ERROR:
     case PLANTILLA_ASIG_BUSCAR_ERROR:
       return {
         ...state,
         msg: action.payload,
+      };
+
+    case CARGANDO:
+      return {
+        ...state,
+        cargandoplantilla: action.payload,
+        plantilla: {},
       };
 
     case VACIAR_MENSAJE:

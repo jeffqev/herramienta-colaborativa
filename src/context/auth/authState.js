@@ -27,9 +27,7 @@ const AuthState = (props) => {
 
   const usuarioAutenticado = async () => {
     const token = localStorage.getItem("token");
-    if (token) {
-      tokenAuth(token);
-    }
+    tokenAuth(token);
 
     try {
       const respuesta = await clienteAxios.get(PERFIL_USUARIO);

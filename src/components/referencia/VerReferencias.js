@@ -39,7 +39,7 @@ function VerReferencias({ idAsignatura }) {
       key: "titulo",
     },
     {
-      title: "Colaboradores",
+      title: "Autores",
       dataIndex: "colaboradores",
       key: "colaboradores",
       render: (colaboradores) => {

@@ -45,7 +45,10 @@ function AgregarDocente({ asignaturaActual }) {
         onFinish={onFinish}
         layout="vertical"
       >
-        <Form.Item name={["asignatura", "docentes"]} label="Docentes">
+        <Form.Item
+          name={["asignatura", "docentes"]}
+          label="Docentes incluidos en la asignatura"
+        >
           <Select
             mode="multiple"
             placeholder="Seleccionar docentes"

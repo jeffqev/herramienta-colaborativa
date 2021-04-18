@@ -49,12 +49,13 @@ function VerAsignaturas() {
       title: "Nombre",
       dataIndex: "nombre",
       key: "nombre",
+      render: (nombre) => capitalize(nombre),
     },
     {
       title: "Carrera",
       dataIndex: "carrera",
       key: "carrera",
-      render: (carrera) => carrera.carrera,
+      render: (carrera) => capitalize(carrera.carrera),
 
       filters: carrerasfiltro,
       filterMultiple: false,

@@ -17,6 +17,8 @@ function Coordinador() {
     if (usuario) {
       if (usuario?.rol === "administrador") {
         history.push("/usuarios");
+      } else if (!usuario?.rol) {
+        history.push("/");
       }
     } else {
       usuarioAutenticado();

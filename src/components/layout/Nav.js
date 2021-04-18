@@ -97,24 +97,24 @@ function Nav({ activa }) {
                       <li className="nav-item">
                         <Link
                           className={`nav-link ${
-                            activa === "plantillas" ? "active" : null
-                          }`}
-                          to={"/plantillas/" + asignaturaid}
-                        >
-                          <i className="bi bi-card-heading feather"></i>
-                          Plantillas
-                        </Link>
-                      </li>
-
-                      <li className="nav-item">
-                        <Link
-                          className={`nav-link ${
                             activa === "temas" ? "active" : null
                           }`}
                           to={"/temas/" + asignaturaid}
                         >
                           <i className="bi bi-tags feather"></i>
                           Temas
+                        </Link>
+                      </li>
+
+                      <li className="nav-item">
+                        <Link
+                          className={`nav-link ${
+                            activa === "plantillas" ? "active" : null
+                          }`}
+                          to={"/plantillas/" + asignaturaid}
+                        >
+                          <i className="bi bi-card-heading feather"></i>
+                          Plantillas
                         </Link>
                       </li>
                     </>
@@ -137,7 +137,7 @@ function Nav({ activa }) {
                       className={`nav-link ${
                         activa === "ejercicios" ? "active" : null
                       }`}
-                      to={"/ejercicios"}
+                      to={"/ejercicios/" + asignaturaid}
                     >
                       <i className="bi bi-file-diff feather"></i>
                       Ejercicios
@@ -148,7 +148,7 @@ function Nav({ activa }) {
                       className={`nav-link ${
                         activa === "practicas" ? "active" : null
                       }`}
-                      to={"/practicass"}
+                      to={"/practicas/" + asignaturaid}
                     >
                       <i className="bi bi-files feather"></i>
                       Practicas

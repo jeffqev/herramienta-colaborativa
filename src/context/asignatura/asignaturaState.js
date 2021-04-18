@@ -17,6 +17,8 @@ import {
   ASIGNATURA_DOCENTES_ERROR,
   ASIGNATURAS_COORDINADOR_OK,
   ASIGNATURAS_COORDINADOR_ERROR,
+  ASIGNATURAS_PERTENECE_OK,
+  ASIGNATURAS_PERTENECE_ERROR,
 } from "../../types";
 import {
   PATH_ASIGNATURA,
@@ -29,6 +31,7 @@ const AsignaturaState = (props) => {
     msg: null,
     nuevocambio: false,
     asignaturas: [],
+    asignaturasDocente: [],
   };
 
   const [state, dispatch] = useReducer(AsignaturaReducer, initialState);
@@ -73,6 +76,21 @@ const AsignaturaState = (props) => {
     } catch (error) {
       dispatch({
         type: ASIGNATURAS_COORDINADOR_ERROR,
+        payload: { texto: errorMsg(error), tipo: "error" },
+      });
+    }
+  };
+
+  const buscarAsignaturasDocente = async () => {
+    try {
+      const respuesta = await clienteAxios.get(PATH_ASIGNATURA_DOCENTES);
+      dispatch({
+        type: ASIGNATURAS_PERTENECE_OK,
+        payload: respuesta?.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: ASIGNATURAS_PERTENECE_ERROR,
         payload: { texto: errorMsg(error), tipo: "error" },
       });
     }
@@ -126,11 +144,13 @@ const AsignaturaState = (props) => {
         msg: state.msg,
         nuevocambio: state.nuevocambio,
         asignaturas: state.asignaturas,
+        asignaturasDocente: state.asignaturasDocente,
         crearAsignatura,
         buscarAsignaturas,
         eliminarAsignatura,
         docentesAsignatura,
         buscarAsignaturasCoordinador,
+        buscarAsignaturasDocente,
         vaciarmsg,
       }}
     >

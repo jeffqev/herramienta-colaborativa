@@ -71,7 +71,7 @@ function ReferenciaForm({ idAsignatura }) {
           rules={[
             {
               required: true,
-              message: "Agregar almenos un colaborador",
+              message: "Agregar almenos un autor",
             },
           ]}
         >
@@ -82,7 +82,7 @@ function ReferenciaForm({ idAsignatura }) {
                   // {...(index === 0
                   //   ? formItemLayout
                   //   : formItemLayoutWithOutLabel)}
-                  label={index === 0 ? "Colaboradores" : ""}
+                  label={index === 0 ? "Autores" : ""}
                   required={false}
                   key={field.key}
                 >
@@ -93,13 +93,13 @@ function ReferenciaForm({ idAsignatura }) {
                       {
                         required: true,
                         whitespace: true,
-                        message: "Agregar un colaborador o eliminar el campo",
+                        message: "Agregar un autor o eliminar el campo",
                       },
                     ]}
                     noStyle
                   >
                     <Input
-                      placeholder="Agregar nuevo colaborador"
+                      placeholder="Agregar nuevo autor"
                       style={{ width: "86%" }}
                     />
                   </Form.Item>
@@ -118,7 +118,7 @@ function ReferenciaForm({ idAsignatura }) {
                   style={{ width: "100%" }}
                   icon={<PlusOutlined />}
                 >
-                  Agregar Colaborador
+                  Agregar Autor
                 </Button>
 
                 <Form.ErrorList errors={errors} />

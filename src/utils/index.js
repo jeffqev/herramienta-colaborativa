@@ -59,28 +59,113 @@ export const autoresReferencia = (colaborador) => {
 
 export const stringReferencia = (referencia) => {
   if (referencia.tipo === "libro") {
-    return (
-      <p>
-        {`${minAutores(referencia.colaboradores).join("")} (${
-          referencia.anio ? referencia.anio : "s.f."
-        }). ${referencia.titulo} ${
-          referencia.edicion ? "(" + referencia.edicion + " ed.)" : ""
-        } ${referencia.editorial ? referencia.editorial + "." : ""}`}
-      </p>
-    );
+    return <p>{textReferencia(referencia)}</p>;
   }
   return (
-    <div>
-      {`${minAutores(referencia.colaboradores).join("")} (${
-        referencia.anio ? referencia.anio : "s.f."
-      }). ${referencia.titulo}. `}
+    <>
+      {textReferencia(referencia)}
       <a target="_blank" rel="noreferrer" href={referencia.url}>
         [online]
       </a>
-    </div>
+    </>
   );
+};
+
+export const textReferencia = (referencia) => {
+  if (referencia.tipo === "libro") {
+    return `${minAutores(referencia.colaboradores).join("")} (${
+      referencia.anio ? referencia.anio : "s.f."
+    }). ${referencia.titulo} ${
+      referencia.edicion ? "(" + referencia.edicion + " ed.)" : ""
+    } ${referencia.editorial ? referencia.editorial + "." : ""}`;
+  }
+  return `${minAutores(referencia.colaboradores).join("")} (${
+    referencia.anio ? referencia.anio : "s.f."
+  }). ${referencia.titulo}. `;
 };
 
 export const eliminarUltimocaracter = (cadena) => {
   return cadena.substring(0, cadena.length - 2);
+};
+
+export const eliminarDuplicado = (array) => {
+  let hash = {};
+  array = array.filter((o) => (hash[o.value] ? false : (hash[o.value] = true)));
+  return array;
+};
+
+export const obtenerColor = (value) => {
+  if (value === 1) {
+    return "green";
+  }
+
+  if (value === 2) {
+    return "#fadb14";
+  }
+
+  if (value === 3) {
+    return "red";
+  }
+};
+
+export const setColorDificultad = (value) => {
+  if (value === 1) {
+    return "green";
+  }
+
+  if (value === 2) {
+    return "gold";
+  }
+
+  if (value === 3) {
+    return "red";
+  }
+
+  return "blue";
+};
+
+export const setDificultadText = (value) => {
+  if (value === 1) {
+    return "Fácil";
+  }
+
+  if (value === 2) {
+    return "Medio";
+  }
+
+  if (value === 3) {
+    return "Difícil";
+  }
+
+  return "";
+};
+
+export const setTipoEjercicio = (value) => {
+  if (value === 0) {
+    return { texto: "Practica", color: "blue" };
+  }
+
+  if (value === 1) {
+    return { texto: "Evaluación", color: "gold" };
+  }
+
+  return { texto: "", color: "" };
+};
+
+export const setArchivado = (value) => {
+  if (value) {
+    return "Archivado";
+  }
+
+  if (!value) {
+    return "Sin Archivar";
+  }
+};
+
+export const SumPuntaje = (array) => {
+  let total = 0;
+  for (const i in array) {
+    total += array[i].puntaje;
+  }
+  return total;
 };
