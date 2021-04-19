@@ -37,7 +37,7 @@ function ListadoPracticas() {
 
   return (
     <>
-      <Row style={{ marginBottom: 20 }}>
+      <Row>
         <Col md={5} style={{ marginTop: 20 }}>
           <Typography.Title level={5}>Filtros</Typography.Title>
           <div className="filtros">Asignaturas</div>

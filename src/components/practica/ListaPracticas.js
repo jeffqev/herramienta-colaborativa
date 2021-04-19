@@ -231,9 +231,19 @@ function ListadoPracticas({ idAsignatura, tipo }) {
 
   return (
     <>
+      {tipo === "coordinador" ? (
+        <Button
+          onClick={() => history.push(`/nueva/practica/` + idAsignatura)}
+          block
+          type="default"
+        >
+          Nueva practica
+        </Button>
+      ) : null}
+
       <Table
         columns={columns}
-        style={{ marginTop: 40 }}
+        style={{ marginTop: 10 }}
         dataSource={data.filter(
           (practica) => practica?.plantilla.asignatura === idAsignatura
         )}
@@ -243,16 +253,6 @@ function ListadoPracticas({ idAsignatura, tipo }) {
         bordered
         rowKey="_id"
       />
-
-      {tipo === "coordinador" ? (
-        <Button
-          onClick={() => history.push(`/nueva/practica/` + idAsignatura)}
-          block
-          type="primary"
-        >
-          Nueva practica
-        </Button>
-      ) : null}
 
       <Modal
         title="Ejercicio"

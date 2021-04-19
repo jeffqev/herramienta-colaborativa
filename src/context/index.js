@@ -13,6 +13,7 @@ import TemaState from "./tema/temaState";
 import UsuarioState from "./usuarios/usuarioState";
 import EjercicioState from "./ejercicio/ejercicioState";
 import CalificacionState from "./calificacion/calificacionState";
+import ReporteState from "./reportes/reporteState";
 
 function Context(props) {
   return (
@@ -28,7 +29,11 @@ function Context(props) {
                       <PlantillaState>
                         <EjercicioState>
                           <CalificacionState>
-                            <AsignaturaState>{props.children}</AsignaturaState>
+                            <ReporteState>
+                              <AsignaturaState>
+                                {props.children}
+                              </AsignaturaState>
+                            </ReporteState>
                           </CalificacionState>
                         </EjercicioState>
                       </PlantillaState>
