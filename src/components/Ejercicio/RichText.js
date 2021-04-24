@@ -36,7 +36,7 @@ function example_image_upload_handler(blobInfo, success, failure, progress) {
 
   xhr = new XMLHttpRequest();
   xhr.withCredentials = false;
-  xhr.open("POST", "http://localhost:1323/upload");
+  xhr.open("POST", process.env.REACT_APP_BACKEND_URL + "/upload");
 
   xhr.upload.onprogress = function (e) {
     progress((e.loaded / e.total) * 100);

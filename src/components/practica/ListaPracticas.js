@@ -55,7 +55,7 @@ function ListadoPracticas({ idAsignatura, tipo }) {
 
   const downloadPDF = (item, tipodescarga) => {
     fetch(
-      `http://localhost:1323/api/practica/pdf/${item._id}/${tipodescarga}`
+      `${process.env.REACT_APP_BACKEND_URL}/api/practica/pdf/${item._id}/${tipodescarga}`
     ).then((response) => {
       if (!response.ok) {
         mostrarMsg("Error al generar el pdf", "error");
