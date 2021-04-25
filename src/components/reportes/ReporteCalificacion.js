@@ -28,13 +28,13 @@ function ReporteCalificacion({ idAsignatura }) {
 
   return (
     <table style={{ width: "100%" }}>
-      <tr>
-        <th></th>
-        <th></th>
-      </tr>
-      {data.map((ejercicio) => (
-        <>
-          <tr>
+      <tbody>
+        <tr>
+          <th></th>
+          <th></th>
+        </tr>
+        {data.map((ejercicio) => (
+          <tr key={ejercicio._id}>
             <td width="60%">
               <Link to={`/ejercicios/${idAsignatura}/${ejercicio._id}`}>
                 {capitalize(ejercicio.titulo)}
@@ -51,8 +51,8 @@ function ReporteCalificacion({ idAsignatura }) {
               />
             </td>
           </tr>
-        </>
-      ))}
+        ))}
+      </tbody>
     </table>
   );
 }

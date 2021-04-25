@@ -152,7 +152,7 @@ function PracticaForm({ idAsignatura }) {
       ),
     },
     {
-      title: "Veces usado",
+      title: "Utililizado",
       dataIndex: "usado",
       key: "usado",
       defaultSortOrder: "ascend",

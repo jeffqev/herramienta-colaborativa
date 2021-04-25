@@ -302,17 +302,7 @@ a.brand-card-header:hover {
 .brand-card-body > .brand-card-item:not(:last-child) {
   border-right: 1px solid #dee2e6;
 }
-/* --- Optional --- */
-.bg-konkon {
-  background-color: #fe669e !important;
-}
-.bg-musescore {
-  background-color: #1f74bd;
-}
-.skk-icotw:before {
-  content: "\f360";
-}
 
 .table-row-dark {
-  background-color: #ffd6d6;
+  background-color: #c1c8c7;
 }

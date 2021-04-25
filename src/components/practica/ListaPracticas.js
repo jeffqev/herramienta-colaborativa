@@ -3,7 +3,11 @@ import { Button, Collapse, Popconfirm, Space, Table } from "antd";
 import { useHistory } from "react-router-dom";
 
 import PracticaContext from "../../context/practica/practicaContext";
-import { DeleteOutlined, FilePdfOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  FilePdfOutlined,
+  EditOutlined,
+} from "@ant-design/icons";
 import { capitalize, mostrarMsg } from "../../utils";
 
 import moment from "moment";
@@ -107,13 +111,13 @@ function ListadoPracticas({ idAsignatura, tipo }) {
       render: (creado) => moment(creado).format("LL"),
     },
     {
-      title: "Ejercicios",
+      title: "Lista de ejercicios",
       dataIndex: "ejercicios",
       key: "ejercicios",
       render: (ejercicios) => (
         <>
           <Collapse ghost>
-            <Collapse.Panel header="Ejercicios">
+            <Collapse.Panel header={definirNumeroEjercicios(ejercicios)}>
               <Space direction="vertical">
                 {ejercicios.map((ejercicio) => (
                   <Button
@@ -135,15 +139,15 @@ function ListadoPracticas({ idAsignatura, tipo }) {
       ),
     },
     {
-      title: "Descargar",
+      title: "Acciones",
       render: (_text, refasignatura) => (
         <>
           {tipo === "coordinador" && !refasignatura?.final ? (
             <Button
               type="link"
-              danger
+              style={{ color: "#237804" }}
               shape="round"
-              icon={<FilePdfOutlined />}
+              icon={<EditOutlined />}
               size={"small"}
               onClick={() => {
                 history.push(
@@ -173,9 +177,9 @@ function ListadoPracticas({ idAsignatura, tipo }) {
           {tipo === "coordinador" && !refasignatura?.finalSolucion ? (
             <Button
               type="link"
-              danger
+              style={{ color: "#237804" }}
               shape="round"
-              icon={<FilePdfOutlined />}
+              icon={<EditOutlined />}
               size={"small"}
               onClick={() => {
                 history.push(
@@ -269,3 +273,11 @@ function ListadoPracticas({ idAsignatura, tipo }) {
 }
 
 export default ListadoPracticas;
+
+const definirNumeroEjercicios = (ejercicios) => {
+  const num = ejercicios.length;
+  return ` ${num} ${num === 1 ? "Ejercicio" : "Ejercicios"}`;
+  // return ejercicios.length + " " + ejercicios.length === 1
+  //   ? " Ejercicio"
+  //   : "Ejercicios";
+};

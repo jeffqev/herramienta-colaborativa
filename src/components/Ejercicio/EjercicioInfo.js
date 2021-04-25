@@ -51,44 +51,46 @@ function EjercicioInfo({ id }) {
 
               <Col md={12} style={{ marginTop: 20 }}>
                 <table style={{ width: "100%" }}>
-                  <tr>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                  <tr>
-                    <td>
-                      <Text strong>Titulo: </Text>
-                    </td>
-                    <td>
-                      <Text>{capitalize(ejercicio.titulo)}</Text>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <Text strong>Descripcion: </Text>
-                    </td>
-                    <td>
-                      <Text>{capitalize(ejercicio.descripcion)} </Text>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <Text strong>Dificultad: </Text>
-                    </td>
-                    <td>
-                      <Tag color={setColorDificultad(ejercicio.dificultad)}>
-                        {setDificultadText(ejercicio.dificultad)}
-                      </Tag>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <Text strong>Tema: </Text>
-                    </td>
-                    <td>
-                      <Text>{capitalize(ejercicio.tema?.nombre)}</Text>
-                    </td>
-                  </tr>
+                  <tbody>
+                    <tr>
+                      <th></th>
+                      <th></th>
+                    </tr>
+                    <tr>
+                      <td>
+                        <Text strong>Titulo: </Text>
+                      </td>
+                      <td>
+                        <Text>{capitalize(ejercicio.titulo)}</Text>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <Text strong>Descripcion: </Text>
+                      </td>
+                      <td>
+                        <Text>{capitalize(ejercicio.descripcion)} </Text>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <Text strong>Dificultad: </Text>
+                      </td>
+                      <td>
+                        <Tag color={setColorDificultad(ejercicio.dificultad)}>
+                          {setDificultadText(ejercicio.dificultad)}
+                        </Tag>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <Text strong>Tema: </Text>
+                      </td>
+                      <td>
+                        <Text>{capitalize(ejercicio.tema?.nombre)}</Text>
+                      </td>
+                    </tr>
+                  </tbody>
                 </table>
               </Col>
               <Col md={12} style={{ marginTop: 2 }}>
@@ -120,7 +122,7 @@ function EjercicioInfo({ id }) {
               />
             ) : null}
 
-            {ejercicio.ejemplo ? (
+            {!ejercicio.ejemplo ? (
               <Alert
                 style={{ marginBottom: 15, marginTop: 15 }}
                 message="No se ha ingresado un ejemplo para este ejercicio"

@@ -35,7 +35,7 @@ function Calificar({ idEjercicio }) {
           label="Calificación"
           rules={[{ required: true, message: "El puntaje es requerido" }]}
         >
-          <Rate allowHalf />
+          <Rate />
         </Form.Item>
 
         <Form.Item colon={false}>
