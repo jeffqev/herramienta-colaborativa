@@ -13,12 +13,18 @@ import {
   USUARIO_ELIMINAR_ERROR,
   DOCENTE_BUSCAR_OK,
   DOCENTE_BUSCAR_ERROR,
+  PERFIL_BUSCAR_OK,
+  PERFIL_BUSCAR_ERROR,
   VACIAR_MENSAJE,
   CARGANDO,
 } from "../../types";
 
 import { errorMsg } from "../../utils";
-import { PATH_USUARIO, PATH_USUARIO_DOCENTES } from "../../config/rutasAPI";
+import {
+  PATH_USUARIO,
+  PATH_USUARIO_DOCENTES,
+  PERFIL_USUARIO,
+} from "../../config/rutasAPI";
 
 const UsuarioState = (props) => {
   const initialState = {
@@ -27,6 +33,7 @@ const UsuarioState = (props) => {
     usuariotransfer: [],
     usuarios: [],
     docentes: [],
+    perfil: {},
     cargando: false,
   };
 
@@ -71,6 +78,22 @@ const UsuarioState = (props) => {
     }
   };
 
+  const editarUsuario = async (id, values) => {
+    try {
+      const respuesta = await clienteAxios.put(`${PATH_USUARIO}/${id}`, values);
+
+      dispatch({
+        type: USUARIO_ELIMINAR_OK,
+        payload: { texto: respuesta?.data.msg, tipo: "info" },
+      });
+    } catch (error) {
+      dispatch({
+        type: USUARIO_ELIMINAR_ERROR,
+        payload: { texto: errorMsg(error), tipo: "error" },
+      });
+    }
+  };
+
   const buscarUsuarios = async () => {
     try {
       const respuesta = await clienteAxios.get(PATH_USUARIO);
@@ -81,6 +104,26 @@ const UsuarioState = (props) => {
     } catch (error) {
       dispatch({
         type: USUARIO_BUSCAR_ERROR,
+        payload: { texto: errorMsg(error), tipo: "error" },
+      });
+    }
+  };
+
+  const buscarPerfil = async () => {
+    dispatch({
+      type: CARGANDO,
+      payload: true,
+    });
+
+    try {
+      const respuesta = await clienteAxios.get(PERFIL_USUARIO);
+      dispatch({
+        type: PERFIL_BUSCAR_OK,
+        payload: respuesta?.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: PERFIL_BUSCAR_ERROR,
         payload: { texto: errorMsg(error), tipo: "error" },
       });
     }
@@ -114,10 +157,13 @@ const UsuarioState = (props) => {
         nuevocambio: state.nuevocambio,
         docentes: state.docentes,
         usuariotransfer: state.usuariotransfer,
+        perfil: state.perfil,
         crearUsuario,
         buscarUsuarios,
+        editarUsuario,
         eliminarUsuario,
         buscarDocentes,
+        buscarPerfil,
         vaciarmsg,
       }}
     >

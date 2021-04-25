@@ -68,7 +68,7 @@ function VerReferencias({ idAsignatura }) {
       ),
     },
     {
-      title: "",
+      title: "Acciones",
       render: (_text, refasignatura) => (
         <>
           <Button

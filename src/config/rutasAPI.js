@@ -40,3 +40,7 @@ export const PATH_CALIFICACION_EJER = "/api/calificacion/ejercicio";
 // practica
 export const PATH_PRACTICA = "/api/practica";
 export const PATH_PRACTICA_ASIG = "/api/practica/asignatura";
+
+// Reportes
+export const PATH_REPORTE_USOS = "/api/reportes/usado";
+export const PATH_REPORTE_CALIFICACION = "/api/reportes/calificacion";

@@ -10,6 +10,9 @@ import Nav from "../../../components/layout/Nav";
 import { capitalize } from "../../../utils";
 import { Col, Row, Typography } from "antd";
 import ModalFloat from "../../../components/CoordinarAsignatura/ModalFloat";
+import ReporteUsos from "../../../components/reportes/ReporteUsos";
+import ReporteCalificacion from "../../../components/reportes/ReporteCalificacion";
+import ModalDocentes from "../../../components/coordinador/ModalDocentes";
 
 function Inicio() {
   const { Text, Title } = Typography;
@@ -97,24 +100,68 @@ function Inicio() {
               <Migas rutas={rutas} />
             </div>
             {asignatura.nombre ? (
-              <Row
-                className="d-flex justify-content-center text-center"
-                style={{ marginBottom: 20 }}
-              >
-                <Col style={{ marginTop: 20 }} md={24}>
-                  <Title level={4}>{asignatura?.nombre.toUpperCase()}</Title>
+              <>
+                <Row
+                  className="d-flex justify-content-center text-center"
+                  style={{ marginBottom: 20 }}
+                >
+                  <Col style={{ marginTop: 20 }} md={24}>
+                    <Title level={4}>{asignatura?.nombre.toUpperCase()}</Title>
 
-                  <Text>{capitalize(asignatura?.carrera.carrera)} </Text>
-                  <br />
-                  <Text>Codigo: {capitalize(asignatura?.codigo)} </Text>
-                </Col>
-
-                {tipo === "coordinador" ? (
-                  <Col md={13}>
-                    <ModalFloat asignatura={asignatura} />
+                    <Text>{capitalize(asignatura?.carrera.carrera)} </Text>
+                    <br />
+                    <Text>Codigo: {capitalize(asignatura?.codigo)} </Text>
                   </Col>
-                ) : null}
-              </Row>
+                </Row>
+
+                <div className="row mb-5">
+                  {tipo === "coordinador" ? (
+                    <div className="col-md-4">
+                      <div className="card  mt-3">
+                        <div className="card-header">
+                          <small>Docentes</small>
+                        </div>
+                        <div className="card-body">
+                          <ModalFloat asignatura={asignatura} />
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="col-md-4">
+                      <div className="card  mt-3">
+                        <div className="card-header">
+                          <small>Docentes</small>
+                        </div>
+                        <div className="card-body">
+                          <ModalDocentes docente={asignatura?.docentes} />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="col-md-4">
+                    <div className="card  mt-3">
+                      <div className="card-header">
+                        <small>Uso de ejercicios</small>
+                      </div>
+                      <div className="card-body">
+                        <ReporteUsos idAsignatura={id} />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="col-md-4">
+                    <div className="card  mt-3">
+                      <div className="card-header">
+                        <small>Calificacion ejercicios</small>
+                      </div>
+                      <div className="card-body">
+                        <ReporteCalificacion idAsignatura={id} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </>
             ) : null}
           </main>
         </div>

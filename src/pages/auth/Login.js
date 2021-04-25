@@ -21,6 +21,7 @@ export default function Login(props) {
   } = authaContext;
 
   useEffect(() => {
+    console.log(process.env.REACT_APP_BACKEND_URL);
     // Si cuenta con un token en el localstorage verificar si es uno correcto
     const token = localStorage.getItem("token");
     if (token) {

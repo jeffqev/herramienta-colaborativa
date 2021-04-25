@@ -32,7 +32,7 @@ function VerCoordinador() {
                   key={asignatura._id}
                   asignatura={asignatura}
                   tipo={"coordinador"}
-                  colorcard={"#6f42c1"}
+                  colorcard={"#d46f4d"}
                 />
               ))}
             </div>
@@ -50,7 +50,7 @@ function VerCoordinador() {
                   key={asignatura._id}
                   tipo={"docente"}
                   asignatura={asignatura}
-                  colorcard={"#1f74bd"}
+                  colorcard={"#006692"}
                 />
               ))}
             </div>

@@ -3,7 +3,11 @@ import { Button, Collapse, Popconfirm, Space, Table } from "antd";
 import { useHistory } from "react-router-dom";
 
 import PracticaContext from "../../context/practica/practicaContext";
-import { DeleteOutlined, FilePdfOutlined } from "@ant-design/icons";
+import {
+  DeleteOutlined,
+  FilePdfOutlined,
+  EditOutlined,
+} from "@ant-design/icons";
 import { capitalize, mostrarMsg } from "../../utils";
 
 import moment from "moment";
@@ -55,7 +59,7 @@ function ListadoPracticas({ idAsignatura, tipo }) {
 
   const downloadPDF = (item, tipodescarga) => {
     fetch(
-      `http://localhost:1323/api/practica/pdf/${item._id}/${tipodescarga}`
+      `${process.env.REACT_APP_BACKEND_URL}/api/practica/pdf/${item._id}/${tipodescarga}`
     ).then((response) => {
       if (!response.ok) {
         mostrarMsg("Error al generar el pdf", "error");
@@ -107,13 +111,13 @@ function ListadoPracticas({ idAsignatura, tipo }) {
       render: (creado) => moment(creado).format("LL"),
     },
     {
-      title: "Ejercicios",
+      title: "Lista de ejercicios",
       dataIndex: "ejercicios",
       key: "ejercicios",
       render: (ejercicios) => (
         <>
           <Collapse ghost>
-            <Collapse.Panel header="Ejercicios">
+            <Collapse.Panel header={definirNumeroEjercicios(ejercicios)}>
               <Space direction="vertical">
                 {ejercicios.map((ejercicio) => (
                   <Button
@@ -135,15 +139,15 @@ function ListadoPracticas({ idAsignatura, tipo }) {
       ),
     },
     {
-      title: "Descargar",
+      title: "Acciones",
       render: (_text, refasignatura) => (
         <>
           {tipo === "coordinador" && !refasignatura?.final ? (
             <Button
               type="link"
-              danger
+              style={{ color: "#237804" }}
               shape="round"
-              icon={<FilePdfOutlined />}
+              icon={<EditOutlined />}
               size={"small"}
               onClick={() => {
                 history.push(
@@ -173,9 +177,9 @@ function ListadoPracticas({ idAsignatura, tipo }) {
           {tipo === "coordinador" && !refasignatura?.finalSolucion ? (
             <Button
               type="link"
-              danger
+              style={{ color: "#237804" }}
               shape="round"
-              icon={<FilePdfOutlined />}
+              icon={<EditOutlined />}
               size={"small"}
               onClick={() => {
                 history.push(
@@ -231,9 +235,19 @@ function ListadoPracticas({ idAsignatura, tipo }) {
 
   return (
     <>
+      {tipo === "coordinador" ? (
+        <Button
+          onClick={() => history.push(`/nueva/practica/` + idAsignatura)}
+          block
+          type="default"
+        >
+          Nueva practica
+        </Button>
+      ) : null}
+
       <Table
         columns={columns}
-        style={{ marginTop: 40 }}
+        style={{ marginTop: 10 }}
         dataSource={data.filter(
           (practica) => practica?.plantilla.asignatura === idAsignatura
         )}
@@ -243,16 +257,6 @@ function ListadoPracticas({ idAsignatura, tipo }) {
         bordered
         rowKey="_id"
       />
-
-      {tipo === "coordinador" ? (
-        <Button
-          onClick={() => history.push(`/nueva/practica/` + idAsignatura)}
-          block
-          type="primary"
-        >
-          Nueva practica
-        </Button>
-      ) : null}
 
       <Modal
         title="Ejercicio"
@@ -269,3 +273,11 @@ function ListadoPracticas({ idAsignatura, tipo }) {
 }
 
 export default ListadoPracticas;
+
+const definirNumeroEjercicios = (ejercicios) => {
+  const num = ejercicios.length;
+  return ` ${num} ${num === 1 ? "Ejercicio" : "Ejercicios"}`;
+  // return ejercicios.length + " " + ejercicios.length === 1
+  //   ? " Ejercicio"
+  //   : "Ejercicios";
+};

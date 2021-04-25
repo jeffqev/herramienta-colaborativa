@@ -39,7 +39,6 @@ function EditarCalificacion({ idEjercicio }) {
             onChange={(value) => {
               editarCalificacion(calificacion[0]._id, { puntaje: value });
             }}
-            allowHalf
             defaultValue={calificacion[0]?.puntaje}
           />
         </>
