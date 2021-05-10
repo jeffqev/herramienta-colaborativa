@@ -74,6 +74,22 @@ const TemaState = (props) => {
     }
   };
 
+  const editarTema = async (id, values) => {
+    try {
+      const respuesta = await clienteAxios.put(`${PATH_TEMA}/${id}`, values);
+
+      dispatch({
+        type: TEMA_ELIMINAR_OK,
+        payload: { texto: respuesta?.data.msg, tipo: "info" },
+      });
+    } catch (error) {
+      dispatch({
+        type: TEMA_ELIMINAR_ERROR,
+        payload: { texto: errorMsg(error), tipo: "error" },
+      });
+    }
+  };
+
   const eliminarTema = async (id) => {
     try {
       const respuesta = await clienteAxios.delete(`${PATH_TEMA}/${id}`);
@@ -108,6 +124,7 @@ const TemaState = (props) => {
         crearTema,
         buscarTemas,
         eliminarTema,
+        editarTema,
         buscarTemasPadre,
         vaciarmsg,
       }}

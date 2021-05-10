@@ -36,7 +36,7 @@ function VerPlantilla({ idAsignatura }) {
     buscarPlantillasAsig(idAsignatura);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nuevocambio]);
+  }, [msg, nuevocambio]);
 
   const handleEliminar = (id) => {
     eliminarPlantilla(id);

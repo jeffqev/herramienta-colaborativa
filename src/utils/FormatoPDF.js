@@ -75,7 +75,9 @@ export function docHeader(datos, solution = false) {
     <table style="border-collapse: collapse; width: 100%;" border="0">
       <tbody>
         <tr>
-          <td style="width: 31.5146%;"><img src="https://www.ups.edu.ec/ups_portal-theme/images/ups/home/logo-ups-home.png" alt="" width="300" height="81" /></td>
+          <td style="width: 31.5146%;"><img src="${
+            process.env.REACT_APP_BACKEND_URL
+          }/images/logo-ups.png" alt="" width="300" height="81" /></td>
           <td style="width: 31.2285%; text-align: center;">
             <p><strong>VICERRECTORADO DOCENTE</strong></p>
             <p>CONSEJO ACADEMICO</p>

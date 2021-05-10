@@ -78,6 +78,25 @@ const ReferenciaState = (props) => {
     }
   };
 
+  const editarReferencia = async (id, values) => {
+    try {
+      const respuesta = await clienteAxios.put(
+        `${PATH_REFERENCIA}/${id}`,
+        values
+      );
+
+      dispatch({
+        type: REFERENCIA_ELIMINAR_OK,
+        payload: { texto: respuesta?.data.msg, tipo: "info" },
+      });
+    } catch (error) {
+      dispatch({
+        type: REFERENCIA_ELIMINAR_ERROR,
+        payload: { texto: errorMsg(error), tipo: "error" },
+      });
+    }
+  };
+
   const eliminarReferencia = async (id) => {
     try {
       const respuesta = await clienteAxios.delete(`${PATH_REFERENCIA}/${id}`);
@@ -111,6 +130,7 @@ const ReferenciaState = (props) => {
         crearReferencia,
         buscarReferencias,
         eliminarReferencia,
+        editarReferencia,
         buscarReferenciasAsignatura,
         vaciarmsg,
       }}

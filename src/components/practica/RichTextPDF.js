@@ -31,16 +31,18 @@ function RichText({ requets2, tipopractica, idpractica, idAsignatura }) {
   };
 
   const handleGuardar = () => {
+    const inicio = `<div style="zoom: 0.55;">`;
+    const fin = `</div>`;
     if (!tipoPractica) {
       const data = {
-        final: initial,
+        final: `${inicio}${initial}${fin}`,
       };
       modificarPractica(idpractica, data);
       return;
     }
     if (tipoPractica) {
       const data = {
-        finalSolucion: initial,
+        finalSolucion: `${inicio}${initial}${fin}`,
       };
       modificarPractica(idpractica, data);
       return;

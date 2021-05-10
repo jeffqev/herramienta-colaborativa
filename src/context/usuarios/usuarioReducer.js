@@ -10,6 +10,7 @@ import {
   VACIAR_MENSAJE,
   CARGANDO,
   PERFIL_BUSCAR_OK,
+  USUARIOID_BUSCAR_OK,
 } from "../../types";
 
 const usuarioState = (state, action) => {
@@ -27,7 +28,7 @@ const usuarioState = (state, action) => {
     case DOCENTE_BUSCAR_ERROR:
       return {
         ...state,
-        mensaje: action.payload,
+        msg: action.payload,
       };
 
     case USUARIO_BUSCAR_OK:
@@ -42,6 +43,14 @@ const usuarioState = (state, action) => {
         perfil: action.payload,
         cargando: false,
       };
+
+    case USUARIOID_BUSCAR_OK:
+      return {
+        ...state,
+        usuario: action.payload,
+        cargando: false,
+      };
+
     case DOCENTE_BUSCAR_OK:
       return {
         ...state,
@@ -66,6 +75,7 @@ const usuarioState = (state, action) => {
         ...state,
         cargando: action.payload,
         perfil: {},
+        usuario: null,
       };
 
     default:
