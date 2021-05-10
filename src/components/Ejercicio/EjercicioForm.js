@@ -72,7 +72,6 @@ function EjercicioForm({ idAsignatura, setactiveTab }) {
     ejercicio.ejemplo = ejemploEditor;
     ejercicio.solucion = solucionEditor;
 
-    console.log(ejercicio);
     crearEjercicio(ejercicio);
     form.resetFields();
     setEjercicioEditor("");

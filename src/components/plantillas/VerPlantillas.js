@@ -47,7 +47,6 @@ function VerPlantilla({ idAsignatura }) {
   };
 
   const handleModificar = (id) => {
-    console.log(id);
     history.push(`/editar/plantillas/${idAsignatura}/${id}`);
     // eliminarPlantilla(id);
   };

@@ -15,8 +15,6 @@ function VerCalificacion({ idEjercicio }) {
 
   useEffect(() => {
     buscarCalificacionEjercicio(idEjercicio);
-    console.log(SumPuntaje(calificacionesEjercicio));
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [msg, nuevocambio]);
 
@@ -28,9 +26,7 @@ function VerCalificacion({ idEjercicio }) {
   //   // form.resetFields();
   // };
 
-  const handleChange = (value) => {
-    console.log(value);
-  };
+  const handleChange = (value) => {};
 
   return (
     <>

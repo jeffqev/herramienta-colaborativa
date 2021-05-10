@@ -68,9 +68,7 @@ function PracticaForm({ idAsignatura }) {
 
     buscarPlantillasAsig(idAsignatura);
 
-    console.log(idPlantilla);
     if (idPlantilla !== null) {
-      console.log("entro");
       buscarEjerciciosPlant(idPlantilla);
     } else {
       vaciarEjerciciosPlant();
@@ -110,7 +108,6 @@ function PracticaForm({ idAsignatura }) {
   };
 
   const onSelectChange = (rows) => {
-    console.log(rows);
     setselectedRowKeys(rows);
   };
 

@@ -49,7 +49,6 @@ function EjercicioEditorForm({ idAsignatura, ejercicio, editarEjercicio }) {
   useEffect(() => {
     buscarTemas(idAsignatura);
     buscarReferenciasAsignatura(idAsignatura);
-    console.log(ejercicio);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nuevocambio, nuevocambior]);
 
@@ -71,8 +70,6 @@ function EjercicioEditorForm({ idAsignatura, ejercicio, editarEjercicio }) {
     values.ejercicio.ejemplo = ejemploEditor;
     values.ejercicio.solucion = solucionEditor;
 
-    console.log(values.ejercicio);
-    console.log(ejercicio._id);
     editarEjercicio(ejercicio._id, values.ejercicio);
   };
 
