@@ -114,6 +114,8 @@ function VerAsignaturas() {
         columns={columns}
         dataSource={asignaturas}
         size="small"
+        style={{ marginBottom: 30 }}
+        scroll={{ x: "50%" }}
         pagination={{ position: ["topCenter"] }}
         showSorterTooltip={false}
         expandable={{

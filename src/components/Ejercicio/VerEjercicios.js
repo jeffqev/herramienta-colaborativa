@@ -231,6 +231,7 @@ function VerEjercicio({ idAsignatura, idusuario, tipo }) {
       showSorterTooltip={false}
       bordered
       rowKey="_id"
+      scroll={{ x: "50%" }}
       expandable={{
         expandedRowRender: ({ descripcion }) =>
           descripcion ? (

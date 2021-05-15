@@ -33,7 +33,6 @@ import tokenAuth from "./config/token";
 import RutaPrivada from "./privado/RutaPrivada";
 import Context from "./context";
 import NotFound from "./components/layout/NotFound";
-import Prubas from "./components/Ejercicio/Prubas";
 
 // Si se encuentra logueado al recargar la pagina
 const token = localStorage.getItem("token");
@@ -94,7 +93,6 @@ function App() {
             component={Practica}
           />
 
-          <RutaPrivada exact path="/pruebas" component={Prubas} />
           {/* <RutaPrivada exact path="/practicas" component={Practicas} />
           <RutaPrivada exact path="/practicas/:id" component={Practica} />
           <RutaPrivada

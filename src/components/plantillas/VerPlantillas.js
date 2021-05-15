@@ -112,6 +112,8 @@ function VerPlantilla({ idAsignatura }) {
       pagination={{ position: ["bottomCenter"] }}
       showSorterTooltip={false}
       bordered
+      style={{ marginBottom: 30 }}
+      scroll={{ x: "50%" }}
       rowKey="_id"
     />
   );

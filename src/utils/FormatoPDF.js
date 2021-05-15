@@ -1,4 +1,4 @@
-import { capitalize, textReferencia } from ".";
+import { capitalize,eliminarReferenciasDuplicado,  textReferencia } from ".";
 
 function listLI(array, style = false) {
   let res = "";
@@ -61,12 +61,16 @@ function listEjercicio(array, solution = false) {
 
 function listRef(array) {
   let res = "";
+  const arrayReferencia = []
+ 
   array.forEach((e) => {
-    e.referencia.forEach((a) => {
-      res += `<li>${textReferencia(a)}</li>`;
+    e.referencia.forEach((referencia) => {
+      arrayReferencia.push(referencia)
     });
   });
 
+  const arraySinDuplicados =  eliminarReferenciasDuplicado(arrayReferencia)
+  arraySinDuplicados.map(referencia => res += `<li>${textReferencia(referencia)}</li>` )
   return res;
 }
 

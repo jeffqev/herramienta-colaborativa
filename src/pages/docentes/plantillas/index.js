@@ -17,7 +17,7 @@ import PlantillaForm from "../../../components/plantillas/PlantillaForm";
 function Plantillas() {
   // tabs
   const { TabPane } = Tabs;
-
+  const [activeTab, setactiveTab] = useState("1");
   // Rutas
   const history = useHistory();
   const { id } = useParams();
@@ -36,6 +36,10 @@ function Plantillas() {
     asignaturas,
     buscarAsignaturasCoordinador,
   } = asignaturaContext;
+
+  const handleChange = (value) => {
+    setactiveTab(value);
+  };
 
   useEffect(() => {
     if (usuario) {
@@ -91,12 +95,19 @@ function Plantillas() {
 
               <div className="row">
                 <div className="col-md-12 mb-3">
-                  <Tabs defaultActiveKey="1">
+                  <Tabs
+                    defaultActiveKey="1"
+                    activeKey={activeTab}
+                    onChange={handleChange}
+                  >
                     <TabPane tab="Listado de plantilla" key="1">
                       <VerPlantilla idAsignatura={id} />
                     </TabPane>
                     <TabPane tab="Crear plantilla" key="2">
-                      <PlantillaForm idAsignatura={id} />
+                      <PlantillaForm
+                        idAsignatura={id}
+                        setactiveTab={setactiveTab}
+                      />
                     </TabPane>
                   </Tabs>
                 </div>

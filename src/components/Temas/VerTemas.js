@@ -106,6 +106,8 @@ function VerTemas({ idAsignatura }) {
         size="small"
         pagination={{ position: ["bottomCenter"] }}
         showSorterTooltip={false}
+        style={{ marginBottom: 30 }}
+        scroll={{ x: "50%" }}
         bordered
         rowKey="_id"
       />

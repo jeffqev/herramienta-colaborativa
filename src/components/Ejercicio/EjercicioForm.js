@@ -140,7 +140,7 @@ function EjercicioForm({ idAsignatura, setactiveTab }) {
               />
             </Form.Item>
           </Col>
-          <Col span={8} style={{ paddingRight: 10 }}>
+          <Col md={8} style={{ paddingRight: 10 }}>
             <Form.Item
               name={["ejercicio", "dificultad"]}
               label={<Title level={4}>Dificultad</Title>}
@@ -160,7 +160,7 @@ function EjercicioForm({ idAsignatura, setactiveTab }) {
               />
             </Form.Item>
           </Col>
-          <Col span={8} style={{ paddingRight: 10 }}>
+          <Col md={8} style={{ paddingRight: 10 }}>
             <Form.Item
               name={["ejercicio", "evaluacion"]}
               label={<Title level={4}>Tipo</Title>}
@@ -177,7 +177,7 @@ function EjercicioForm({ idAsignatura, setactiveTab }) {
               </Radio.Group>
             </Form.Item>
           </Col>
-          <Col span={8} style={{ paddingLeft: 10 }}>
+          <Col md={8} style={{ paddingLeft: 10 }}>
             <Form.Item
               name={["ejercicio", "tema"]}
               label={<Title level={4}>Tema</Title>}

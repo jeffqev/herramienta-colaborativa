@@ -99,6 +99,8 @@ function VerUsuarios() {
       <Table
         columns={columns}
         dataSource={usuarios}
+        style={{ marginBottom: 30 }}
+        scroll={{ x: "50%" }}
         size="small"
         pagination={{ position: ["topCenter"] }}
         showSorterTooltip={false}

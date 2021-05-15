@@ -94,6 +94,12 @@ export const eliminarDuplicado = (array) => {
   return array;
 };
 
+export const eliminarReferenciasDuplicado = (array) => {
+  let hash = {};
+  array = array.filter((o) => (hash[o._id] ? false : (hash[o._id] = true)));
+  return array;
+};
+
 export const obtenerColor = (value) => {
   if (value === 1) {
     return "green";

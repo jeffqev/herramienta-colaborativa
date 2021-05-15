@@ -21,7 +21,6 @@ export default function Login(props) {
   } = authaContext;
 
   useEffect(() => {
-    console.log(process.env.REACT_APP_BACKEND_URL);
     // Si cuenta con un token en el localstorage verificar si es uno correcto
     const token = localStorage.getItem("token");
     if (token) {
@@ -41,10 +40,7 @@ export default function Login(props) {
   }, [mensaje, autenticado, props.history]);
 
   // Inicializar el State del formulario
-  const [usuario, setUsuario] = useState({
-    correo: "docente1@docente.com",
-    contrasena: "docente",
-  });
+  const [usuario, setUsuario] = useState({});
 
   // Guardar en los values del formulario el state
   const { correo, contrasena } = usuario;
@@ -75,7 +71,7 @@ export default function Login(props) {
           <div className="card-header">
             <img
               className="img-fluid mx-auto d-block"
-              src="https://www.ups.edu.ec/ups_portal-theme/images/ups/home/logo-ups-home.png"
+              src="https://quicklab-api.grupoia.ec/images/logo-ups.png"
               alt=""
             />
           </div>
@@ -90,7 +86,7 @@ export default function Login(props) {
                 type="email"
                 name="correo"
                 value={correo}
-                placeholder="correo"
+                placeholder="Correo"
                 onChange={handleChange}
               />
 
@@ -103,7 +99,7 @@ export default function Login(props) {
                 type="password"
                 value={contrasena}
                 name="contrasena"
-                placeholder="contrasena"
+                placeholder="Contraseña"
                 onChange={handleChange}
               />
 

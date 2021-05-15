@@ -116,6 +116,8 @@ function VerPeriodos() {
       <Table
         columns={columns}
         dataSource={periodos}
+        style={{ marginBottom: 30 }}
+        scroll={{ x: "50%" }}
         size="small"
         pagination={{ position: ["topCenter"] }}
         showSorterTooltip={false}

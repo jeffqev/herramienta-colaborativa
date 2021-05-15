@@ -9,7 +9,7 @@ import { capitalize } from "../../utils";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import Title from "antd/lib/typography/Title";
 
-function PlantillaForm({ idAsignatura }) {
+function PlantillaForm({ idAsignatura, setactiveTab }) {
   // Formularios de antd
   const { Option } = Select;
   const [form] = Form.useForm();
@@ -35,6 +35,7 @@ function PlantillaForm({ idAsignatura }) {
     plantilla.asignatura = idAsignatura;
 
     crearPlantilla(plantilla);
+    setactiveTab("1");
     // form.resetFields();
   };
 
@@ -80,7 +81,7 @@ function PlantillaForm({ idAsignatura }) {
           <Input />
         </Form.Item>
         <Row>
-          <Col span={8} style={{ paddingRight: 10 }}>
+          <Col md={8} style={{ paddingRight: 10 }}>
             <Form.Item
               name={["plantilla", "formato"]}
               label={<Title level={4}>Formato</Title>}
@@ -102,7 +103,7 @@ function PlantillaForm({ idAsignatura }) {
               </Select>
             </Form.Item>
           </Col>
-          <Col span={8} style={{ paddingRight: 10 }}>
+          <Col md={8} style={{ paddingRight: 10 }}>
             <Form.Item
               name={["plantilla", "numero"]}
               label={<Title level={4}>Número Practica</Title>}
@@ -121,7 +122,7 @@ function PlantillaForm({ idAsignatura }) {
               <InputNumber style={{ width: "100%" }} />
             </Form.Item>
           </Col>
-          <Col span={8} style={{ paddingLeft: 10 }}>
+          <Col md={8} style={{ paddingLeft: 10 }}>
             <Form.Item
               name={["plantilla", "temas"]}
               label={<Title level={4}>Tema</Title>}

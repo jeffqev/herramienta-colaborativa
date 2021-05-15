@@ -210,11 +210,12 @@ function PracticaForm({ idAsignatura }) {
             </Col>
             <Col span={24}>
               <Table
-                style={{ marginTop: 20 }}
+                style={{ marginTop: 20,marginBottom: 30 }}
                 rowSelection={rowSelection}
                 columns={columns}
                 dataSource={ejercicios}
                 rowKey="_id"
+                scroll={{ x: "50%" }}
               />
             </Col>
           </>

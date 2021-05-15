@@ -20,13 +20,8 @@ function EjercicioInfo({ id }) {
   const history = useHistory();
   // Variables globales de ejercicios
   const ejercicioContext = useContext(EjercicioContext);
-  const {
-    msg,
-    vaciarmsg,
-    nuevocambio,
-    ejercicio,
-    buscarEjercicioID,
-  } = ejercicioContext;
+  const { msg, vaciarmsg, nuevocambio, ejercicio, buscarEjercicioID } =
+    ejercicioContext;
 
   useEffect(() => {
     if (!msg) {
@@ -109,7 +104,9 @@ function EjercicioInfo({ id }) {
                 header={<Text strong>Vista previa del ejercicio: </Text>}
                 key="1"
               >
-                {htmlParce(listEjercicio(ejercicio, true))}
+                <div style={{ overflowX: "scroll" }}>
+                  {htmlParce(listEjercicio(ejercicio, true))}
+                </div>
               </Panel>
             </Collapse>
             {!ejercicio.solucion ? (

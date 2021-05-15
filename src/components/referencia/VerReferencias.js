@@ -117,6 +117,8 @@ function VerReferencias({ idAsignatura }) {
         showSorterTooltip={false}
         bordered
         rowKey="_id"
+        style={{ marginBottom: 30 }}
+        scroll={{ x: "50%" }}
         expandable={{
           expandedRowRender: (referencia) => stringReferencia(referencia),
         }}
