@@ -10,6 +10,7 @@ import { mostrarMsg, capitalize } from "../../utils";
 
 function AsignaturaForm() {
   const { Option } = Select;
+  const [form] = Form.useForm();
 
   // Datos globales con useContext para usar los usuarios
   const usuarioContext = useContext(UsuarioContext);
@@ -39,13 +40,19 @@ function AsignaturaForm() {
   const onFinish = (values) => {
     const { asignatura } = values;
     crearAsignatura(asignatura);
+    form.resetFields();
   };
   return (
-    <Form name="asignaturaform" onFinish={onFinish} layout="vertical">
+    <Form
+      form={form}
+      name="asignaturaform"
+      onFinish={onFinish}
+      layout="vertical"
+    >
       <Form.Item
         name={["asignatura", "codigo"]}
-        label="Codigo"
-        rules={[{ required: true, message: "El codigo es requerido" }]}
+        label="Código"
+        rules={[{ required: true, message: "El código es requerido" }]}
       >
         <Input />
       </Form.Item>

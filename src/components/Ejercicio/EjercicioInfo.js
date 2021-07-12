@@ -6,9 +6,11 @@ import htmlParce from "react-html-parser";
 import EjercicioContext from "../../context/ejercicio/ejercicioContext";
 import {
   capitalize,
+  eliminarReferenciasDuplicado,
   mostrarMsg,
   setColorDificultad,
   setDificultadText,
+  textReferencia,
 } from "../../utils";
 import MiCalificacion from "./MiCalificacion";
 import VerCalificacion from "./VerCalificacion";
@@ -137,6 +139,19 @@ function EjercicioInfo({ id }) {
 
 export default EjercicioInfo;
 
+function listRef(arrayReferencia) {
+  if (arrayReferencia.length === 0) {
+    return `<p style="color: #e03e2d;">Este ejercicio no cuenta con referencias</p>`;
+  }
+  let res = "";
+
+  const arraySinDuplicados = eliminarReferenciasDuplicado(arrayReferencia);
+  arraySinDuplicados.map(
+    (referencia) => (res += `<li>${textReferencia(referencia)}</li>`)
+  );
+  return res;
+}
+
 function listEjercicio(e, solution = false) {
   let res = ``;
   // array.forEach((e) => {
@@ -178,6 +193,10 @@ function listEjercicio(e, solution = false) {
                 : ``
             }
           </li>
+        </ol>
+        <p><strong>REFERENCIAS:</strong></p>
+        <ol>
+          ${listRef(e.referencia)}
         </ol>
       </li>
     `;

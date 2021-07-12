@@ -4,6 +4,7 @@ import {
   REPORTE_USOS_OK,
   REPORTE_USOS_ERROR,
   VACIAR_MENSAJE,
+  REPORTE_TEMAS_OK,
 } from "../../types";
 
 const reporteReducer = (state, action) => {
@@ -18,6 +19,12 @@ const reporteReducer = (state, action) => {
       return {
         ...state,
         reporteCalificacion: action.payload,
+      };
+
+    case REPORTE_TEMAS_OK:
+      return {
+        ...state,
+        reporteTemas: action.payload,
       };
 
     case REPORTE_USOS_ERROR:

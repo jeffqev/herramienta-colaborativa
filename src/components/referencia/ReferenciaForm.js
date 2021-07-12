@@ -142,7 +142,7 @@ function ReferenciaForm({ idAsignatura }) {
         </Form.Item>
         {tipoForm === "libro" ? (
           <>
-            <Form.Item name={["referencia", "edicion"]} label="Edicion">
+            <Form.Item name={["referencia", "edicion"]} label="Edición">
               <Input />
             </Form.Item>
 

@@ -13,6 +13,7 @@ import ModalFloat from "../../../components/CoordinarAsignatura/ModalFloat";
 import ReporteUsos from "../../../components/reportes/ReporteUsos";
 import ReporteCalificacion from "../../../components/reportes/ReporteCalificacion";
 import ModalDocentes from "../../../components/coordinador/ModalDocentes";
+import ReporteTemas from "../../../components/reportes/ReporteTemas";
 
 function Inicio() {
   const { Text, Title } = Typography;
@@ -110,53 +111,68 @@ function Inicio() {
 
                     <Text>{capitalize(asignatura?.carrera.carrera)} </Text>
                     <br />
-                    <Text>Codigo: {capitalize(asignatura?.codigo)} </Text>
+                    <Text>Código: {capitalize(asignatura?.codigo)} </Text>
                   </Col>
                 </Row>
 
                 <div className="row mb-5">
-                  {tipo === "coordinador" ? (
-                    <div className="col-md-4">
-                      <div className="card  mt-3">
-                        <div className="card-header">
-                          <small>Docentes</small>
-                        </div>
-                        <div className="card-body">
-                          <ModalFloat asignatura={asignatura} />
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="col-md-4">
-                      <div className="card  mt-3">
-                        <div className="card-header">
-                          <small>Docentes</small>
-                        </div>
-                        <div className="card-body">
-                          <ModalDocentes docente={asignatura?.docentes} />
-                        </div>
-                      </div>
-                    </div>
-                  )}
-
                   <div className="col-md-4">
-                    <div className="card  mt-3">
-                      <div className="card-header">
-                        <small>Uso de ejercicios</small>
+                    {tipo === "coordinador" ? (
+                      <div className="col-md-12">
+                        <div className="card  mt-3">
+                          <div className="card-header">
+                            <small>Docentes</small>
+                          </div>
+                          <div className="card-body">
+                            <ModalFloat asignatura={asignatura} />
+                          </div>
+                        </div>
                       </div>
-                      <div className="card-body">
-                        <ReporteUsos idAsignatura={id} />
+                    ) : (
+                      <div className="col-md-12">
+                        <div className="card  mt-3">
+                          <div className="card-header">
+                            <small>Docentes</small>
+                          </div>
+                          <div className="card-body">
+                            <ModalDocentes docente={asignatura?.docentes} />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="col-md-12">
+                      <div className="card  mt-3">
+                        <div className="card-header">
+                          <small>Ejercicios por temas</small>
+                        </div>
+                        <div className="card-body">
+                          <ReporteTemas idAsignatura={id} />
+                        </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="col-md-4">
-                    <div className="card  mt-3">
-                      <div className="card-header">
-                        <small>Calificacion ejercicios</small>
+                  <div className="col-md-8">
+                    <div className="col-md-12">
+                      <div className="card  mt-3">
+                        <div className="card-header">
+                          <small>Uso de ejercicios</small>
+                        </div>
+                        <div className="card-body">
+                          <ReporteUsos idAsignatura={id} />
+                        </div>
                       </div>
-                      <div className="card-body">
-                        <ReporteCalificacion idAsignatura={id} />
+                    </div>
+
+                    <div className="col-md-12">
+                      <div className="card  mt-3">
+                        <div className="card-header">
+                          <small>Calificación ejercicios</small>
+                        </div>
+                        <div className="card-body">
+                          <ReporteCalificacion idAsignatura={id} />
+                        </div>
                       </div>
                     </div>
                   </div>

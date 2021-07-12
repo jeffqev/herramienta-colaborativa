@@ -1,4 +1,4 @@
-import { capitalize,eliminarReferenciasDuplicado,  textReferencia } from ".";
+import { capitalize, eliminarReferenciasDuplicado, textReferencia } from ".";
 
 function listLI(array, style = false) {
   let res = "";
@@ -61,16 +61,18 @@ function listEjercicio(array, solution = false) {
 
 function listRef(array) {
   let res = "";
-  const arrayReferencia = []
- 
+  const arrayReferencia = [];
+
   array.forEach((e) => {
     e.referencia.forEach((referencia) => {
-      arrayReferencia.push(referencia)
+      arrayReferencia.push(referencia);
     });
   });
 
-  const arraySinDuplicados =  eliminarReferenciasDuplicado(arrayReferencia)
-  arraySinDuplicados.map(referencia => res += `<li>${textReferencia(referencia)}</li>` )
+  const arraySinDuplicados = eliminarReferenciasDuplicado(arrayReferencia);
+  arraySinDuplicados.map(
+    (referencia) => (res += `<li>${textReferencia(referencia)}</li>`)
+  );
   return res;
 }
 
@@ -137,7 +139,7 @@ export function docHeader(datos, solution = false) {
     <ol>
       ${listLI(datos.plantilla.resultados)}
     </ol>
-    <p><strong>CONCLUCIONES:</strong></p>
+    <p><strong>CONCLUSIONES:</strong></p>
     <ol>
       <li>Generar al menos una conclus&iacute;on de la pr&aacute;ctica desarrollada</li>
     </ol>
@@ -145,7 +147,9 @@ export function docHeader(datos, solution = false) {
     <ol>
       ${listRef(datos.ejercicios)}
     </ol>
-    <p>Claustro Docente de Programaci&oacute;n - Quito</p>
+    <p>Claustro Docente de ${capitalize(
+      datos.plantilla?.asignatura?.nombre
+    )} - Quito</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>Firma:____________________________</p>

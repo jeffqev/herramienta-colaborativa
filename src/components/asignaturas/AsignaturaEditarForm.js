@@ -56,8 +56,8 @@ function AsignaturaEditarForm({ asignaturaEditar }) {
     >
       <Form.Item
         name={["asignatura", "codigo"]}
-        label="Codigo"
-        rules={[{ required: true, message: "El codigo es requerido" }]}
+        label="Código"
+        rules={[{ required: true, message: "El código es requerido" }]}
       >
         <Input />
       </Form.Item>

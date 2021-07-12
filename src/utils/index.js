@@ -81,7 +81,7 @@ export const textReferencia = (referencia) => {
   }
   return `${minAutores(referencia.colaboradores).join("")} (${
     referencia.anio ? referencia.anio : "s.f."
-  }). ${referencia.titulo}. `;
+  }). ${referencia.titulo}. [Online]. Available: ${referencia?.url} `;
 };
 
 export const eliminarUltimocaracter = (cadena) => {

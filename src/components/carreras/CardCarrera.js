@@ -3,7 +3,7 @@ import React from "react";
 import { Popconfirm } from "antd";
 import { useHistory } from "react-router-dom";
 
-import { capitalize, mostrarMsg } from "../../utils";
+import { mostrarMsg } from "../../utils";
 
 function CardCarrera({
   carrera,
@@ -35,7 +35,7 @@ function CardCarrera({
           <div className="card-body d-grid gap-2 ">
             <h5 className="card-title text-left">
               <p className="text-center card-title-carrera mb-1">
-                {capitalize(carrera.carrera)}
+                {carrera.carrera.toUpperCase()}
               </p>
               <div className="d-flex justify-content-center">
                 <button
