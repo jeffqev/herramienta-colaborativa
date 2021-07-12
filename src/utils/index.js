@@ -81,7 +81,7 @@ export const textReferencia = (referencia) => {
   }
   return `${minAutores(referencia.colaboradores).join("")} (${
     referencia.anio ? referencia.anio : "s.f."
-  }). ${referencia.titulo}. `;
+  }). ${referencia.titulo}. [Online]. Available: ${referencia?.url} `;
 };
 
 export const eliminarUltimocaracter = (cadena) => {
@@ -91,6 +91,12 @@ export const eliminarUltimocaracter = (cadena) => {
 export const eliminarDuplicado = (array) => {
   let hash = {};
   array = array.filter((o) => (hash[o.value] ? false : (hash[o.value] = true)));
+  return array;
+};
+
+export const eliminarReferenciasDuplicado = (array) => {
+  let hash = {};
+  array = array.filter((o) => (hash[o._id] ? false : (hash[o._id] = true)));
   return array;
 };
 

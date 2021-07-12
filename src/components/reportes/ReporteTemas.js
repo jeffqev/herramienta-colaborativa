@@ -1,16 +1,16 @@
 import React, { useContext, useEffect } from "react";
-import { Column } from "@ant-design/charts";
+import { Pie } from "@ant-design/charts";
 
 import ReporteContext from "../../context/reportes/reporteContext";
 import { mostrarMsg } from "../../utils";
 
-function ReporteUsos({ idAsignatura }) {
+function ReporteTemas({ idAsignatura }) {
   const reporteContext = useContext(ReporteContext);
   const {
-    reporteUsos: data,
+    reporteTemas: data,
     msg,
     vaciarmsg,
-    buscarReporteUsos,
+    buscarReporteTema,
   } = reporteContext;
 
   // Si hay cambios volver a hacer la consulta
@@ -20,29 +20,22 @@ function ReporteUsos({ idAsignatura }) {
       vaciarmsg();
     }
 
-    buscarReporteUsos(idAsignatura);
+    buscarReporteTema(idAsignatura);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   var config = {
+    appendPadding: 10,
     data: data,
-    xField: "type",
-    yField: "sales",
-    label: {
-      position: "middle",
-      style: {
-        fill: "#FFFFFF",
-        opacity: 0.6,
-      },
-    },
-    meta: {
-      type: { alias: "Titulo" },
-      sales: { alias: "Veces usado" },
-    },
+    angleField: "value",
+    colorField: "type",
+    radius: 0.8,
+    label: { type: "outer" },
+    interactions: [{ type: "pie-legend-active" }, { type: "element-active" }],
   };
 
-  return <Column {...config} />;
+  return <Pie {...config} />;
 }
 
-export default ReporteUsos;
+export default ReporteTemas;

@@ -31,16 +31,18 @@ function RichText({ requets2, tipopractica, idpractica, idAsignatura }) {
   };
 
   const handleGuardar = () => {
+    const inicio = `<div style="zoom: 0.55;">`;
+    const fin = `</div>`;
     if (!tipoPractica) {
       const data = {
-        final: initial,
+        final: `${inicio}${initial}${fin}`,
       };
       modificarPractica(idpractica, data);
       return;
     }
     if (tipoPractica) {
       const data = {
-        finalSolucion: initial,
+        finalSolucion: `${inicio}${initial}${fin}`,
       };
       modificarPractica(idpractica, data);
       return;
@@ -70,13 +72,14 @@ function RichText({ requets2, tipopractica, idpractica, idAsignatura }) {
         textareaName="myTextArea"
         init={{
           selector: "myTextArea",
+          language: "es",
           height: 10000,
           // menubar: false,
           // readonly: true,
           plugins: [
             "advlist autolink lists link image charmap  preview anchor",
-            "searchreplace visualblocks code print fullscreen",
-            "insertdatetime media table paste code help wordcount",
+            "searchreplace visualblocks code fullscreen",
+            "insertdatetime table paste code wordcount",
           ],
           images_upload_handler: example_image_upload_handler,
           toolbar: false,

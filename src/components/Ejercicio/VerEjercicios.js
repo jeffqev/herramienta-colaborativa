@@ -56,7 +56,6 @@ function VerEjercicio({ idAsignatura, idusuario, tipo }) {
   };
 
   const handleModificar = (id) => {
-    console.log(id);
     history.push(`/editar/ejercicios/${idAsignatura}/${id}`);
     // eliminarEjercicio(id);
   };
@@ -224,7 +223,6 @@ function VerEjercicio({ idAsignatura, idusuario, tipo }) {
     <Table
       columns={columns}
       rowClassName={(record, index) => {
-        console.log(record?.archivado);
         return record?.archivado === true ? "table-row-dark" : "";
       }}
       dataSource={ejercicios}
@@ -233,6 +231,7 @@ function VerEjercicio({ idAsignatura, idusuario, tipo }) {
       showSorterTooltip={false}
       bordered
       rowKey="_id"
+      scroll={{ x: "50%" }}
       expandable={{
         expandedRowRender: ({ descripcion }) =>
           descripcion ? (

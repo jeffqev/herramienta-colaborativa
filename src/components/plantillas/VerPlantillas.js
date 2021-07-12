@@ -36,7 +36,7 @@ function VerPlantilla({ idAsignatura }) {
     buscarPlantillasAsig(idAsignatura);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nuevocambio]);
+  }, [msg, nuevocambio]);
 
   const handleEliminar = (id) => {
     eliminarPlantilla(id);
@@ -47,7 +47,6 @@ function VerPlantilla({ idAsignatura }) {
   };
 
   const handleModificar = (id) => {
-    console.log(id);
     history.push(`/editar/plantillas/${idAsignatura}/${id}`);
     // eliminarPlantilla(id);
   };
@@ -113,6 +112,8 @@ function VerPlantilla({ idAsignatura }) {
       pagination={{ position: ["bottomCenter"] }}
       showSorterTooltip={false}
       bordered
+      style={{ marginBottom: 30 }}
+      scroll={{ x: "50%" }}
       rowKey="_id"
     />
   );

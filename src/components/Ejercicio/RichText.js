@@ -15,12 +15,12 @@ function RichText({ htmleditor, sethtmlEditor }) {
         plugins: [
           "advlist autolink lists link image charmap print preview anchor",
           "searchreplace visualblocks code fullscreen",
-          "insertdatetime media table paste code help wordcount",
+          "insertdatetime table paste code wordcount",
         ],
         toolbar: `fullscreen | undo redo | formatselect | bold italic backcolor | 
              alignleft aligncenter alignright alignjustify | 
              bullist numlist outdent indent | removeformat | charmap |
-             table | media image | searchreplace `,
+             table | image | searchreplace `,
         // paste_as_text: true,
         images_upload_handler: example_image_upload_handler,
       }}

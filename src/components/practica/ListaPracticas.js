@@ -247,7 +247,7 @@ function ListadoPracticas({ idAsignatura, tipo }) {
 
       <Table
         columns={columns}
-        style={{ marginTop: 10 }}
+        style={{ marginTop: 10, marginBottom: 30 }}
         dataSource={data.filter(
           (practica) => practica?.plantilla.asignatura === idAsignatura
         )}
@@ -256,6 +256,7 @@ function ListadoPracticas({ idAsignatura, tipo }) {
         showSorterTooltip={false}
         bordered
         rowKey="_id"
+        scroll={{ x: "50%" }}
       />
 
       <Modal

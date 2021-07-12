@@ -1,12 +1,30 @@
-import React, { useContext, useEffect } from "react";
-import { Table, Button, Tag } from "antd";
+import React, { useContext, useEffect, useState } from "react";
+import { Table, Button, Tag, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import ReferenciaContext from "../../context/referencia/referenciaContext";
 
 import BotonEliminar from "../layout/extras/BotonEliminar";
 import { autoresReferencia, stringReferencia } from "../../utils";
+import ReferenciaEditarForm from "./ReferenciaEditarForm";
 
 function VerReferencias({ idAsignatura }) {
+  // Editar referencia
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [editar, setEditar] = useState("");
+
+  // Modal editar
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   // Datos globales con useContext para usar las referencias
   const referenciaContext = useContext(ReferenciaContext);
   const {
@@ -27,9 +45,9 @@ function VerReferencias({ idAsignatura }) {
     eliminarReferencia(id);
   };
 
-  const handleModificar = (id) => {
-    console.log(id);
-    // eliminarReferencia(id);
+  const handleModificar = (values) => {
+    setEditar(values);
+    showModal();
   };
 
   const columns = [
@@ -78,7 +96,7 @@ function VerReferencias({ idAsignatura }) {
             icon={<EditOutlined />}
             size={"small"}
             onClick={() => {
-              handleModificar(refasignatura._id);
+              handleModificar(refasignatura);
             }}
           />
           <BotonEliminar
@@ -99,10 +117,31 @@ function VerReferencias({ idAsignatura }) {
         showSorterTooltip={false}
         bordered
         rowKey="_id"
+        style={{ marginBottom: 30 }}
+        scroll={{ x: "50%" }}
         expandable={{
           expandedRowRender: (referencia) => stringReferencia(referencia),
         }}
       />
+
+      <Modal
+        title="Editar Referencia"
+        centered
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={false}
+        width={345}
+      >
+        <div className="d-flex justify-content-center">
+          {editar ? (
+            <ReferenciaEditarForm
+              referenciaEditar={editar}
+              idAsignatura={idAsignatura}
+            />
+          ) : null}
+        </div>
+      </Modal>
     </>
   );
 }

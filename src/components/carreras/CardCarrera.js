@@ -3,9 +3,14 @@ import React from "react";
 import { Popconfirm } from "antd";
 import { useHistory } from "react-router-dom";
 
-import { capitalize, mostrarMsg } from "../../utils";
+import { mostrarMsg } from "../../utils";
 
-function CardCarrera({ carrera, eliminarCarrera, enviaraAsignatura }) {
+function CardCarrera({
+  carrera,
+  eliminarCarrera,
+  enviaraAsignatura,
+  handleEditar,
+}) {
   // Hook para cambiar de ventana
   const history = useHistory();
 
@@ -30,10 +35,15 @@ function CardCarrera({ carrera, eliminarCarrera, enviaraAsignatura }) {
           <div className="card-body d-grid gap-2 ">
             <h5 className="card-title text-left">
               <p className="text-center card-title-carrera mb-1">
-                {capitalize(carrera.carrera)}
+                {carrera.carrera.toUpperCase()}
               </p>
               <div className="d-flex justify-content-center">
-                <button className="btn btn-link cardcarreraeditar">
+                <button
+                  className="btn btn-link cardcarreraeditar"
+                  onClick={() => {
+                    handleEditar(carrera);
+                  }}
+                >
                   <i className="bi bi-gear"></i>
                 </button>
                 <Popconfirm

@@ -57,6 +57,22 @@ const PeriodoState = (props) => {
     }
   };
 
+  const editarPeriodo = async (id, values) => {
+    try {
+      const respuesta = await clienteAxios.put(`${PATH_PERIODO}/${id}`, values);
+
+      dispatch({
+        type: PERIODO_ELIMINAR_OK,
+        payload: { texto: respuesta?.data.msg, tipo: "info" },
+      });
+    } catch (error) {
+      dispatch({
+        type: PERIODO_ELIMINAR_ERROR,
+        payload: { texto: errorMsg(error), tipo: "error" },
+      });
+    }
+  };
+
   const eliminarPeriodo = async (id) => {
     try {
       const respuesta = await clienteAxios.delete(`${PATH_PERIODO}/${id}`);
@@ -106,6 +122,7 @@ const PeriodoState = (props) => {
         buscarPeriodos,
         eliminarPeriodo,
         activarPeriodo,
+        editarPeriodo,
         vaciarmsg,
       }}
     >

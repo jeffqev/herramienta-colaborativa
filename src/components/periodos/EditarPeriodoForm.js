@@ -2,28 +2,30 @@ import React, { useContext, useEffect } from "react";
 
 import { Form, InputNumber, Button, DatePicker } from "antd";
 import PeriodoContext from "../../context/periodo/periodoContext";
-import { mostrarMsg } from "../../utils";
 
 // Configurar data picker en español
 import moment from "moment";
 import "moment/locale/es";
 import locale from "antd/es/date-picker/locale/es_ES";
 
-function PeriodoForm() {
+function EditarPeriodoForm({ periodo }) {
   const [form] = Form.useForm();
 
   // Variables globales de periodos
   const periodoContext = useContext(PeriodoContext);
-  const { msg, crearPeriodo, vaciarmsg } = periodoContext;
+  const { editarPeriodo } = periodoContext;
 
   // Si existe un mensaje mostrarlo
   useEffect(() => {
-    if (msg) {
-      mostrarMsg(msg.texto, msg.tipo);
-      vaciarmsg();
-    }
+    form.setFieldsValue({
+      periodo: {
+        periodo: periodo?.periodo,
+        fecha: [moment(periodo?.fechainicio), moment(periodo?.fechafin)],
+      },
+    });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [msg]);
+  }, [periodo]);
 
   // Configurar Input de fecha
   const { RangePicker } = DatePicker;
@@ -39,15 +41,12 @@ function PeriodoForm() {
 
   // Validar datos y guardar en la db
   const onFinish = (values) => {
-    const { periodo } = values;
-
     const periodoEnviar = {
-      periodo: periodo.periodo,
-      fechainicio: moment(periodo.fecha[0]).format("MM/DD/YYYY"),
-      fechafin: moment(periodo.fecha[1]).format("MM/DD/YYYY"),
+      periodo: values.periodo.periodo,
+      fechainicio: moment(values.periodo.fecha[0]).format("MM/DD/YYYY"),
+      fechafin: moment(values.periodo.fecha[1]).format("MM/DD/YYYY"),
     };
-    crearPeriodo(periodoEnviar);
-    form.resetFields();
+    editarPeriodo(periodo._id, periodoEnviar);
   };
 
   return (
@@ -94,4 +93,4 @@ function PeriodoForm() {
   );
 }
 
-export default PeriodoForm;
+export default EditarPeriodoForm;

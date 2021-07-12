@@ -1,13 +1,31 @@
-import React, { useContext, useEffect } from "react";
-import { Table, Button } from "antd";
+import React, { useContext, useEffect, useState } from "react";
+import { Table, Button, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 // import { SearchOutlined } from '@ant-design/icons';
 import TemaContext from "../../context/tema/temaContext";
 
 import { capitalize } from "../../utils";
 import BotonEliminar from "../layout/extras/BotonEliminar";
+import TemaEditarForm from "./TemaEditarForm";
 
 function VerTemas({ idAsignatura }) {
+  // Editar Temas
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [editar, setEditar] = useState("");
+
+  // Modal editar
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   // Datos globales con useContext para usar las temas
   const temaContext = useContext(TemaContext);
   const {
@@ -31,9 +49,9 @@ function VerTemas({ idAsignatura }) {
     eliminarTema(id);
   };
 
-  const handleModificar = (id) => {
-    console.log(id);
-    // eliminarTema(id);
+  const handleModificar = (values) => {
+    setEditar(values);
+    showModal();
   };
 
   const columns = [
@@ -72,7 +90,7 @@ function VerTemas({ idAsignatura }) {
             icon={<EditOutlined />}
             size={"small"}
             onClick={() => {
-              handleModificar(temas._id);
+              handleModificar(temas);
             }}
           />
           <BotonEliminar id={temas._id} handleEliminar={handleEliminar} />
@@ -88,9 +106,27 @@ function VerTemas({ idAsignatura }) {
         size="small"
         pagination={{ position: ["bottomCenter"] }}
         showSorterTooltip={false}
+        style={{ marginBottom: 30 }}
+        scroll={{ x: "50%" }}
         bordered
         rowKey="_id"
       />
+
+      <Modal
+        title="Editar Tema"
+        centered
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={false}
+        width={345}
+      >
+        <div className="d-flex justify-content-center">
+          {editar ? (
+            <TemaEditarForm temaEditar={editar} idAsignatura={idAsignatura} />
+          ) : null}
+        </div>
+      </Modal>
     </>
   );
 }

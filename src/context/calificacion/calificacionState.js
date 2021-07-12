@@ -106,7 +106,6 @@ const CalificacionState = (props) => {
         `${PATH_CALIFICACION}/${id}`,
         values
       );
-      console.log(respuesta);
       dispatch({
         type: CALIFICACION_ELIMINAR_OK,
         payload: { texto: respuesta?.data.msg, tipo: "info" },

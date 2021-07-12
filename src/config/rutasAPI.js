@@ -44,3 +44,4 @@ export const PATH_PRACTICA_ASIG = "/api/practica/asignatura";
 // Reportes
 export const PATH_REPORTE_USOS = "/api/reportes/usado";
 export const PATH_REPORTE_CALIFICACION = "/api/reportes/calificacion";
+export const PATH_REPORTE_TEMA = "/api/reportes/tema";

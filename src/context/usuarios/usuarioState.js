@@ -17,6 +17,8 @@ import {
   PERFIL_BUSCAR_ERROR,
   VACIAR_MENSAJE,
   CARGANDO,
+  USUARIOID_BUSCAR_OK,
+  USUARIOID_BUSCAR_ERROR,
 } from "../../types";
 
 import { errorMsg } from "../../utils";
@@ -34,6 +36,7 @@ const UsuarioState = (props) => {
     usuarios: [],
     docentes: [],
     perfil: {},
+    usuario: null,
     cargando: false,
   };
 
@@ -129,6 +132,26 @@ const UsuarioState = (props) => {
     }
   };
 
+  const buscarUsuario = async (id) => {
+    dispatch({
+      type: CARGANDO,
+      payload: true,
+    });
+
+    try {
+      const respuesta = await clienteAxios.get(`${PATH_USUARIO}/${id}`);
+      dispatch({
+        type: USUARIOID_BUSCAR_OK,
+        payload: respuesta?.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: USUARIOID_BUSCAR_ERROR,
+        payload: { texto: errorMsg(error), tipo: "error" },
+      });
+    }
+  };
+
   const buscarDocentes = async () => {
     try {
       dispatch({
@@ -157,6 +180,7 @@ const UsuarioState = (props) => {
         nuevocambio: state.nuevocambio,
         docentes: state.docentes,
         usuariotransfer: state.usuariotransfer,
+        usuario: state.usuario,
         perfil: state.perfil,
         crearUsuario,
         buscarUsuarios,
@@ -164,6 +188,7 @@ const UsuarioState = (props) => {
         eliminarUsuario,
         buscarDocentes,
         buscarPerfil,
+        buscarUsuario,
         vaciarmsg,
       }}
     >

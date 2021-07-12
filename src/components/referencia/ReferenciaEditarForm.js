@@ -1,57 +1,50 @@
 import React, { useContext, useEffect, useState } from "react";
 
-import { Form, Input, Button, InputNumber, Radio } from "antd";
+import { Form, Input, Button, InputNumber } from "antd";
 
 import ReferenciaContext from "../../context/referencia/referenciaContext";
 
-import { mostrarMsg } from "../../utils";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 
 // import { InfoCircleOutlined } from "@ant-design/icons";
 
-function ReferenciaForm({ idAsignatura }) {
+function ReferenciaEditarForm({ idAsignatura, referenciaEditar }) {
   // Formularios de antd
 
   const [form] = Form.useForm();
-  const [tipoForm, setTipoForm] = useState("libro");
+  const [tipoForm, setTipoForm] = useState(referenciaEditar?.tipo);
   // Datos globales con useContext para usar las referencias
   const referenciaContext = useContext(ReferenciaContext);
-  const { msg, nuevocambio, vaciarmsg, crearReferencia } = referenciaContext;
+  const { editarReferencia } = referenciaContext;
 
   // Si existe un mensaje mostrarlo
   useEffect(() => {
-    if (msg) {
-      mostrarMsg(msg.texto, msg.tipo);
-      vaciarmsg();
-    }
+    form.setFieldsValue({
+      referencia: {
+        titulo: referenciaEditar?.titulo,
+        colaboradores: referenciaEditar?.colaboradores,
+        anio: referenciaEditar?.anio,
+        edicion: referenciaEditar?.edicion,
+        editorial: referenciaEditar?.editorial,
+        url: referenciaEditar?.url,
+        // padre: referenciaEditar?.padre?._id,
+      },
+    });
+    setTipoForm(referenciaEditar?.tipo);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [msg, nuevocambio]);
+  }, [referenciaEditar]);
 
   // Validar datos y guardar en la db
   const onFinish = (values) => {
     const { referencia } = values;
     referencia.asignatura = idAsignatura;
     referencia.tipo = tipoForm;
-    crearReferencia(referencia);
-    form.resetFields();
-  };
-
-  const handleTipo = (e) => {
-    setTipoForm(e.target.value);
+    editarReferencia(referenciaEditar?._id, referencia);
   };
 
   return (
     <>
-      <div>
-        Tipo:{" "}
-        <Radio.Group onChange={handleTipo} defaultValue="libro" size="small">
-          <Radio.Button value="libro">Libro</Radio.Button>
-          <Radio.Button value="web">Sitio Web</Radio.Button>
-        </Radio.Group>
-      </div>
-
-      <br />
       <Form
         form={form}
         name="referenciaform"
@@ -79,9 +72,6 @@ function ReferenciaForm({ idAsignatura }) {
             <>
               {fields.map((field, index) => (
                 <Form.Item
-                  // {...(index === 0
-                  //   ? formItemLayout
-                  //   : formItemLayoutWithOutLabel)}
                   label={index === 0 ? "Autores" : ""}
                   required={false}
                   key={field.key}
@@ -162,7 +152,7 @@ function ReferenciaForm({ idAsignatura }) {
 
         <Form.Item colon={false}>
           <Button block type="primary" htmlType="submit">
-            Agrear Referencia
+            Editar Referencia
           </Button>
         </Form.Item>
       </Form>
@@ -170,4 +160,4 @@ function ReferenciaForm({ idAsignatura }) {
   );
 }
 
-export default ReferenciaForm;
+export default ReferenciaEditarForm;

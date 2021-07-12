@@ -6,11 +6,11 @@ import AsignaturaContext from "../../context/asignatura/asignaturaContext";
 import CarreraContext from "../../context/carrera/carreraContext";
 import UsuarioContext from "../../context/usuarios/usuarioContext";
 
-import { mostrarMsg, capitalize } from "../../utils";
+import { capitalize } from "../../utils";
 
-function AsignaturaForm() {
-  const { Option } = Select;
+function AsignaturaEditarForm({ asignaturaEditar }) {
   const [form] = Form.useForm();
+  const { Option } = Select;
 
   // Datos globales con useContext para usar los usuarios
   const usuarioContext = useContext(UsuarioContext);
@@ -22,30 +22,35 @@ function AsignaturaForm() {
 
   // Datos globales con useContext para usar las asignaturas
   const asignaturaContext = useContext(AsignaturaContext);
-  const { msg, nuevocambio, crearAsignatura, vaciarmsg } = asignaturaContext;
+  const { editarAsignatura } = asignaturaContext;
 
   // Si existe un mensaje mostrarlo
   useEffect(() => {
-    if (msg) {
-      mostrarMsg(msg.texto, msg.tipo);
-      vaciarmsg();
-    }
     buscarCarreras();
     buscarDocentes();
 
+    form.setFieldsValue({
+      asignatura: {
+        codigo: asignaturaEditar?.codigo,
+        nombre: asignaturaEditar?.nombre,
+        carrera: asignaturaEditar?.carrera?._id,
+        coordinador: asignaturaEditar?.coordinador?._id,
+        docentes: asignaturaEditar?.docentes.map((docente) => docente?._id),
+      },
+    });
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [msg, nuevocambio]);
+  }, [asignaturaEditar]);
 
   // Validar datos y guardar en la db
   const onFinish = (values) => {
     const { asignatura } = values;
-    crearAsignatura(asignatura);
-    form.resetFields();
+    editarAsignatura(asignaturaEditar?._id, asignatura);
   };
   return (
     <Form
-      form={form}
       name="asignaturaform"
+      form={form}
       onFinish={onFinish}
       layout="vertical"
     >
@@ -126,11 +131,11 @@ function AsignaturaForm() {
 
       <Form.Item colon={false}>
         <Button block type="primary" htmlType="submit">
-          Agrear Asignatura
+          Editar Asignatura
         </Button>
       </Form.Item>
     </Form>
   );
 }
 
-export default AsignaturaForm;
+export default AsignaturaEditarForm;

@@ -12,6 +12,7 @@
 
 # production
 /build
+/herramienta-colaborativa-ui
 
 # misc
 .DS_Store

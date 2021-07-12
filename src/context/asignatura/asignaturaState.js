@@ -96,6 +96,25 @@ const AsignaturaState = (props) => {
     }
   };
 
+  const editarAsignatura = async (id, values) => {
+    try {
+      const respuesta = await clienteAxios.put(
+        `${PATH_ASIGNATURA}/${id}`,
+        values
+      );
+
+      dispatch({
+        type: ASIGNATURA_ELIMINAR_OK,
+        payload: { texto: respuesta?.data.msg, tipo: "info" },
+      });
+    } catch (error) {
+      dispatch({
+        type: ASIGNATURA_ELIMINAR_ERROR,
+        payload: { texto: errorMsg(error), tipo: "error" },
+      });
+    }
+  };
+
   const eliminarAsignatura = async (id) => {
     try {
       const respuesta = await clienteAxios.delete(`${PATH_ASIGNATURA}/${id}`);
@@ -148,6 +167,7 @@ const AsignaturaState = (props) => {
         crearAsignatura,
         buscarAsignaturas,
         eliminarAsignatura,
+        editarAsignatura,
         docentesAsignatura,
         buscarAsignaturasCoordinador,
         buscarAsignaturasDocente,

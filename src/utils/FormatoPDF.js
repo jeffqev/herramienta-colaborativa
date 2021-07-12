@@ -1,4 +1,4 @@
-import { capitalize, textReferencia } from ".";
+import { capitalize, eliminarReferenciasDuplicado, textReferencia } from ".";
 
 function listLI(array, style = false) {
   let res = "";
@@ -61,12 +61,18 @@ function listEjercicio(array, solution = false) {
 
 function listRef(array) {
   let res = "";
+  const arrayReferencia = [];
+
   array.forEach((e) => {
-    e.referencia.forEach((a) => {
-      res += `<li>${textReferencia(a)}</li>`;
+    e.referencia.forEach((referencia) => {
+      arrayReferencia.push(referencia);
     });
   });
 
+  const arraySinDuplicados = eliminarReferenciasDuplicado(arrayReferencia);
+  arraySinDuplicados.map(
+    (referencia) => (res += `<li>${textReferencia(referencia)}</li>`)
+  );
   return res;
 }
 
@@ -75,7 +81,9 @@ export function docHeader(datos, solution = false) {
     <table style="border-collapse: collapse; width: 100%;" border="0">
       <tbody>
         <tr>
-          <td style="width: 31.5146%;"><img src="https://www.ups.edu.ec/ups_portal-theme/images/ups/home/logo-ups-home.png" alt="" width="300" height="81" /></td>
+          <td style="width: 31.5146%;"><img src="${
+            process.env.REACT_APP_BACKEND_URL
+          }/images/logo-ups.png" alt="" width="300" height="81" /></td>
           <td style="width: 31.2285%; text-align: center;">
             <p><strong>VICERRECTORADO DOCENTE</strong></p>
             <p>CONSEJO ACADEMICO</p>
@@ -131,7 +139,7 @@ export function docHeader(datos, solution = false) {
     <ol>
       ${listLI(datos.plantilla.resultados)}
     </ol>
-    <p><strong>CONCLUCIONES:</strong></p>
+    <p><strong>CONCLUSIONES:</strong></p>
     <ol>
       <li>Generar al menos una conclus&iacute;on de la pr&aacute;ctica desarrollada</li>
     </ol>
@@ -139,7 +147,9 @@ export function docHeader(datos, solution = false) {
     <ol>
       ${listRef(datos.ejercicios)}
     </ol>
-    <p>Claustro Docente de Programaci&oacute;n - Quito</p>
+    <p>Claustro Docente de ${capitalize(
+      datos.plantilla?.asignatura?.nombre
+    )} - Quito</p>
     <p>&nbsp;</p>
     <p>&nbsp;</p>
     <p>Firma:____________________________</p>

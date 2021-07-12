@@ -63,17 +63,13 @@ function Practica() {
         if (!busquedaDocente) {
           history.push(`/dashboard`);
         } else {
-          console.log("entro c");
           setAsignatura(busquedaDocente);
-          console.log(practica);
           buscarPracticaID(idpractica);
 
           // setTipo("docente");
         }
       } else {
-        console.log("entro d");
         setAsignatura(busqueda);
-        console.log(practica);
         buscarPracticaID(idpractica);
         // setTipo("coordinador");
       }

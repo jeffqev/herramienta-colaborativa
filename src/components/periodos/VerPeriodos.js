@@ -1,11 +1,30 @@
-import React, { useContext, useEffect } from "react";
-import { Table, Tag } from "antd";
+import React, { useContext, useEffect, useState } from "react";
+import { Button, Modal, Table, Tag } from "antd";
 import moment from "moment";
 import PeriodoContext from "../../context/periodo/periodoContext";
 import "moment/locale/es";
 import BotonEliminar from "../layout/extras/BotonEliminar";
+import { EditOutlined } from "@ant-design/icons";
+import EditarPeriodoForm from "./EditarPeriodoForm";
 
 function VerPeriodos() {
+  // Editar Periodo
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [editar, setEditar] = useState("");
+
+  // Modal editar
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   // Variables globales de periodos
   const periodoContext = useContext(PeriodoContext);
   const {
@@ -29,6 +48,11 @@ function VerPeriodos() {
 
   const handleEliminar = (id) => {
     eliminarPeriodo(id);
+  };
+
+  const handleModificar = (values) => {
+    setEditar(values);
+    showModal();
   };
 
   const columns = [
@@ -69,6 +93,17 @@ function VerPeriodos() {
               >
                 ACTIVAR
               </Tag>
+              <Button
+                type="link"
+                style={{ padding: 0, marginRight: 5 }}
+                shape="round"
+                icon={<EditOutlined />}
+                size={"small"}
+                onClick={() => {
+                  handleModificar(periodo);
+                }}
+              />
+
               <BotonEliminar handleEliminar={handleEliminar} id={periodo._id} />
             </>
           )}
@@ -81,12 +116,28 @@ function VerPeriodos() {
       <Table
         columns={columns}
         dataSource={periodos}
+        style={{ marginBottom: 30 }}
+        scroll={{ x: "50%" }}
         size="small"
         pagination={{ position: ["topCenter"] }}
         showSorterTooltip={false}
         bordered
         rowKey="_id"
       />
+
+      <Modal
+        title="Editar Periodo"
+        centered
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={false}
+        width={345}
+      >
+        <div className="d-flex justify-content-center">
+          {editar ? <EditarPeriodoForm periodo={editar} /> : null}
+        </div>
+      </Modal>
     </>
   );
 }

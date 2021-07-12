@@ -12,9 +12,12 @@ import {
   REPORTE_USOS_ERROR,
   CARGANDO,
   VACIAR_MENSAJE,
+  REPORTE_TEMAS_OK,
+  REPORTE_TEMAS_ERROR,
 } from "../../types";
 import {
   PATH_REPORTE_CALIFICACION,
+  PATH_REPORTE_TEMA,
   PATH_REPORTE_USOS,
 } from "../../config/rutasAPI";
 
@@ -24,6 +27,7 @@ const ReporteState = (props) => {
     nuevocambio: false,
     reporteCalificacion: [],
     reporteUsos: [],
+    reporteTemas: [],
   };
 
   const [state, dispatch] = useReducer(ReporteReducer, initialState);
@@ -80,6 +84,26 @@ const ReporteState = (props) => {
     }
   };
 
+  const buscarReporteTema = async (id) => {
+    dispatch({
+      type: CARGANDO,
+    });
+
+    try {
+      const respuesta = await clienteAxios.get(`${PATH_REPORTE_TEMA}/${id}`);
+
+      dispatch({
+        type: REPORTE_TEMAS_OK,
+        payload: respuesta?.data.data,
+      });
+    } catch (error) {
+      dispatch({
+        type: REPORTE_TEMAS_ERROR,
+        payload: { texto: errorMsg(error), tipo: "error" },
+      });
+    }
+  };
+
   const vaciarmsg = async () => {
     dispatch({
       type: VACIAR_MENSAJE,
@@ -94,9 +118,11 @@ const ReporteState = (props) => {
         nuevocambio: state.nuevocambio,
         reporteCalificacion: state.reporteCalificacion,
         reporteUsos: state.reporteUsos,
+        reporteTemas: state.reporteTemas,
 
         buscarReporteCalificacion,
         buscarReporteUsos,
+        buscarReporteTema,
         vaciarmsg,
       }}
     >

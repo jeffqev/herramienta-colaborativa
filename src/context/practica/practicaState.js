@@ -86,7 +86,6 @@ const PracticaState = (props) => {
     });
     try {
       const respuesta = await clienteAxios.get(`${PATH_PRACTICA}/` + id);
-      console.log(respuesta);
       dispatch({
         type: PRACTICA_ID_BUSCAR_OK,
         payload: respuesta?.data.data,

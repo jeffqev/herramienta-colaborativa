@@ -13,7 +13,6 @@ function DocenteEditarPassword({ usuarioEditar, editarUsuario }) {
       return;
     }
     delete usuario["contrasena2"];
-    console.log(usuario);
     editarUsuario(usuarioEditar._id, usuario);
   };
   return (

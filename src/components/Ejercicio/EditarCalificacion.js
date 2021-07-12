@@ -15,21 +15,8 @@ function EditarCalificacion({ idEjercicio }) {
 
   useEffect(() => {
     buscarCalificaciones(idEjercicio);
-    console.log(calificacion);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [msg, nuevocambio]);
-
-  // Validar datos y guardar en la db
-  // const onFinish = (values) => {
-  //   const { calificacion } = values;
-  //   calificacion.ejercicio = idEjercicio;
-  //   crearCalificacion(calificacion);
-  //   // form.resetFields();
-  // };
-
-  // const handleChange = (value) => {
-  //   console.log(value);
-  // };
 
   return (
     <>

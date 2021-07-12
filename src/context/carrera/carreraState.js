@@ -59,6 +59,22 @@ const CarreraState = (props) => {
     }
   };
 
+  const editarCarrera = async (id, values) => {
+    try {
+      const respuesta = await clienteAxios.put(`${PATH_CARRERA}/${id}`, values);
+
+      dispatch({
+        type: CARRERA_ELIMINAR_OK,
+        payload: { texto: respuesta?.data.msg, tipo: "info" },
+      });
+    } catch (error) {
+      dispatch({
+        type: CARRERA_ELIMINAR_ERROR,
+        payload: { texto: errorMsg(error), tipo: "error" },
+      });
+    }
+  };
+
   const eliminarCarrera = async (id) => {
     try {
       const respuesta = await clienteAxios.delete(`${PATH_CARRERA}/${id}`);
@@ -107,6 +123,7 @@ const CarreraState = (props) => {
         crearCarrera,
         buscarCarreras,
         eliminarCarrera,
+        editarCarrera,
         vaciarmsg,
         enviaraAsignatura,
       }}

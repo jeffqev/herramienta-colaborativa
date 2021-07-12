@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from "react";
-import { Table, Tag, Button } from "antd";
+import React, { useContext, useEffect, useState } from "react";
+import { Table, Tag, Button, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 // import { SearchOutlined } from '@ant-design/icons';
 import AsignaturaContext from "../../context/asignatura/asignaturaContext";
@@ -7,8 +7,26 @@ import CarreraContext from "../../context/carrera/carreraContext";
 
 import { capitalize } from "../../utils";
 import BotonEliminar from "../layout/extras/BotonEliminar";
+import AsignaturaEditarForm from "./AsignaturaEditarForm";
 
 function VerAsignaturas() {
+  // Editar Asignatura
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [editar, setEditar] = useState("");
+
+  // Modal editar
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleOk = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
   // Datos globales con useContext para usar las asignaturas
   const asignaturaContext = useContext(AsignaturaContext);
   const {
@@ -33,9 +51,9 @@ function VerAsignaturas() {
     eliminarAsignatura(id);
   };
 
-  const handleModificar = (id) => {
-    console.log(id);
-    // eliminarAsignatura(id);
+  const handleModificar = (values) => {
+    setEditar(values);
+    showModal();
   };
 
   const columns = [
@@ -82,7 +100,7 @@ function VerAsignaturas() {
             icon={<EditOutlined />}
             size={"small"}
             onClick={() => {
-              handleModificar(asignaturas._id);
+              handleModificar(asignaturas);
             }}
           />
           <BotonEliminar id={asignaturas._id} handleEliminar={handleEliminar} />
@@ -96,6 +114,8 @@ function VerAsignaturas() {
         columns={columns}
         dataSource={asignaturas}
         size="small"
+        style={{ marginBottom: 30 }}
+        scroll={{ x: "50%" }}
         pagination={{ position: ["topCenter"] }}
         showSorterTooltip={false}
         expandable={{
@@ -118,6 +138,20 @@ function VerAsignaturas() {
         bordered
         rowKey="_id"
       />
+
+      <Modal
+        title="Editar Asignatura"
+        centered
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={false}
+        width={345}
+      >
+        <div className="d-flex justify-content-center">
+          {editar ? <AsignaturaEditarForm asignaturaEditar={editar} /> : null}
+        </div>
+      </Modal>
     </>
   );
 }
