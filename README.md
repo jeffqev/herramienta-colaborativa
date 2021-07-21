@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Proyecto
+ 
+Este proyecto es solo la parte visual del Proyecto técnico para crear una herramienta colaborativa en Internet que permita gestionar las prácticas de laboratorio del claustro docente de la Universidad Politécnica Salesiana. 
+ 
+También puede revisar la lógica de negocio en el repositorio del API [ Herramienta colaborativa API ](https://github.com/jeffqev/herramienta-colaborativa-api).
+ 
+Si se desea entender mejor como fue contruido el proyecto, cada modulo realizado cuenta con su tarjeta en el [ tablero kanban ](https://github.com/jeffqev/herramienta-colaborativa/projects/1) cada tarjeta esta asociada a un pull request donde esta descrito lo que se hace y el codigo que fue modificado
+## Pre requisitos para levantar el proyecto
+ 
+Para levantar el proyecto correctamente es recomendable primero levantar localmente el API del proyecto [ Herramienta colaborativa API ](https://github.com/jeffqev/herramienta-colaborativa-api). o ya tener el API desplegada en algun servidor
+ 
+El proyecto fue desarrollado en la versión de node v14.15.1 sin embargo se ha probado que funciona correctamente en versiones mayores a 12.0.0
+ 
+Para que funcione correctamente es necesario tener las siguientes variables de entorno en un archivo `.env.development.local`
+ 
+```
+* REACT_APP_BACKEND_URL=https://localhost:3001
+* REACT_APP_RICHTEXT_KEY=ey98xxxxxxxxxxxxx
+```
+ 
+Descripción: 
+* REACT_APP_BACKEND_URL: Debe contener el url del proyecto del API
+* REACT_APP_RICHTEXT_KEY= Debe contener el token que brinda [ tinymce ](https://www.tiny.cloud/) en el dashboard al crear una cuenta
+ 
+ 
+### Levantar el proyecto
+ 
+* `npm install`
+* `npm start`
+ 
+### Desplegar el aplicativo
+ 
+**tener las variables de entorno descritas en los pre requisitos copiadas en el archivo `.env.production.local` tomando en cuenta que serán los datos de producción**
+ 
+```
+REACT_APP_BACKEND_URL=https://quicklab-api.grupoia.ec
+REACT_APP_RICHTEXT_KEY=ey98xxxxxxxxxxxxx
+```
+ 
+Escribimos el comando 
+ 
+* `npm run build`
+ 
+Esto generar una carpeta llamada build la podemos renombrar por `herramienta-colaborativa-ui` y estará lista para ser servida en cualquier servidor 
+ 
+**NOTE: si desea servir el build en nginx necesita especificar try_files de la siguiente forma para que no haya problema con las rutas de react router doom**
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+```
+server {
 
-In the project directory, you can run:
+        root /home/quicklab/herramienta-colaborativa-ui;
+        index index.html index.htm index.nginx-debian.html;
 
-### `npm start`
+        server_name quicklab.grupoia.ec;
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+        location / {
+                try_files $uri /index.html;
+        }
+}
+```
