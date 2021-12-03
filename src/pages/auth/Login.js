@@ -13,12 +13,8 @@ export default function Login(props) {
 
   // Datos globales con useContext para la informacion de autenticación
   const authaContext = useContext(AuthContext);
-  const {
-    iniciarSesion,
-    usuarioAutenticado,
-    autenticado,
-    mensaje,
-  } = authaContext;
+  const { iniciarSesion, usuarioAutenticado, autenticado, mensaje } =
+    authaContext;
 
   useEffect(() => {
     // Si cuenta con un token en el localstorage verificar si es uno correcto
@@ -71,7 +67,7 @@ export default function Login(props) {
           <div className="card-header">
             <img
               className="img-fluid mx-auto d-block"
-              src="https://quicklab-api.grupoia.ec/images/logo-ups.png"
+              src="https://res.cloudinary.com/datqjnyvk/image/upload/v1638494263/logo-ups-home_dxcazn.png"
               alt=""
             />
           </div>
