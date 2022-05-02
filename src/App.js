@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -23,94 +23,88 @@ import ejercicioEditar from "./pages/docentes/ejercicios/ejercicioEditar";
 import Practicas from "./pages/docentes/practica";
 import PracticaNueva from "./pages/docentes/practica/practicaNueva";
 import Practica from "./pages/docentes/practica/practica";
-
-// import Practicas from "./components/practicas";
-// import PracticaForm from "./components/practicas/PracticaForm";
-// import GestionarPractica from "./components/practicas/GestionarPractica";
-// import Practica from "./components/practicas/Practica";
+import Recovery from './pages/auth/Recovery';
+import Input from './pages/auth/InputCode';
+import NewPassword from './pages/auth/NewPassword';
 
 import tokenAuth from "./config/token";
 import RutaPrivada from "./privado/RutaPrivada";
 import Context from "./context";
 import NotFound from "./components/layout/NotFound";
 
+import recoveryContext from "./context/auth/recoveryContext";
+import useRecovery from './context/auth/recoveryState';
+
 // Si se encuentra logueado al recargar la pagina
 const token = localStorage.getItem("token");
 if (token) {
-  tokenAuth(token);
+    tokenAuth(token);
 }
 
 function App() {
-  return (
-    <Context>
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Login} />
-          <RutaPrivada exact path="/usuarios" component={Usuarios} />
-          <RutaPrivada exact path="/carreras" component={Carreras} />
-          <RutaPrivada exact path="/periodos" component={Periodos} />
-          <RutaPrivada exact path="/asignaturas" component={Asignaturas} />
+    const initialState = useRecovery();
+    return (
+        <Context>
+            <Router>
+                <Switch>
+                    <Route exact path="/" component={Login}/>
+                    <RutaPrivada exact path="/usuarios" component={Usuarios}/>
+                    <RutaPrivada exact path="/carreras" component={Carreras}/>
+                    <RutaPrivada exact path="/periodos" component={Periodos}/>
+                    <RutaPrivada exact path="/asignaturas" component={Asignaturas}/>
 
-          <RutaPrivada exact path="/asignatura/:id" component={Asignatura} />
-          <RutaPrivada exact path="/dashboard" component={Dashboard} />
+                    <RutaPrivada exact path="/asignatura/:id" component={Asignatura}/>
+                    <RutaPrivada exact path="/dashboard" component={Dashboard}/>
 
-          <RutaPrivada exact path="/temas/:id" component={Temas} />
-          <RutaPrivada exact path="/referencias/:id" component={Referencias} />
-          <RutaPrivada exact path="/plantillas/:id" component={Plantillas} />
-          <RutaPrivada
-            exact
-            path="/plantillas/:id/:idplantilla"
-            component={Plantilla}
-          />
+                    <RutaPrivada exact path="/temas/:id" component={Temas}/>
+                    <RutaPrivada exact path="/referencias/:id" component={Referencias}/>
+                    <RutaPrivada exact path="/plantillas/:id" component={Plantillas}/>
+                    <RutaPrivada
+                        exact
+                        path="/plantillas/:id/:idplantilla"
+                        component={Plantilla}
+                    />
 
-          <RutaPrivada
-            exact
-            path="/editar/plantillas/:id/:idplantilla"
-            component={PlantillaEditar}
-          />
+                    <RutaPrivada
+                        exact
+                        path="/editar/plantillas/:id/:idplantilla"
+                        component={PlantillaEditar}
+                    />
 
-          <RutaPrivada exact path="/ejercicios/:id" component={Ejercicios} />
-          <RutaPrivada
-            exact
-            path="/ejercicios/:id/:idejercicio"
-            component={Ejercicio}
-          />
-          <RutaPrivada
-            exact
-            path="/editar/ejercicios/:id/:idejercicio"
-            component={ejercicioEditar}
-          />
+                    <RutaPrivada exact path="/ejercicios/:id" component={Ejercicios}/>
+                    <RutaPrivada
+                        exact
+                        path="/ejercicios/:id/:idejercicio"
+                        component={Ejercicio}
+                    />
+                    <RutaPrivada
+                        exact
+                        path="/editar/ejercicios/:id/:idejercicio"
+                        component={ejercicioEditar}
+                    />
 
-          <RutaPrivada exact path="/practicas/:id" component={Practicas} />
-          <RutaPrivada
-            exact
-            path="/nueva/practica/:id"
-            component={PracticaNueva}
-          />
-          <RutaPrivada
-            exact
-            path="/practica/:id/:idpractica/:tipopractica"
-            component={Practica}
-          />
+                    <RutaPrivada exact path="/practicas/:id" component={Practicas}/>
+                    <RutaPrivada
+                        exact
+                        path="/nueva/practica/:id"
+                        component={PracticaNueva}
+                    />
+                    <RutaPrivada
+                        exact
+                        path="/practica/:id/:idpractica/:tipopractica"
+                        component={Practica}
+                    />
+                    <recoveryContext.Provider value={initialState}>
+                        <Route exact path="/recovery" component={Recovery}/>
+                        <Route exact path="/input" component={Input}/>
+                        <Route exact path="/newPassword" component={NewPassword}/>
+                    </recoveryContext.Provider>
 
-          {/* <RutaPrivada exact path="/practicas" component={Practicas} />
-          <RutaPrivada exact path="/practicas/:id" component={Practica} />
-          <RutaPrivada
-            exact
-            path="/gestionar/practicas/:id"
-            component={PracticaForm}
-          />
-          <RutaPrivada
-            exact
-            path="/gestionar/practicas"
-            component={GestionarPractica}
-          /> */}
-
-          <Route component={NotFound} />
-        </Switch>
-      </Router>
-    </Context>
-  );
+                    <Route component={NotFound}/>
+                </Switch>
+            </Router>
+        </Context>
+    );
 }
 
 export default App;

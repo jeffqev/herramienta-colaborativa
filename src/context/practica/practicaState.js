@@ -37,6 +37,7 @@ const PracticaState = (props) => {
   const [state, dispatch] = useReducer(PracticaReducer, initialState);
 
   const crearPractica = async (datos) => {
+    console.log(datos,'aaaaaaaaa')
     dispatch({
       type: LIMPIAR_PRACTICA_CREADA,
     });

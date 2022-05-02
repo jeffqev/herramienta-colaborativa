@@ -82,6 +82,7 @@ const UsuarioState = (props) => {
   };
 
   const editarUsuario = async (id, values) => {
+    console.log(values, 'aaaaaa')
     try {
       const respuesta = await clienteAxios.put(`${PATH_USUARIO}/${id}`, values);
 

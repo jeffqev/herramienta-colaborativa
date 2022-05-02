@@ -45,3 +45,6 @@ export const PATH_PRACTICA_ASIG = "/api/practica/asignatura";
 export const PATH_REPORTE_USOS = "/api/reportes/usado";
 export const PATH_REPORTE_CALIFICACION = "/api/reportes/calificacion";
 export const PATH_REPORTE_TEMA = "/api/reportes/tema";
+
+//Restablecer contraseña
+export const PATH_RESTABLECER_CONTRASENA = 'api/recovery';
