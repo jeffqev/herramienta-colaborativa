@@ -1,4 +1,4 @@
-import {Col, Row, Typography, Collapse, Tag, Tabs, Alert, Form, Rate} from "antd";
+import {Col, Row, Typography, Collapse, Tag, Tabs, Alert} from "antd";
 import React, {useContext, useEffect} from "react";
 import {useHistory} from "react-router";
 import htmlParce from "react-html-parser";
