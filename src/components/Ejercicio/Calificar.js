@@ -15,12 +15,7 @@ function Calificar({ idEjercicio }) {
     const { calificacion } = values;
     calificacion.ejercicio = idEjercicio;
     crearCalificacion(calificacion);
-    // form.resetFields();
   };
-
-  // const handleTipo = (e) => {
-  //   setTipoForm(e.target.value);
-  // };
 
   return (
     <>

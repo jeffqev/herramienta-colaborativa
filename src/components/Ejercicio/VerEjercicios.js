@@ -35,8 +35,6 @@ function VerEjercicio({idAsignatura, idusuario, tipo}) {
         editarEjercicio,
     } = ejercicioContext;
 
-    console.log(ejercicios, "ejercicios")
-
     // Si hay cambios volver a hacer la consulta
     useEffect(() => {
         if (msg) {
@@ -67,6 +65,12 @@ function VerEjercicio({idAsignatura, idusuario, tipo}) {
     };
 
     const columns = [
+        {
+            title: "Periodo",
+            dataIndex: "periodo",
+            key: "periodo",
+            render: (periodo) => periodo.periodo,
+        },
         {
             title: "Titulo",
             dataIndex: "titulo",
@@ -101,8 +105,6 @@ function VerEjercicio({idAsignatura, idusuario, tipo}) {
             dataIndex: "docente",
             key: "docente",
             filterMultiple: false,
-            onFilter: (value, record) =>
-                setTipoEjercicio(record.apellido + record.nombre).texto.indexOf(value) === 0,
             render: (docente) => capitalize(`${docente.nombre.split(' ')[0]} ${docente.apellido[0]}.`),
         },
 
@@ -130,6 +132,12 @@ function VerEjercicio({idAsignatura, idusuario, tipo}) {
                     defaultValue={SumPuntaje(calificacion) / calificacion.length}
                 />
             ),
+        },
+        {
+            title: "Comentario",
+            dataIndex: "comentario",
+            key: "comentario",
+            render: (comentario) => comentario,
         },
         {
             title: "Tipo",
