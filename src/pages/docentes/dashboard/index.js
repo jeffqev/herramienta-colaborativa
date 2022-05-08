@@ -1,57 +1,55 @@
-import React, { useContext, useEffect } from "react";
+import React, {useContext, useEffect} from "react";
 
 import AuthContext from "../../../context/auth/authContext";
 import AntHeader from "../../../components/layout/AntHeader";
 
 import Header from "../../../components/layout/Header";
-// import Nav from "../../../components/layout/Nav";
 import VerCoordinador from "../../../components/coordinador/VerCoordinador";
-import { useHistory } from "react-router";
+import {useHistory} from "react-router";
 
 function Coordinador() {
-  const authContext = useContext(AuthContext);
-  const { usuario, usuarioAutenticado } = authContext;
+    const authContext = useContext(AuthContext);
+    const {usuario, usuarioAutenticado} = authContext;
 
-  const history = useHistory();
-  useEffect(() => {
-    if (usuario) {
-      if (usuario?.rol === "administrador") {
-        history.push("/usuarios");
-      } else if (!usuario?.rol) {
-        history.push("/");
-      }
-    } else {
-      usuarioAutenticado();
-    }
+    const history = useHistory();
+    useEffect(() => {
+        if (usuario) {
+            if (usuario?.rol === "administrador") {
+                history.push("/usuarios");
+            } else if (!usuario?.rol) {
+                history.push("/");
+            }
+        } else {
+            usuarioAutenticado();
+        }
 
-    // eslint-disable-next-line
-  }, [usuarioAutenticado]);
+        // eslint-disable-next-line
+    }, [usuarioAutenticado]);
 
-  if (!usuario) return null;
+    if (!usuario) return null;
 
-  return (
-    <>
-      <Header />
-      {/* <Nav activa={"coordinar"} /> */}
+    return (
+        <>
+            <Header/>
 
-      <div className="container-fluid">
-        <div className="row">
-          <main className="">
-            <div className="row">
-              <AntHeader
-                titulo={"Dashboard"}
-                subtitulo={"Asignaturas a las que pertenece"}
-              />
+            <div className="container-fluid">
+                <div className="row">
+                    <main className="">
+                        <div className="row">
+                            <AntHeader
+                                titulo={"Dashboard"}
+                                subtitulo={"Asignaturas a las que pertenece"}
+                            />
 
-              <div className="col-md-12 mt-4">
-                <VerCoordinador />
-              </div>
+                            <div className="col-md-12 mt-4">
+                                <VerCoordinador/>
+                            </div>
+                        </div>
+                    </main>
+                </div>
             </div>
-          </main>
-        </div>
-      </div>
-    </>
-  );
+        </>
+    );
 }
 
 export default Coordinador;
