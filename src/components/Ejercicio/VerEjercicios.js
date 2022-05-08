@@ -70,6 +70,7 @@ function VerEjercicio({idAsignatura, idusuario, tipo}) {
             dataIndex: "periodo",
             key: "periodo",
             render: (periodo) => periodo.periodo,
+            sorter: (a, b) => a.periodo?.periodo - b.periodo?.periodo,
         },
         {
             title: "Titulo",
