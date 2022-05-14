@@ -15,6 +15,7 @@ import {
 import MiCalificacion from "./MiCalificacion";
 import VerCalificacion from "./VerCalificacion";
 import ComentarioEjercicio from './ComentarioEjercicio';
+import ComentariosEjercicio from "./ComentariosEjercicio";
 
 function EjercicioInfo({id}) {
     const {Text} = Typography;
@@ -51,8 +52,8 @@ function EjercicioInfo({id}) {
                                 <table style={{width: "100%"}}>
                                     <tbody>
                                     <tr>
-                                        <th></th>
-                                        <th></th>
+                                        <th/>
+                                        <th/>
                                     </tr>
                                     <tr>
                                         <td>
@@ -88,6 +89,14 @@ function EjercicioInfo({id}) {
                                             <Text>{capitalize(ejercicio.tema?.nombre)}</Text>
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td>
+                                            <Text strong>Docente creación: </Text>
+                                        </td>
+                                        <td>
+                                            <Text>{capitalize(ejercicio.docente.nombre)} {capitalize(ejercicio.docente.apellido)}</Text>
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </Col>
@@ -100,9 +109,15 @@ function EjercicioInfo({id}) {
                                         <MiCalificacion idEjercicio={id}/>
                                     </Tabs.TabPane>
                                 </Tabs>
-                            </Col>
-                            <Col md={12} style={{marginTop: 2}}>
-                                <ComentarioEjercicio data={{id, comentario: ejercicio.comentario}}/>
+
+                                <Tabs defaultActiveKey="1">
+                                    <Tabs.TabPane tab="Comentarios" key="1">
+                                        <ComentariosEjercicio idEjercicio={id}/>
+                                    </Tabs.TabPane>
+                                    <Tabs.TabPane tab="Mi Comentario" key="2">
+                                        <ComentarioEjercicio data={{id}}/>
+                                    </Tabs.TabPane>
+                                </Tabs>
                             </Col>
                         </Row>
                         <Collapse defaultActiveKey={["1"]}>

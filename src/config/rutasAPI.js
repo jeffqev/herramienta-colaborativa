@@ -48,3 +48,6 @@ export const PATH_REPORTE_TEMA = "/api/reportes/tema";
 
 //Restablecer contraseña
 export const PATH_RESTABLECER_CONTRASENA = 'api/recovery';
+
+//comentarios
+export const PATH_COMENTARIO = "/api/comentario";

@@ -2,7 +2,7 @@ import {Button, Col, Row} from "antd";
 import TextArea from "antd/es/input/TextArea";
 import {useState} from "react";
 import Text from "antd/lib/typography/Text";
-import {PATH_EJERCICIO} from "../../config/rutasAPI";
+import {PATH_COMENTARIO} from "../../config/rutasAPI";
 import clienteAxios from "../../config/axios";
 import {mostrarMsg} from "../../utils";
 
@@ -13,14 +13,14 @@ const ComentarioEjercicio = (data) => {
     };
     const handleInsertComentario = async () => {
         let dataToUpdate = {
-            comentario
+            comentario,
+            ejercicio: data.data.id
         };
 
         try {
-            await clienteAxios.put(`${PATH_EJERCICIO}/${data.data.id}`, dataToUpdate);
+            await clienteAxios.post(`${PATH_COMENTARIO}/`, dataToUpdate);
             mostrarMsg("Añadir comentario", "success");
         } catch (error) {
-            console.log(error.response.data.msg);
             mostrarMsg("Añadir comentario", "error");
         }
     };
@@ -32,7 +32,7 @@ const ComentarioEjercicio = (data) => {
                     <TextArea
                         onChange={handleChange}
                         placeholder="Escribe aquí tu comentario"
-                        defaultValue={data.data.comentario}
+                        //defaultValue={data.data.comentario}
                     />
                 </Col>
             </Row>

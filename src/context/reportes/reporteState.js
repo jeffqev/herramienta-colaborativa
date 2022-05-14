@@ -41,6 +41,7 @@ const ReporteState = (props) => {
       const respuesta = await clienteAxios.get(
         `${PATH_REPORTE_CALIFICACION}/${id}`
       );
+
       dispatch({
         type: REPORTE_CALIFICACIONES_OK,
         payload: respuesta?.data.data,
