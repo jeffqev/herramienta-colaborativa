@@ -64,7 +64,7 @@ const ComentarioEjercicio = (data) => {
                         </Col>
                         :
                         <Col style={{marginTop: 2}}>
-                            <Button type="primary" onClick={handleInsertComentario}>
+                            <Button type="primary" onClick={handleInsertComentario} disabled={comentario === ''}>
                                 Agrear Comentario
                             </Button>
                         </Col>

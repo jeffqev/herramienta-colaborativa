@@ -135,12 +135,6 @@ function VerEjercicio({idAsignatura, idusuario, tipo}) {
             ),
         },
         {
-            title: "Comentario",
-            dataIndex: "comentario",
-            key: "comentario",
-            render: (comentario) => comentario,
-        },
-        {
             title: "Tipo",
             dataIndex: "evaluacion",
             key: "evaluacion",

@@ -78,7 +78,6 @@ function ListadoPracticas({ idAsignatura, tipo }) {
   };
 
   const handleEliminar = (id) => {
-    // eliminarPlantilla(id);
     eliminarPractica(id);
   };
 
