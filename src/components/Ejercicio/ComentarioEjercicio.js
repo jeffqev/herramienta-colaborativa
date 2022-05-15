@@ -7,23 +7,41 @@ import clienteAxios from "../../config/axios";
 import {mostrarMsg} from "../../utils";
 
 const ComentarioEjercicio = (data) => {
+
     const [comentario, setComentario] = useState('');
+
+
     const handleChange = (e) => {
         setComentario(e.target.value);
     };
     const handleInsertComentario = async () => {
+        let dataToCreate = {
+            comentario,
+            ejercicio: data.data.id
+        };
+
+        try {
+            await clienteAxios.post(`${PATH_COMENTARIO}/`, dataToCreate);
+            mostrarMsg("Añadir comentario", "success");
+        } catch (error) {
+            mostrarMsg("Añadir comentario", "error");
+        }
+    };
+
+    const handleUpdateComentario = async () => {
         let dataToUpdate = {
             comentario,
             ejercicio: data.data.id
         };
 
         try {
-            await clienteAxios.post(`${PATH_COMENTARIO}/`, dataToUpdate);
-            mostrarMsg("Añadir comentario", "success");
+            await clienteAxios.put(`${PATH_COMENTARIO}/${data.data.miComentarioId}`, dataToUpdate);
+            mostrarMsg("Actualizar comentario", "success");
         } catch (error) {
-            mostrarMsg("Añadir comentario", "error");
+            mostrarMsg("Actualizar comentario", "error");
         }
     };
+
     return (
         <>
             <Row>
@@ -32,16 +50,25 @@ const ComentarioEjercicio = (data) => {
                     <TextArea
                         onChange={handleChange}
                         placeholder="Escribe aquí tu comentario"
-                        //defaultValue={data.data.comentario}
+                        defaultValue={data.data.miComentario}
                     />
                 </Col>
             </Row>
             <Row>
-                <Col style={{marginTop: 2}}>
-                    <Button type="primary" onClick={handleInsertComentario}>
-                        Agrear Comentario
-                    </Button>
-                </Col>
+                {
+                    data.data.miComentario !== '' ?
+                        <Col style={{marginTop: 2}}>
+                            <Button type="primary" onClick={handleUpdateComentario}>
+                                Editar Comentario
+                            </Button>
+                        </Col>
+                        :
+                        <Col style={{marginTop: 2}}>
+                            <Button type="primary" onClick={handleInsertComentario}>
+                                Agrear Comentario
+                            </Button>
+                        </Col>
+                }
             </Row>
         </>
     );

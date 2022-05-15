@@ -27,7 +27,7 @@ const ComentariosEjercicio = (data) => {
             {
                 comentarios.map(comentario => (
                     <Row key={comentario._id}>
-                        <Col>
+                        <Col style={{borderBottom: '1px so'}}>
                             <Row>
                                 <Text>Usuario: {comentario.docente.nombre} {comentario.docente.apellido}</Text>
                             </Row>

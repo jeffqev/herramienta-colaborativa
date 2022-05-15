@@ -1,5 +1,5 @@
 import {Col, Row, Typography, Collapse, Tag, Tabs, Alert} from "antd";
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useHistory} from "react-router";
 import htmlParce from "react-html-parser";
 
@@ -16,6 +16,8 @@ import MiCalificacion from "./MiCalificacion";
 import VerCalificacion from "./VerCalificacion";
 import ComentarioEjercicio from './ComentarioEjercicio';
 import ComentariosEjercicio from "./ComentariosEjercicio";
+import clienteAxios from "../../config/axios";
+import {PATH_COMENTARIO} from "../../config/rutasAPI";
 
 function EjercicioInfo({id}) {
     const {Text} = Typography;
@@ -27,6 +29,13 @@ function EjercicioInfo({id}) {
     const {msg, vaciarmsg, nuevocambio, ejercicio, buscarEjercicioID} =
         ejercicioContext;
 
+    const [miComentario, setMiComentario] = useState('');
+    const [miComentarioId, setMiComentarioId] = useState('');
+
+    const buscarMiComentario = (idEjercicio) => {
+        return clienteAxios.get(`${PATH_COMENTARIO}/${idEjercicio}`);
+    };
+
     useEffect(() => {
         if (!msg) {
             buscarEjercicioID(id);
@@ -37,6 +46,20 @@ function EjercicioInfo({id}) {
             vaciarmsg();
             history.goBack();
         }
+
+        let dataApi = buscarMiComentario(id);
+        dataApi.then(res => {
+            if (res.data.data.length > 0) {
+                setMiComentario(res.data.data[0].comentario);
+                setMiComentarioId(res.data.data[0]._id);
+            } else {
+                setMiComentario('');
+                setMiComentarioId('');
+            }
+        }).catch(_err => {
+            mostrarMsg("Error al buscar mi comentario", "error");
+        });
+
         // eslint-disable-next-line
     }, [nuevocambio, msg, id]);
 
@@ -115,7 +138,7 @@ function EjercicioInfo({id}) {
                                         <ComentariosEjercicio idEjercicio={id}/>
                                     </Tabs.TabPane>
                                     <Tabs.TabPane tab="Mi Comentario" key="2">
-                                        <ComentarioEjercicio data={{id}}/>
+                                        <ComentarioEjercicio data={{id, miComentario, miComentarioId}}/>
                                     </Tabs.TabPane>
                                 </Tabs>
                             </Col>
