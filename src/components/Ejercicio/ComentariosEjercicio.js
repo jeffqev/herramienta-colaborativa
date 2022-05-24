@@ -16,7 +16,7 @@ const ComentariosEjercicio = (data) => {
             mostrarMsg("Error al buscar los comentarios", "error");
         });
 
-    }, []);
+    }, [data.idEjercicio]);
 
     const buscarComentariosEjercicio = (id) => {
         return clienteAxios.get(`${PATH_COMENTARIO}/ejercicio/${id}`);
