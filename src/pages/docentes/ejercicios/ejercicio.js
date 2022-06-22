@@ -1,18 +1,13 @@
 import React, {useContext, useEffect, useState} from "react";
 import {useParams, useHistory} from "react-router-dom";
-
 import AuthContext from "../../../context/auth/authContext";
 import AsignaturaContext from "../../../context/asignatura/asignaturaContext";
 import EjercicioContext from "../../../context/ejercicio/ejercicioContext";
-
 import Header from "../../../components/layout/Header";
 import Nav from "../../../components/layout/Nav";
 import {capitalize} from "../../../utils";
-
 import Migas from "../../../components/layout/Migas";
 import EjercicioInfo from "../../../components/Ejercicio/EjercicioInfo";
-
-// import EjercicioInfo from "../../../components/ejercicios/EjercicioInfo";
 
 function Ejercicio() {
     // Rutas

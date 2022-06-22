@@ -100,7 +100,7 @@ function CoordinarAsignatura() {
                         Pre-Requisitos:
                       </Title>
 
-                      {practica.requisitos.map((requisito, index) => (
+                      {practica.requisitos.map((requisito, _index) => (
                         <Text> {`‣ ${requisito}`} </Text>
                       ))}
                     </Space>

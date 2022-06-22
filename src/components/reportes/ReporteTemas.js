@@ -25,7 +25,7 @@ function ReporteTemas({ idAsignatura }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  var config = {
+  let config = {
     appendPadding: 10,
     data: data,
     angleField: "value",

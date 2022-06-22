@@ -35,11 +35,8 @@ function Formulario({ idAsignatura }) {
   // Validar datos y guardar en la db
   const onFinish = (values) => {
     const { practicas } = values;
-
     practicas.asignatura = idAsignatura;
-
     crearPractica(practicas);
-    // form.resetFields();
   };
 
   const formItemLayout = {
@@ -64,7 +61,6 @@ function Formulario({ idAsignatura }) {
       <h3 className=" mt-3 mb-5 text-center"> Nueva practica</h3>
 
       <Form
-        // {...formItemLayoutWithOutLabel}
         form={form}
         name="practicasform"
         onFinish={onFinish}

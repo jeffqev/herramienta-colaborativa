@@ -46,7 +46,7 @@ const ReferenciaState = (props) => {
     }
   };
 
-  const buscarReferencias = async (id) => {
+  const buscarReferencias = async (_id) => {
     try {
       const respuesta = await clienteAxios.get(`${PATH_REFERENCIA}`);
       dispatch({

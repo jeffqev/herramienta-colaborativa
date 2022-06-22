@@ -30,7 +30,7 @@ function TextPDF({ handleChange, editorPrint, initial }) {
 export default TextPDF;
 
 function example_image_upload_handler(blobInfo, success, failure, progress) {
-  var xhr, formData;
+  let xhr, formData;
 
   xhr = new XMLHttpRequest();
   xhr.withCredentials = false;
@@ -41,7 +41,7 @@ function example_image_upload_handler(blobInfo, success, failure, progress) {
   };
 
   xhr.onload = function () {
-    var json;
+    let json;
 
     if (xhr.status === 403) {
       failure("HTTP Error: " + xhr.status, { remove: true });

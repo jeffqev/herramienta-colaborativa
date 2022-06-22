@@ -1,13 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
-
 import { Form, Input, Button, InputNumber, Radio } from "antd";
-
 import ReferenciaContext from "../../context/referencia/referenciaContext";
-
 import { mostrarMsg } from "../../utils";
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-
-// import { InfoCircleOutlined } from "@ant-design/icons";
 
 function ReferenciaForm({ idAsignatura }) {
   // Formularios de antd
@@ -24,8 +19,6 @@ function ReferenciaForm({ idAsignatura }) {
       mostrarMsg(msg.texto, msg.tipo);
       vaciarmsg();
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [msg, nuevocambio]);
 
   // Validar datos y guardar en la db

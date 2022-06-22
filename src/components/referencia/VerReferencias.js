@@ -87,7 +87,7 @@ function VerReferencias({ idAsignatura }) {
     },
     {
       title: "Acciones",
-      render: (_text, refasignatura) => (
+      render: (_text, refsignature) => (
         <>
           <Button
             type="link"
@@ -96,11 +96,11 @@ function VerReferencias({ idAsignatura }) {
             icon={<EditOutlined />}
             size={"small"}
             onClick={() => {
-              handleModificar(refasignatura);
+              handleModificar(refsignature);
             }}
           />
           <BotonEliminar
-            id={refasignatura._id}
+            id={refsignature._id}
             handleEliminar={handleEliminar}
           />
         </>
