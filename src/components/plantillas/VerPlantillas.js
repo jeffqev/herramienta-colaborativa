@@ -48,7 +48,6 @@ function VerPlantilla({ idAsignatura }) {
 
   const handleModificar = (id) => {
     history.push(`/editar/plantillas/${idAsignatura}/${id}`);
-    // eliminarPlantilla(id);
   };
 
   const columns = [

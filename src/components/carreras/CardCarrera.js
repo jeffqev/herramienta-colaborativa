@@ -23,8 +23,8 @@ function CardCarrera({
     mostrarMsg("Eliminacion cancelada", "info");
   };
 
-  const handleFiltrar = (carrera) => {
-    enviaraAsignatura(carrera);
+  const handleFiltrar = (filter) => {
+    enviaraAsignatura(filter);
     history.push("/asignaturas");
   };
 
