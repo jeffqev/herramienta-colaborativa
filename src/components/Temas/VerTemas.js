@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Table, Button, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
-// import { SearchOutlined } from '@ant-design/icons';
 import TemaContext from "../../context/tema/temaContext";
 
 import { capitalize } from "../../utils";
@@ -41,8 +40,6 @@ function VerTemas({ idAsignatura }) {
   useEffect(() => {
     buscarTemas(idAsignatura);
     buscarTemasPadre(idAsignatura);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nuevocambio]);
 
   const handleEliminar = (id) => {
@@ -81,7 +78,7 @@ function VerTemas({ idAsignatura }) {
     },
     {
       title: "",
-      render: (_text, temas) => (
+      render: (_text, temasEliminar) => (
         <>
           <Button
             type="link"
@@ -90,10 +87,10 @@ function VerTemas({ idAsignatura }) {
             icon={<EditOutlined />}
             size={"small"}
             onClick={() => {
-              handleModificar(temas);
+              handleModificar(temasEliminar);
             }}
           />
-          <BotonEliminar id={temas._id} handleEliminar={handleEliminar} />
+          <BotonEliminar id={temasEliminar._id} handleEliminar={handleEliminar} />
         </>
       ),
     },

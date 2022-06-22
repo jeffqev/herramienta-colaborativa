@@ -26,7 +26,9 @@ function VerCalificacion({ idEjercicio }) {
   //   // form.resetFields();
   // };
 
-  const handleChange = (value) => {};
+  const handleChange = () => {
+    console.log('handleChange');
+  };
 
   return (
     <>

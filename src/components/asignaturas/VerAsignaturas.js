@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Table, Tag, Button, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
-// import { SearchOutlined } from '@ant-design/icons';
 import AsignaturaContext from "../../context/asignatura/asignaturaContext";
 import CarreraContext from "../../context/carrera/carreraContext";
 
@@ -91,7 +90,7 @@ function VerAsignaturas() {
     },
     {
       title: "",
-      render: (_text, asignaturas) => (
+      render: (_text, asignatura) => (
         <>
           <Button
             type="link"
@@ -100,10 +99,10 @@ function VerAsignaturas() {
             icon={<EditOutlined />}
             size={"small"}
             onClick={() => {
-              handleModificar(asignaturas);
+              handleModificar(asignatura);
             }}
           />
-          <BotonEliminar id={asignaturas._id} handleEliminar={handleEliminar} />
+          <BotonEliminar id={asignatura._id} handleEliminar={handleEliminar} />
         </>
       ),
     },

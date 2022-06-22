@@ -19,7 +19,6 @@ function AgregarDocente({ asignaturaActual }) {
 
     docentesAsignatura(asignaturaActual._id, asignatura);
 
-    // docentesAsignatura(asignatura);
   };
 
   // Si existe un mensaje mostrarlo

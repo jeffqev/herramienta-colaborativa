@@ -57,7 +57,6 @@ function VerEjercicio({idAsignatura, idusuario, tipo}) {
 
     const handleModificar = (id) => {
         history.push(`/editar/ejercicios/${idAsignatura}/${id}`);
-        // eliminarEjercicio(id);
     };
 
     const handleDesarchivar = (id) => {
@@ -237,7 +236,7 @@ function VerEjercicio({idAsignatura, idusuario, tipo}) {
     return (
         <Table
             columns={columns}
-            rowClassName={(record, index) => {
+            rowClassName={(record, _index) => {
                 return record?.archivado === true ? "table-row-dark" : "";
             }}
             dataSource={ejercicios}

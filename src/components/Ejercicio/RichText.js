@@ -2,7 +2,7 @@ import React from "react";
 import { Editor } from "@tinymce/tinymce-react";
 
 function RichText({ htmleditor, sethtmlEditor }) {
-  const handleChange = (content, editor) => {
+  const handleChange = (content) => {
     sethtmlEditor(content);
   };
   return (
