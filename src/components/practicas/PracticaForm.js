@@ -40,15 +40,13 @@ function PracticaForm() {
 
     // Verificar si es coordinador de dicha asignatura
     if (asignaturas) {
-      const busqueda = asignaturas.find((asignatura) => asignatura._id === id);
+      const busqueda = asignaturas.find((item) => item._id === id);
       if (!busqueda) {
         history.push(`/gestionar/practicas`);
       } else {
         setAsignatura(busqueda);
       }
     }
-
-    // eslint-disable-next-line
   }, [nuevocambio]);
 
   if (!usuario) return null;

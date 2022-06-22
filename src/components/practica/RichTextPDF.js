@@ -26,7 +26,7 @@ function RichText({ requets2, tipopractica, idpractica, idAsignatura }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nuevocambio]);
 
-  const handleChange = (content, editor) => {
+  const handleChange = (content) => {
     setInitial(content);
   };
 
@@ -93,7 +93,7 @@ function RichText({ requets2, tipopractica, idpractica, idAsignatura }) {
 export default RichText;
 
 function example_image_upload_handler(blobInfo, success, failure, progress) {
-  var xhr, formData;
+  let xhr, formData;
 
   xhr = new XMLHttpRequest();
   xhr.withCredentials = false;
@@ -104,7 +104,7 @@ function example_image_upload_handler(blobInfo, success, failure, progress) {
   };
 
   xhr.onload = function () {
-    var json;
+    let json;
 
     if (xhr.status === 403) {
       failure("HTTP Error: " + xhr.status, { remove: true });

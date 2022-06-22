@@ -1,12 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
-
 import { Form, Input, Button, InputNumber } from "antd";
-
 import ReferenciaContext from "../../context/referencia/referenciaContext";
-
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-
-// import { InfoCircleOutlined } from "@ant-design/icons";
 
 function ReferenciaEditarForm({ idAsignatura, referenciaEditar }) {
   // Formularios de antd

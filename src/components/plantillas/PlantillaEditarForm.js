@@ -25,7 +25,6 @@ function PlantillaEditarForm({ idAsignatura, plantilla }) {
   // Si existe un mensaje mostrarlo
   useEffect(() => {
     buscarTemas(idAsignatura);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nuevocambio]);
 
   // Validar datos y guardar en la db
