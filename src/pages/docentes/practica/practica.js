@@ -1,19 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-
 import AuthContext from "../../../context/auth/authContext";
 import AsignaturaContext from "../../../context/asignatura/asignaturaContext";
 import PracticaContext from "../../../context/practica/practicaContext";
-
 import Header from "../../../components/layout/Header";
 import Nav from "../../../components/layout/Nav";
 import { capitalize } from "../../../utils";
-
 import Migas from "../../../components/layout/Migas";
 import RichTextPDF from "../../../components/practica/RichTextPDF";
-// import EjercicioInfo from "../../../components/Ejercicio/EjercicioInfo";
-
-// import EjercicioInfo from "../../../components/ejercicios/EjercicioInfo";
 
 function Practica() {
   // Rutas
@@ -54,11 +48,11 @@ function Practica() {
     // Verificar si es coordinador o docente de dicha asignatura
     if (asignaturas) {
       //Busqueda si es coordinador
-      const busqueda = asignaturas.find((asignatura) => asignatura._id === id);
+      const busqueda = asignaturas.find((item) => item._id === id);
       if (!busqueda) {
         //Busqueda si es docente
         const busquedaDocente = asignaturasDocente.find(
-          (asignatura) => asignatura._id === id
+          (item) => item._id === id
         );
         if (!busquedaDocente) {
           history.push(`/dashboard`);
@@ -66,12 +60,10 @@ function Practica() {
           setAsignatura(busquedaDocente);
           buscarPracticaID(idpractica);
 
-          // setTipo("docente");
         }
       } else {
         setAsignatura(busqueda);
         buscarPracticaID(idpractica);
-        // setTipo("coordinador");
       }
     }
 

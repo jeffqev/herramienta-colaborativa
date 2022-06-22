@@ -46,7 +46,7 @@ function Temas() {
 
     // Verificar si es coordinador de dicha asignatura
     if (asignaturas) {
-      const busqueda = asignaturas.find((asignatura) => asignatura._id === id);
+      const busqueda = asignaturas.find((item) => item._id === id);
       if (!busqueda) {
         history.push(`/dashboard`);
       } else {

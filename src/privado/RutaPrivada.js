@@ -14,11 +14,11 @@ const RutaPrivada = ({component: Component, ...props}) => {
     return (
         <Route
             {...props}
-            render={(props) =>
+            render={(item) =>
                 !autenticado && !cargando ? (
                     <Redirect to="/"/>
                 ) : (
-                    <Component {...props} />
+                    <Component {...item} />
                 )
             }
         />
