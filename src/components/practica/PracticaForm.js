@@ -17,7 +17,6 @@ import Text from "antd/lib/typography/Text";
 import Modal from "antd/lib/modal/Modal";
 import EjercicioInfo from "../Ejercicio/EjercicioInfo";
 import { useHistory } from "react-router";
-// import RichText from "./RichTextPDF";
 
 function PracticaForm({ idAsignatura }) {
   const history = useHistory();

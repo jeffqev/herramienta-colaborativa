@@ -277,7 +277,5 @@ export default ListadoPracticas;
 const definirNumeroEjercicios = (ejercicios) => {
   const num = ejercicios.length;
   return ` ${num} ${num === 1 ? "Ejercicio" : "Ejercicios"}`;
-  // return ejercicios.length + " " + ejercicios.length === 1
-  //   ? " Ejercicio"
-  //   : "Ejercicios";
+
 };
