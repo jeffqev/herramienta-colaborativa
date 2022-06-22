@@ -24,7 +24,6 @@ function Referencias() {
 
   // asignatura seleccionada
   const [asignatura, setAsignatura] = useState("");
-  // const [tipo, setTipo] = useState("");
 
   // Variables globales usuario logueado
   const authContext = useContext(AuthContext);
@@ -55,21 +54,19 @@ function Referencias() {
     // Verificar si es coordinador o docente de dicha asignatura
     if (asignaturas) {
       //Busqueda si es coordinador
-      const busqueda = asignaturas.find((asignatura) => asignatura._id === id);
+      const busqueda = asignaturas.find((item) => item._id === id);
       if (!busqueda) {
         //Busqueda si es docente
         const busquedaDocente = asignaturasDocente.find(
-          (asignatura) => asignatura._id === id
+          (item) => item._id === id
         );
         if (!busquedaDocente) {
           history.push(`/dashboard`);
         } else {
           setAsignatura(busquedaDocente);
-          // setTipo("docente");
         }
       } else {
         setAsignatura(busqueda);
-        // setTipo("coordinador");
       }
     }
 
