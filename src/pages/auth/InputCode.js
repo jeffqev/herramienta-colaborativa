@@ -9,7 +9,6 @@ import {useHistory} from "react-router-dom";
 export default function InputCode() {
     const history = useHistory();
     const {code} = useContext(recoveryContext);
-
     const alertaContext = useContext(AlertaContext);
     const {alerta, mostrarAlerta} = alertaContext;
 
