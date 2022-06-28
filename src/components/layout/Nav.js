@@ -71,6 +71,18 @@ function Nav({ activa }) {
                       Asignaturas
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <Link
+                        className={`nav-link ${
+                            activa === "usuarios" ? "active" : null
+                        }`}
+                        to={"/ayuda"}
+                    >
+                      {/* <span data-feather="users"></span> */}
+                      <i className="bi bi-question-circle"></i>
+                      Ayuda
+                    </Link>
+                  </li>
                 </ul>
               </>
             ) : (
@@ -154,6 +166,19 @@ function Nav({ activa }) {
                       Practicas
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <Link
+                        className={`nav-link ${
+                            activa === "ayuda" ? "active" : null
+                        }`}
+                        to={"/ayuda"}
+                    >
+                      {/* <span data-feather="users"></span> */}
+                      <i className="bi bi-question-circle"></i>
+                      Ayuda
+                    </Link>
+                  </li>
+
                 </ul>
               </>
             )}

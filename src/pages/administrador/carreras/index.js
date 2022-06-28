@@ -23,7 +23,6 @@ function Usuario() {
     } else {
       usuarioAutenticado();
     }
-    // eslint-disable-next-line
   }, [usuarioAutenticado]);
 
   if (!usuario) return null;
