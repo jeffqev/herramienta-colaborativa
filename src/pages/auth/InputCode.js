@@ -46,7 +46,7 @@ export default function InputCode() {
                         <h3 style={{textAlign: "center"}}>Validar Codigo</h3>
                         <img
                             className="img-fluid mx-auto d-block"
-                            src="https://quicklab-qa.herokuapp.com/images/logo-ups.png"
+                            src={`${process.env.REACT_APP_BACKEND_URL}/images/logo-ups.png`}
                             alt=""
                         />
                     </div>
