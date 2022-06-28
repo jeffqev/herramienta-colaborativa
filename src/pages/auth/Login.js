@@ -2,7 +2,6 @@ import React, {useState, useContext, useEffect} from "react";
 import AlertaContext from "../../context/alerta/alertaContext";
 import Alerta from "../../components/layout/Alerta";
 import {Link} from 'react-router-dom';
-
 import "./login.css";
 
 import AuthContext from "../../context/auth/authContext";
