@@ -34,6 +34,7 @@ import NotFound from "./components/layout/NotFound";
 
 import recoveryContext from "./context/auth/recoveryContext";
 import useRecovery from './context/auth/recoveryState';
+import Ayuda from "./pages/administrador/Ayuda";
 
 // Si se encuentra logueado al recargar la pagina
 const token = localStorage.getItem("token");
@@ -52,7 +53,7 @@ function App() {
                     <RutaPrivada exact path="/carreras" component={Carreras}/>
                     <RutaPrivada exact path="/periodos" component={Periodos}/>
                     <RutaPrivada exact path="/asignaturas" component={Asignaturas}/>
-
+                    <RutaPrivada exact path="/ayuda" component={Ayuda}/>
                     <RutaPrivada exact path="/asignatura/:id" component={Asignatura}/>
                     <RutaPrivada exact path="/dashboard" component={Dashboard}/>
 
