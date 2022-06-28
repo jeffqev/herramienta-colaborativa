@@ -8,6 +8,7 @@ import Iframe from 'react-iframe'
 import AntHeader from "../../../components/layout/AntHeader";
 import PdfManual from "../../../../src/assets/statics/Manual_Coordinador.pdf";
 
+
 function Ayuda() {
     const authContext = useContext(AuthContext);
     const {usuario, usuarioAutenticado} = authContext;
