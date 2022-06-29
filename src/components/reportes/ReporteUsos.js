@@ -19,10 +19,13 @@ function ReporteUsos({ idAsignatura }) {
       mostrarMsg(msg.texto, msg.tipo);
       vaciarmsg();
     }
+
     buscarReporteUsos(idAsignatura);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  let config = {
+  var config = {
     data: data,
     xField: "type",
     yField: "sales",

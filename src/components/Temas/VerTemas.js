@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Table, Button, Modal } from "antd";
 import { EditOutlined } from "@ant-design/icons";
+// import { SearchOutlined } from '@ant-design/icons';
 import TemaContext from "../../context/tema/temaContext";
 
 import { capitalize } from "../../utils";
@@ -40,6 +41,8 @@ function VerTemas({ idAsignatura }) {
   useEffect(() => {
     buscarTemas(idAsignatura);
     buscarTemasPadre(idAsignatura);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [nuevocambio]);
 
   const handleEliminar = (id) => {
@@ -78,56 +81,54 @@ function VerTemas({ idAsignatura }) {
     },
     {
       title: "",
-      render: (_text, temasEliminar) => (
-        <>
-          <Button
-            type="link"
-            style={{ padding: 0, marginRight: 5 }}
-            shape="round"
-            icon={<EditOutlined />}
-            size={"small"}
-            onClick={() => {
-              handleModificar(temasEliminar);
-            }}
-          />
-          <BotonEliminar id={temasEliminar._id} handleEliminar={handleEliminar} />
-        </>
+      render: (_text, temas) => (
+          <>
+            <Button
+                type="link"
+                style={{ padding: 0, marginRight: 5 }}
+                shape="round"
+                icon={<EditOutlined />}
+                size={"small"}
+                onClick={() => {
+                  handleModificar(temas);
+                }}
+            />
+            <BotonEliminar id={temas._id} handleEliminar={handleEliminar} />
+          </>
       ),
     },
   ];
   return (
-    <>
-      <Table
-        columns={columns}
-        dataSource={temas}
-        size="small"
-        pagination={{ position: ["bottomCenter"] }}
-        showSorterTooltip={false}
-        style={{ marginBottom: 30 }}
-        scroll={{ x: "50%" }}
-        bordered
-        rowKey="_id"
-      />
+      <>
+        <Table
+            columns={columns}
+            dataSource={temas}
+            size="small"
+            pagination={{ position: ["bottomCenter"] }}
+            showSorterTooltip={false}
+            style={{ marginBottom: 30 }}
+            scroll={{ x: "50%" }}
+            bordered
+            rowKey="_id"
+        />
 
-      <Modal
-        title="Editar Tema"
-        centered
-        visible={isModalVisible}
-        onOk={handleOk}
-        onCancel={handleCancel}
-        footer={false}
-        width={345}
-      >
-        <div className="d-flex justify-content-center">
-          {editar ? (
-            <TemaEditarForm temaEditar={editar} idAsignatura={idAsignatura} />
-          ) : null}
-        </div>
-      </Modal>
-    </>
+        <Modal
+            title="Editar Tema"
+            centered
+            visible={isModalVisible}
+            onOk={handleOk}
+            onCancel={handleCancel}
+            footer={false}
+            width={345}
+        >
+          <div className="d-flex justify-content-center">
+            {editar ? (
+                <TemaEditarForm temaEditar={editar} idAsignatura={idAsignatura} />
+            ) : null}
+          </div>
+        </Modal>
+      </>
   );
 }
-
-//
 
 export default VerTemas;
